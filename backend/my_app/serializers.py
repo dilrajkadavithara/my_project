@@ -13,7 +13,9 @@ class NavLinkSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ServiceImageSerializer(serializers.ModelSerializer):
-    # We might want the actual image URL instead of just the path
+    # This field configuration ensures that when the serializer
+    # processes an image, it will provide its absolute URL.
+    # This relies on Django's MEDIA_URL setting and the request context.
     image = serializers.ImageField(use_url=True)
 
     class Meta:
@@ -21,7 +23,9 @@ class ServiceImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ServiceSerializer(serializers.ModelSerializer):
-    images = ServiceImageSerializer(many=True, read_only=True) # Nested serializer for related images
+    # Nested serializer for related images
+    # The 'images' here matches the related_name='images' in ServiceImage model
+    images = ServiceImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Service
