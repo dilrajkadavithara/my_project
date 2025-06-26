@@ -2,7 +2,8 @@
 import React from 'react';
 import './App.css';
 import HeroSection from './components/HeroSection';
-import AboutUsSection from './components/AboutUsSection'; // <--- Add this import
+import AboutUsSection from './components/AboutUsSection';
+import ServicesSection from './components/ServicesSection'; // <--- Add this import
 
 function App() {
   return (
@@ -11,8 +12,8 @@ function App() {
 
       <main>
         <HeroSection />
-        <AboutUsSection /> {/* <--- Place the About Us Section here */}
-        {/* Services Section will go here */}
+        <AboutUsSection />
+        <ServicesSection /> {/* <--- Place the Services Section here */}
         {/* Contact Us Section will go here */}
       </main>
 
