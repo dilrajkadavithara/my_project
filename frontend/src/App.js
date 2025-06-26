@@ -3,7 +3,8 @@ import React from 'react';
 import './App.css';
 import HeroSection from './components/HeroSection';
 import AboutUsSection from './components/AboutUsSection';
-import ServicesSection from './components/ServicesSection'; // <--- Add this import
+import ServicesSection from './components/ServicesSection';
+import ContactUsSection from './components/ContactUsSection'; // <--- Add this import
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
       <main>
         <HeroSection />
         <AboutUsSection />
-        <ServicesSection /> {/* <--- Place the Services Section here */}
-        {/* Contact Us Section will go here */}
+        <ServicesSection />
+        <ContactUsSection /> {/* <--- Place the Contact Us Section here */}
       </main>
 
       {/* Footer will go here later */}
