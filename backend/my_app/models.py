@@ -2,6 +2,21 @@
 from django.db import models
 
 
+# New Model: SiteImage for general website images
+class SiteImage(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True, help_text="A descriptive title for the image (optional)")
+    image = models.ImageField(upload_to='site_images/') # Direct upload field
+    alt_text = models.CharField(max_length=255, help_text="Alt text for accessibility (e.g., 'Hero section background image')", blank=True, null=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Site Images"
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return self.title or f"Image #{self.id}"
+
+
 class Lead(models.Model):
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
@@ -52,25 +67,36 @@ class ServiceImage(models.Model):
     def __str__(self):
         return f"Image for {self.service.title} ({self.alt_text or 'No Alt Text'})"
 
+# MODIFIED: WebsiteContent model
 class WebsiteContent(models.Model):
     key = models.CharField(
         max_length=255,
         unique=True,
         help_text="Unique identifier for this content block (e.g., 'hero_main_heading', 'about_us_paragraph_1', 'hero_background_image_desktop', 'contact_us_phone', 'site_meta_title')"
     )
+    # Value field is now optional, as content can come from image_object
     value = models.TextField(
-        help_text="The actual content: text, HTML, or URL for images."
+        blank=True, null=True, # <--- MADE OPTIONAL
+        help_text="The actual content: text, HTML, or URL for non-image types. Optional if an Image Object is selected."
     )
     content_type = models.CharField(
         max_length=50,
         default='text',
         choices=[
             ('text', 'Text'),
-            ('html', 'HTML'),         # For rich text content if needed
-            ('image_url', 'Image URL'), # For image paths/URLs for hero/about us sections
-            ('link', 'Link URL'),     # If 'value' is a URL for a button, etc.
+            ('html', 'HTML'),
+            ('image_url', 'Image URL'), # Still an option for external image URLs if preferred
+            ('image_object', 'Image Object'), # <--- NEW CHOICE: Link to a SiteImage
+            ('link', 'Link URL'),
         ],
-        help_text="Type of content stored in the 'value' field."
+        help_text="Type of content stored in the 'value' field OR linked via 'image_object'."
+    )
+    # NEW FIELD: Foreign Key to SiteImage
+    image_object = models.ForeignKey(
+        SiteImage,
+        on_delete=models.SET_NULL, # If SiteImage is deleted, WebsiteContent entry keeps its key
+        blank=True, null=True,
+        help_text="Link to a Site Image if 'Content type' is 'Image Object'."
     )
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -78,7 +104,9 @@ class WebsiteContent(models.Model):
         verbose_name_plural = "Website Content"
 
     def __str__(self):
-        return f"{self.key}: {self.value[:50]}..." # Show first 50 chars of value
+        if self.content_type == 'image_object' and self.image_object:
+            return f"{self.key}: {self.image_object.title or self.image_object.image.name}"
+        return f"{self.key}: {self.value[:50]}..." if self.value else f"{self.key}: (No Value)"
 
 class NavLink(models.Model):
     text = models.CharField(max_length=100)
