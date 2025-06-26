@@ -1,7 +1,8 @@
 // frontend/src/App.js
 import React from 'react';
-import './App.css'; // Keep default styling for now
-import HeroSection from './components/HeroSection'; // Import the HeroSection component
+import './App.css';
+import HeroSection from './components/HeroSection';
+import AboutUsSection from './components/AboutUsSection'; // <--- Add this import
 
 function App() {
   return (
@@ -9,8 +10,8 @@ function App() {
       {/* Header/Navigation will go here later */}
 
       <main>
-        <HeroSection /> {/* The Hero Section component is now placed here */}
-        {/* About Us Section will go here */}
+        <HeroSection />
+        <AboutUsSection /> {/* <--- Place the About Us Section here */}
         {/* Services Section will go here */}
         {/* Contact Us Section will go here */}
       </main>
