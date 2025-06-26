@@ -1,27 +1,21 @@
 // frontend/src/components/HeroSection.js
 import React from 'react';
-import LeadCaptureForm from './LeadCaptureForm'; // Import the LeadCaptureForm component
+import LeadCaptureForm from './LeadCaptureForm';
 
-function HeroSection() {
-  // Placeholder for dynamic content from backend
-  const heroContent = {
-    mainHeading: "Your Main Hero Heading (Dynamic)",
-    subHeading: "Your Sub Heading (Dynamic)",
-    tagline: "A short, compelling tagline for your service (Dynamic)",
-    // backgroundImage: "url_to_dynamic_image.jpg" // Will come from WebsiteContent
-    // For slider background, we'll fetch a list of image URLs here
-    // For mobile single image, we'll fetch one specific image URL here
-  };
+// Accept props from App.js
+function HeroSection({ mainHeading, subHeading, tagline }) {
+  // We will handle dynamic background images/slider here in a later step,
+  // potentially based on additional props for image URLs
 
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <h1>{heroContent.mainHeading}</h1>
-        <h2>{heroContent.subHeading}</h2>
-        <p>{heroContent.tagline}</p>
+        <h1>{mainHeading}</h1> {/* Use dynamic content */}
+        <h2>{subHeading}</h2> {/* Use dynamic content */}
+        <p>{tagline}</p>      {/* Use dynamic content */}
       </div>
       <div className="hero-form-container">
-        <LeadCaptureForm /> {/* The Lead Capture Form component is now placed here */}
+        <LeadCaptureForm />
       </div>
     </section>
   );
