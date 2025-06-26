@@ -1,7 +1,7 @@
 // frontend/src/components/LeadCaptureForm.js
 import React, { useState } from 'react';
-// import axios from 'axios'; // Will use this later for API calls
-// import { useNavigate } from 'react-router-dom'; // Will use this later for navigation
+import axios from 'axios'; // <--- Uncomment this line
+import { useNavigate } from 'react-router-dom'; // <--- Uncomment this line and import
 
 function LeadCaptureForm() {
   const [name, setName] = useState('');
@@ -9,7 +9,7 @@ function LeadCaptureForm() {
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
 
-  // const navigate = useNavigate(); // For redirecting to success page
+  const navigate = useNavigate(); // <--- Activate useNavigate hook
 
   const handleNameChange = (e) => {
     const value = e.target.value;
@@ -70,26 +70,25 @@ function LeadCaptureForm() {
       phone_number: phoneNumber.trim(), // Match backend model field name
     };
 
-    // Placeholder for API call and redirection
-    console.log('Form Data to Send:', formData);
-    alert('Form submitted! (API call and redirect placeholder)');
-    // In a later step, we'll replace this with an actual Axios POST request
-    // and then redirect to a success page.
-    /*
+    // <--- Activate API call and redirection
     try {
       const API_URL = process.env.REACT_APP_API_URL;
+      if (!API_URL) {
+          throw new Error("REACT_APP_API_URL is not defined in .env.development");
+      }
       await axios.post(`${API_URL}leads/`, formData);
+      console.log('Lead submitted successfully:', formData);
       navigate('/success'); // Redirect to success page
     } catch (error) {
       console.error('Error submitting lead:', error);
       alert('Failed to submit lead. Please try again.'); // Or set state for error message
     }
-    */
+    // End API call and redirection
   };
 
   return (
     <div className="lead-capture-form">
-      <h3>Get a Call</h3> {/* Updated Heading */}
+      <h3>Get a Call</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -113,7 +112,7 @@ function LeadCaptureForm() {
           />
           {phoneError && <p className="error-message">{phoneError}</p>}
         </div>
-        <button type="submit">Submit</button> {/* Updated Button Text */}
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
