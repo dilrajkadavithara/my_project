@@ -8,42 +8,60 @@ import HeroSection from './components/HeroSection';
 import AboutUsSection from './components/AboutUsSection';
 import ServicesSection from './components/ServicesSection';
 import ContactUsSection from './components/ContactUsSection';
+import Header from './components/Header';
 import axios from 'axios';
+
+// Helper function getSliderImages is outside the App component
+const getSliderImages = (websiteContent) => {
+    const images = [];
+    let i = 1;
+    while (websiteContent[`hero_slider_image_${i}`]) {
+        images.push(websiteContent[`hero_slider_image_${i}`].value);
+        i++;
+    }
+    return images;
+};
 
 function App() {
   const [websiteContent, setWebsiteContent] = useState({});
+  const [navLinks, setNavLinks] = useState([]); // <--- NEW STATE
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
 
   useEffect(() => {
-    const fetchWebsiteContent = async () => {
+    const fetchAllContent = async () => { // <--- Renamed to fetch all content
       try {
         const API_URL = process.env.REACT_APP_API_URL;
         if (!API_URL) {
             throw new Error("REACT_APP_API_URL is not defined in .env.development");
         }
-        const response = await axios.get(`${API_URL}website-content/`);
-        // Transform the array of content objects into a key-value pair object for easier access
+
+        // Fetch Website Content
+        const websiteContentResponse = await axios.get(`${API_URL}website-content/`);
         const contentMap = {};
-        response.data.forEach(item => {
-          // If content_type is 'image_file', use content_image's URL. Otherwise, use 'value'.
-          // Adjust logic here to get the correct content based on its type
+        websiteContentResponse.data.forEach(item => {
           if (item.content_type === 'image_file' && item.content_image) {
-              contentMap[item.key] = { value: item.content_image, content_type: item.content_type }; // <--- CHANGED THIS LINE
+              contentMap[item.key] = { value: item.content_image, content_type: item.content_type };
           } else {
               contentMap[item.key] = { value: item.value, content_type: item.content_type };
           }
         });
         setWebsiteContent(contentMap);
+
+        // <--- NEW: Fetch Nav Links
+        const navLinksResponse = await axios.get(`${API_URL}navlinks/`);
+        setNavLinks(navLinksResponse.data);
+        // --- END NEW ---
+
       } catch (err) {
-        console.error("Error fetching website content:", err);
+        console.error("Error fetching content:", err); // Consolidated error logging
         setErrorContent("Failed to load website content.");
       } finally {
         setLoadingContent(false);
       }
     };
 
-    fetchWebsiteContent();
+    fetchAllContent(); // Call the new consolidated fetch function
   }, []);
 
   if (loadingContent) {
@@ -54,24 +72,12 @@ function App() {
     return <div className="App">Error: {errorContent}</div>;
   }
 
-  // Helper to get multiple slider image URLs
-  const getSliderImages = () => {
-      const images = [];
-      let i = 1;
-      while (websiteContent[`hero_slider_image_${i}`]) {
-          images.push(websiteContent[`hero_slider_image_${i}`].value); // .value now directly holds the image URL
-          i++;
-      }
-      return images;
-  };
-
   // Pass down content as props
   const heroProps = {
     mainHeading: websiteContent['hero_main_heading']?.value || "Your Main Hero Heading (Default)",
     subHeading: websiteContent['hero_sub_heading']?.value || "Your Sub Heading (Default)",
     tagline: websiteContent['hero_tagline']?.value || "A short, compelling tagline for your service (Default)",
-    // Pass dynamic image URLs - now directly from .value which contentMap populates with content_image
-    sliderImages: getSliderImages(), // Array of image URLs for slider
+    sliderImages: getSliderImages(websiteContent),
     mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
 
@@ -92,11 +98,16 @@ function App() {
     youtubeUrl: websiteContent['social_youtube_url']?.value || '#',
   };
 
+  const headerProps = {
+    logoText: websiteContent['logo_text']?.value || "my_project",
+    navLinks: navLinks, // <--- NEW PROP: Pass navLinks to Header
+  };
+
 
   return (
     <Router>
       <div className="App">
-        {/* Header/Navigation will go here later */}
+        <Header {...headerProps} />
 
         <Routes>
           <Route path="/" element={
