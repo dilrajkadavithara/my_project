@@ -1,10 +1,25 @@
 /* frontend/src/index.css - Additional Global Styles and Basic Layout */
 
+/* Basic Resets */
 body {
-  /* (Existing styles for body remain) */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4; /* Light grey background */
   overflow-x: hidden; /* Prevent horizontal scroll for now */
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Global App Structure */
 .App {
   display: flex;
   flex-direction: column;
@@ -15,58 +30,26 @@ main {
   flex: 1; /* Allows main content to grow and push footer down */
 }
 
+/* Global Section Styling */
 section {
-  padding: 80px 40px; /* More generous padding for sections */
+  padding: 80px 40px; /* More generous vertical padding for sections */
   margin-bottom: 0; /* Remove margin-bottom as sections will typically stack without it */
   background-color: #fff;
   border-bottom: 1px solid #eee;
   text-align: center; /* Center content within sections by default */
 }
 
-/* Adjust specific section padding/alignment */
-.hero-section,
-.about-us-section,
-.contact-us-section {
-  max-width: 1200px; /* Max width for content */
-  margin: 0 auto; /* Center content on larger screens */
-  padding-left: 20px;
-  padding-right: 20px;
-  box-sizing: border-box;
-  text-align: left; /* Align text left within these sections */
-}
-
-/* Hero Section Specific Styling */
-.hero-section {
-  display: flex;
-  flex-direction: column; /* Stack content vertically on small screens */
-  justify-content: center;
-  align-items: flex-start; /* Align content to the start (left) */
-  min-height: 500px; /* Minimum height for hero */
+h1, h2, h3, h4, h5, h6 {
   color: #333;
-  padding: 100px 40px; /* More padding for hero */
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
-.hero-content {
-  max-width: 600px; /* Control width of hero text */
-  margin-bottom: 30px;
+p {
+  margin-bottom: 10px;
 }
 
-.hero-form-container {
-    /* Placeholder for styling the form container */
-    margin-top: 20px; /* Space between hero text and form */
-    max-width: 400px; /* Control width of form */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background for form */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Lead Capture Form Styling */
-.lead-capture-form h3 {
-  text-align: center;
-  color: #007bff;
-}
-
+/* Basic form styling (from previous setup) */
 .form-group {
   margin-bottom: 15px;
 }
@@ -75,22 +58,160 @@ section {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
 }
 
-.form-group input {
-  width: calc(100% - 20px); /* Account for padding */
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+button {
+  background-color: #007bff; /* Primary blue color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section Specific Styling */
+.hero-section {
+  position: relative; /* Needed for absolute positioning of overlay and background */
+  overflow: hidden;   /* Hide overflow from slider images */
+  min-height: 600px;  /* Ensure it has enough height */
+  display: flex;
+  align-items: center; /* Vertically center the overlay content */
+  justify-content: flex-start; /* Align overlay content to the left */
+  padding: 0; /* Remove existing padding as overlay will handle it */
+  color: #fff; /* Default text color for overlay (assuming dark background images) */
+}
+
+.hero-content-overlay {
+  position: relative; /* Stacks above background */
+  z-index: 2; /* Ensures content is on top */
+  max-width: 1200px; /* Control content width */
+  margin: 0 auto; /* Center content on larger screens */
+  padding: 100px 40px; /* Padding for the content inside the hero section */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-content-overlay h1,
+.hero-content-overlay h2,
+.hero-content-overlay p {
+  color: #fff; /* Ensure white text for headings and paragraphs */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for readability */
+}
+
+/* Hero Image (Mobile Background) */
+.hero-background-image,
+.hero-image-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area */
+  z-index: 1; /* Place behind overlay content */
+  filter: brightness(0.5); /* Make image darker for text readability */
+}
+
+/* Hero Slider (Desktop Background) */
+.hero-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Place behind overlay content */
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out; /* Smooth fade transition */
+  opacity: 0; /* Hidden by default */
+  filter: brightness(0.5); /* Make image darker for text readability */
+}
+
+.hero-slide.active {
+  opacity: 1; /* Active slide is visible */
+}
+
+/* Adjust form container for better visibility on dark background */
+.hero-form-container {
+  background-color: rgba(255, 255, 255, 0.9); /* Keep it slightly transparent white */
+  padding: 30px; /* More padding */
+  border-radius: 10px; /* Slightly more rounded corners */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* More prominent shadow */
+}
+
+/* Adjust specific section padding/alignment */
+/* These styles ensure content within sections are properly constrained and aligned */
+.hero-section .hero-content, /* Target content within hero section */
+.about-us-section,
+.services-section,
+.contact-us-section,
+.success-page-section {
+  max-width: 1200px; /* Max width for content */
+  margin: 0 auto; /* Center content on larger screens */
+  padding-left: 20px;
+  padding-right: 20px;
   box-sizing: border-box;
+}
+
+.about-us-section,
+.contact-us-section {
+  text-align: left; /* Align text left within these sections */
+}
+
+/* Lead Capture Form Styling (refined from previous setup) */
+.lead-capture-form h3 {
+  text-align: center;
+  color: #007bff; /* Use primary brand color */
 }
 
 .lead-capture-form button {
   width: 100%;
   padding: 12px;
   font-size: 18px;
-  background-color: #28a745; /* Green submit button */
+  background-color: #28a745; /* Green submit button (secondary/accent) */
   border-color: #28a745;
 }
 
@@ -108,6 +229,7 @@ section {
 /* Services Section Specific Styling (for grid) */
 .services-section {
   background-color: #f8f9fa; /* Light background for services */
+  text-align: center; /* Center heading */
 }
 
 .services-section h2 {
@@ -119,9 +241,9 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
   gap: 30px; /* Space between cards */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1200px; /* Should be centered by parent section padding/margin */
+  margin: 0 auto; /* Center grid within its section */
+  padding: 0; /* No extra padding here */
 }
 
 /* Service Card Styling */
@@ -152,7 +274,7 @@ section {
 .service-card h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #007bff;
+  color: #007bff; /* Use primary brand color */
 }
 
 .service-card p {
@@ -165,7 +287,11 @@ section {
 /* Contact Us Section Styling */
 .contact-us-section {
   background-color: #e9ecef; /* Slightly darker background */
-  text-align: center;
+  text-align: center; /* Center heading and contact details */
+}
+
+.social-links {
+    margin-top: 20px;
 }
 
 .social-links a {
@@ -192,7 +318,7 @@ section {
 }
 
 .success-page-section h2 {
-  color: #28a745;
+  color: #28a745; /* Green for success */
   font-size: 2.5em;
   margin-bottom: 20px;
 }
@@ -222,20 +348,31 @@ section {
     padding: 40px 15px;
   }
 
+  /* Hero Section Responsive */
   .hero-section {
-    padding: 60px 15px;
-    align-items: center; /* Center content on small screens */
-    text-align: center;
+    min-height: 450px;
+    align-items: center; /* Center content on smaller screens */
+    justify-content: center;
+    text-align: center; /* Center text on small screens */
+    padding: 0; /* Remove section padding, overlay handles it */
   }
 
-  .hero-content {
-    margin-bottom: 20px;
+  .hero-content-overlay {
+      padding: 80px 20px; /* Adjusted padding for overlay on mobile */
+      align-items: center; /* Center content on mobile */
+  }
+
+  .hero-content-overlay h1,
+  .hero-content-overlay h2 {
+      font-size: 2em; /* Smaller font on mobile */
   }
 
   .hero-form-container {
-      max-width: 90%;
+      width: 90%;
+      max-width: none; /* Allow it to take more width */
   }
 
+  /* Services Section Responsive */
   .service-cards-grid {
     grid-template-columns: 1fr; /* Single column on small screens */
     padding: 0 15px;

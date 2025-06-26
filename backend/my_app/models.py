@@ -1,21 +1,8 @@
 # backend/my_app/models.py
 from django.db import models
+from django.utils import timezone # Keep timezone import as it's a standard utility
 
-
-# New Model: SiteImage for general website images
-class SiteImage(models.Model):
-    title = models.CharField(max_length=255, blank=True, null=True, help_text="A descriptive title for the image (optional)")
-    image = models.ImageField(upload_to='site_images/') # Direct upload field
-    alt_text = models.CharField(max_length=255, help_text="Alt text for accessibility (e.g., 'Hero section background image')", blank=True, null=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name_plural = "Site Images"
-        ordering = ['-uploaded_at']
-
-    def __str__(self):
-        return self.title or f"Image #{self.id}"
-
+# REMOVED: SiteImage model
 
 class Lead(models.Model):
     name = models.CharField(max_length=255)
@@ -67,17 +54,23 @@ class ServiceImage(models.Model):
     def __str__(self):
         return f"Image for {self.service.title} ({self.alt_text or 'No Alt Text'})"
 
-# MODIFIED: WebsiteContent model
+# REVISED: WebsiteContent model for direct image upload
 class WebsiteContent(models.Model):
     key = models.CharField(
         max_length=255,
         unique=True,
         help_text="Unique identifier for this content block (e.g., 'hero_main_heading', 'about_us_paragraph_1', 'hero_background_image_desktop', 'contact_us_phone', 'site_meta_title')"
     )
-    # Value field is now optional, as content can come from image_object
+    # Value field is used for text, but can be blank if content_image is used
     value = models.TextField(
-        blank=True, null=True, # <--- MADE OPTIONAL
-        help_text="The actual content: text, HTML, or URL for non-image types. Optional if an Image Object is selected."
+        blank=True, null=True,
+        help_text="The actual content: text or HTML. Optional if an Image File is uploaded."
+    )
+    # NEW FIELD: Direct ImageField for content type 'image_file'
+    content_image = models.ImageField(
+        upload_to='website_content_images/', # New upload path for these images
+        blank=True, null=True,
+        help_text="Upload an image file if 'Content type' is 'Image File'."
     )
     content_type = models.CharField(
         max_length=50,
@@ -85,27 +78,21 @@ class WebsiteContent(models.Model):
         choices=[
             ('text', 'Text'),
             ('html', 'HTML'),
-            ('image_url', 'Image URL'), # Still an option for external image URLs if preferred
-            ('image_object', 'Image Object'), # <--- NEW CHOICE: Link to a SiteImage
+            ('image_file', 'Image File'), # <--- NEW CHOICE: for direct image uploads
             ('link', 'Link URL'),
         ],
-        help_text="Type of content stored in the 'value' field OR linked via 'image_object'."
+        help_text="Type of content: Text, HTML, Image File, or Link URL."
     )
-    # NEW FIELD: Foreign Key to SiteImage
-    image_object = models.ForeignKey(
-        SiteImage,
-        on_delete=models.SET_NULL, # If SiteImage is deleted, WebsiteContent entry keeps its key
-        blank=True, null=True,
-        help_text="Link to a Site Image if 'Content type' is 'Image Object'."
-    )
+    # REMOVED: image_object ForeignKey field from previous version
+
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Website Content"
 
     def __str__(self):
-        if self.content_type == 'image_object' and self.image_object:
-            return f"{self.key}: {self.image_object.title or self.image_object.image.name}"
+        if self.content_type == 'image_file' and self.content_image:
+            return f"{self.key}: Image ({self.content_image.name})"
         return f"{self.key}: {self.value[:50]}..." if self.value else f"{self.key}: (No Value)"
 
 class NavLink(models.Model):

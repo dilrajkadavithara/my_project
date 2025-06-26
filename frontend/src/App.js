@@ -1,10 +1,8 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-// --- NEW IMPORTS FOR ROUTING ---
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SuccessPage from './pages/SuccessPage'; // <--- Corrected path
-// --- END NEW IMPORTS ---
+import SuccessPage from './pages/SuccessPage';
 
 import HeroSection from './components/HeroSection';
 import AboutUsSection from './components/AboutUsSection';
@@ -25,9 +23,16 @@ function App() {
             throw new Error("REACT_APP_API_URL is not defined in .env.development");
         }
         const response = await axios.get(`${API_URL}website-content/`);
+        // Transform the array of content objects into a key-value pair object for easier access
         const contentMap = {};
         response.data.forEach(item => {
-          contentMap[item.key] = { value: item.value, content_type: item.content_type };
+          // If content_type is 'image_file', use content_image's URL. Otherwise, use 'value'.
+          // Adjust logic here to get the correct content based on its type
+          if (item.content_type === 'image_file' && item.content_image) {
+              contentMap[item.key] = { value: item.content_image, content_type: item.content_type }; // <--- CHANGED THIS LINE
+          } else {
+              contentMap[item.key] = { value: item.value, content_type: item.content_type };
+          }
         });
         setWebsiteContent(contentMap);
       } catch (err) {
@@ -49,12 +54,25 @@ function App() {
     return <div className="App">Error: {errorContent}</div>;
   }
 
+  // Helper to get multiple slider image URLs
+  const getSliderImages = () => {
+      const images = [];
+      let i = 1;
+      while (websiteContent[`hero_slider_image_${i}`]) {
+          images.push(websiteContent[`hero_slider_image_${i}`].value); // .value now directly holds the image URL
+          i++;
+      }
+      return images;
+  };
+
   // Pass down content as props
   const heroProps = {
     mainHeading: websiteContent['hero_main_heading']?.value || "Your Main Hero Heading (Default)",
     subHeading: websiteContent['hero_sub_heading']?.value || "Your Sub Heading (Default)",
     tagline: websiteContent['hero_tagline']?.value || "A short, compelling tagline for your service (Default)",
-    mobileImage: websiteContent['hero_background_image_mobile']?.value || 'placeholder_mobile.jpg'
+    // Pass dynamic image URLs - now directly from .value which contentMap populates with content_image
+    sliderImages: getSliderImages(), // Array of image URLs for slider
+    mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
 
   const aboutUsProps = {
@@ -76,11 +94,11 @@ function App() {
 
 
   return (
-    <Router> {/* <--- Wrap the entire app with Router */}
+    <Router>
       <div className="App">
         {/* Header/Navigation will go here later */}
 
-        <Routes> {/* <--- Define routes here */}
+        <Routes>
           <Route path="/" element={
             <main>
               <HeroSection {...heroProps} />
@@ -89,8 +107,7 @@ function App() {
               <ContactUsSection {...contactUsProps} />
             </main>
           } />
-          <Route path="/success" element={<SuccessPage />} /> {/* <--- Route for SuccessPage */}
-          {/* Add more routes here for other pages if needed later */}
+          <Route path="/success" element={<SuccessPage />} />
         </Routes>
 
         {/* Footer will go here later */}
