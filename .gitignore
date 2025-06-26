@@ -1,0 +1,16 @@
+# Python virtual environment
+.venv/
+
+# Node.js modules
+node_modules/
+
+# Environment variables files
+.env
+.env.*
+
+# Django specific
+__pycache__/
+*.pyc
+
+# React specific
+build/
