@@ -517,3 +517,64 @@ a:hover {
     transform: rotate(45deg) translate(-5px, -6px);
   }
 }
+
+/* frontend/src/index.css - Header Phone Number Styling */
+
+.main-header {
+  /* Ensure main-header uses flex for alignment */
+  display: flex;
+  justify-content: space-between; /* Spacing for logo, phone, nav */
+  align-items: center; /* Vertically center items */
+}
+
+.header-phone {
+  margin: 0 auto; /* Center horizontally if space allows, otherwise just pushes */
+  padding: 0 20px; /* Some padding around the phone number */
+}
+
+.header-phone a {
+  color: #fff; /* White color for phone number */
+  text-decoration: none;
+  font-size: 1.2em; /* Slightly larger font for prominence */
+  font-weight: bold;
+  white-space: nowrap; /* Prevent phone number from breaking */
+}
+
+.header-phone a:hover {
+  color: #007bff; /* Primary blue on hover */
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for Header Phone Number */
+@media (max-width: 768px) {
+  .main-header {
+    flex-wrap: wrap; /* Allow items to wrap to next line */
+    justify-content: center; /* Center items when wrapped */
+    padding: 10px 15px; /* Adjust header padding for mobile */
+  }
+
+  .main-header .logo {
+    flex-basis: 100%; /* Logo takes full width on top */
+    text-align: center;
+    margin-bottom: 10px; /* Space below logo */
+  }
+
+  .header-phone {
+    order: 3; /* Move phone to bottom on mobile, after logo, before nav icon/menu */
+    flex-basis: 100%; /* Phone number takes full width */
+    text-align: center;
+    margin: 10px 0; /* Vertical margin for phone number */
+    padding: 0;
+  }
+
+  .main-nav {
+    order: 4; /* Nav menu comes after phone number on mobile */
+  }
+
+  .mobile-menu-icon {
+    order: 2; /* Hamburger icon near the phone number/logo row */
+    position: absolute; /* Take out of flow to position top-right */
+    top: 15px; /* Adjust based on header padding */
+    right: 15px; /* Adjust based on header padding */
+  }
+}

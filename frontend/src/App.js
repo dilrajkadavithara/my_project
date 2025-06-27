@@ -24,12 +24,12 @@ const getSliderImages = (websiteContent) => {
 
 function App() {
   const [websiteContent, setWebsiteContent] = useState({});
-  const [navLinks, setNavLinks] = useState([]); // <--- NEW STATE
+  const [navLinks, setNavLinks] = useState([]);
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
 
   useEffect(() => {
-    const fetchAllContent = async () => { // <--- Renamed to fetch all content
+    const fetchAllContent = async () => {
       try {
         const API_URL = process.env.REACT_APP_API_URL;
         if (!API_URL) {
@@ -48,20 +48,19 @@ function App() {
         });
         setWebsiteContent(contentMap);
 
-        // <--- NEW: Fetch Nav Links
+        // Fetch Nav Links
         const navLinksResponse = await axios.get(`${API_URL}navlinks/`);
         setNavLinks(navLinksResponse.data);
-        // --- END NEW ---
 
       } catch (err) {
-        console.error("Error fetching content:", err); // Consolidated error logging
+        console.error("Error fetching content:", err);
         setErrorContent("Failed to load website content.");
       } finally {
         setLoadingContent(false);
       }
     };
 
-    fetchAllContent(); // Call the new consolidated fetch function
+    fetchAllContent();
   }, []);
 
   if (loadingContent) {
@@ -100,7 +99,8 @@ function App() {
 
   const headerProps = {
     logoText: websiteContent['logo_text']?.value || "my_project",
-    navLinks: navLinks, // <--- NEW PROP: Pass navLinks to Header
+    navLinks: navLinks,
+    headerPhoneNumber: websiteContent['header_phone_number']?.value || null, // <--- NEW PROP
   };
 
 

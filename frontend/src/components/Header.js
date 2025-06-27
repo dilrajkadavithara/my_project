@@ -1,22 +1,36 @@
 // frontend/src/components/Header.js
-import React, { useState } from 'react'; // <--- Import useState
-import { Link } from 'react-router-dom'; // <--- Import Link for navigation
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-// Accept navLinks prop from App.js
-function Header({ logoText, navLinks }) { // <--- Accept navLinks prop
+// Accept headerPhoneNumber prop from App.js
+function Header({ logoText, navLinks, headerPhoneNumber }) { // <--- Accept headerPhoneNumber prop
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Helper to generate phone link
+  const getPhoneLink = (phoneNumber) => {
+    if (!phoneNumber) return '#';
+    return `tel:${phoneNumber.replace(/\s/g, '')}`; // Remove spaces for the tel: link
+  };
+
   return (
     <header className="main-header">
       <div className="logo">
-        <Link to="/"><h1>{logoText || "My Project"}</h1></Link> {/* Make logo a link to home */}
+        <Link to="/"><h1>{logoText || "My Project"}</h1></Link>
       </div>
 
-      <nav className={`main-nav ${isMobileMenuOpen ? 'open' : ''}`}> {/* Add 'open' class for styling */}
+      {headerPhoneNumber && ( // <--- NEW: Display phone number if it exists
+        <div className="header-phone">
+          <a href={getPhoneLink(headerPhoneNumber)}>
+            {headerPhoneNumber}
+          </a>
+        </div>
+      )}
+
+      <nav className={`main-nav ${isMobileMenuOpen ? 'open' : ''}`}>
         <ul>
           {navLinks.map(link => (
             <li key={link.id}>
