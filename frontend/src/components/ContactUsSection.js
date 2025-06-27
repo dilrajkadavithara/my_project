@@ -19,7 +19,8 @@ function ContactUsSection({ heading, phone, email, address, facebookUrl, instagr
   };
 
   return (
-    <section className="contact-us-section">
+    // Added id="contact-us-section" to the main section tag
+    <section className="contact-us-section" id="contact-us-section">
       <h2>{heading}</h2> {/* Use dynamic content */}
       <p>Phone: <a href={getPhoneLink(phone)}>{phone}</a></p> {/* Use dynamic content */}
       <p>Email: <a href={`mailto:${email}`}>{email}</a></p> {/* Use dynamic content */}

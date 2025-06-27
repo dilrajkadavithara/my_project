@@ -182,7 +182,6 @@ a:hover {
 }
 
 /* Hero Image (Mobile Background) & Hero Slider Background Styles */
-/* These remain absolute for full coverage of their respective containers */
 .hero-background-image,
 .hero-image-fallback,
 .hero-slider {
@@ -219,7 +218,7 @@ a:hover {
 
 /* Styles for the container holding text and form, layered on top of background */
 .hero-slide-content-overlay {
-  position: absolute; /* Keeps it layered over the image/slider */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -291,40 +290,130 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.95);
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  /* Enhanced shadow for a more pronounced lift */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Stronger initial shadow */
   position: relative; /* Maintain position context */
   z-index: 3;
   flex-shrink: 0; /* Prevent form from shrinking */
+  /* Added for a subtle lift effect */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hero-form-desktop-container:hover,
+.hero-form-mobile-container:hover {
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4); /* Even stronger shadow on hover */
 }
 
 /* ========================================= */
-/* 4. Form Section (Lead Capture Form) */
+/* 4. Form Section (Lead Capture Form) - STYLED */
 /* ========================================= */
-/* Shared form styling already mostly in Global, specific overrides here */
+
+
 .lead-capture-form h3 {
   text-align: center;
   color: #007bff; /* Use primary brand color */
   font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  margin-bottom: 25px; /* More space below heading */
+  font-size: 1.8em;
+  position: relative;
+  padding-bottom: 10px; /* Space for underline */
 }
 
-.lead-capture-form button {
+.lead-capture-form h3::after { /* Stylish underline effect */
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #28a745; /* Accent color for underline */
+  border-radius: 5px;
+}
+
+.lead-capture-form .form-group {
+  margin-bottom: 20px; /* Space between form groups */
+  text-align: left; /* Align labels/inputs left */
+}
+
+.lead-capture-form label {
+  display: block; /* Ensure label is on its own line */
+  margin-bottom: 8px; /* Space between label and input */
+  font-weight: 600; /* Slightly bolder labels */
+  color: #555;
+  font-size: 0.95em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.lead-capture-form input[type="text"],
+.lead-capture-form input[type="tel"] {
   width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  background-color: #28a745; /* Green submit button (secondary/accent) */
-  border-color: #28a745;
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+  padding: 12px 15px; /* More generous padding */
+  border: 2px solid #ced4da; /* Subtle border */
+  border-radius: 8px; /* Rounded corners for inputs */
+  font-size: 1.1em; /* Larger text in inputs */
+  color: #333;
+  /* Enhanced transitions for zoom and shadow */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  box-sizing: border-box; /* Include padding and border in width */
+  font-family: 'Open Sans', sans-serif;
 }
 
-.lead-capture-form button:hover {
-  background-color: #218838;
-  border-color: #1e7e34;
+.lead-capture-form input[type="text"]:focus,
+.lead-capture-form input[type="tel"]:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  /* More prominent shadow on focus */
+  box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.3), 0 5px 15px rgba(0, 123, 255, 0.2);
+  transform: scale(1.01); /* Subtle zoom effect on focus */
+  outline: none; /* Remove default outline */
 }
+
+.lead-capture-form input[type="text"]:hover,
+.lead-capture-form input[type="tel"]:hover {
+  border-color: #007bff; /* Highlight border on hover */
+  transform: scale(1.005); /* Very subtle zoom on hover to indicate interactiveness */
+}
+
+
+.lead-capture-form button[type="submit"] {
+  width: 100%;
+  padding: 15px; /* Larger padding for a more substantial button */
+  font-size: 1.2em; /* Larger font size */
+  font-weight: bold;
+  /* Use a gradient for a modern, inviting look */
+  background: linear-gradient(45deg, #28a745, #218838); /* Green gradient */
+  color: white;
+  border: none; /* No border for a cleaner look */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  /* More prominent shadow for the button */
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5); /* Stronger initial shadow */
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat to button text */
+  text-transform: uppercase; /* Make text uppercase for emphasis */
+  letter-spacing: 1px; /* Add some letter spacing */
+}
+
+.lead-capture-form button[type="submit"]:hover {
+  background: linear-gradient(45deg, #218838, #1e7e34); /* Darker gradient on hover */
+  transform: translateY(-3px); /* More pronounced lift effect on hover */
+  box-shadow: 0 12px 25px rgba(40, 167, 69, 0.7); /* Even more prominent shadow on hover */
+}
+
+.lead-capture-form button[type="submit"]:active {
+  transform: translateY(0); /* "Press" effect on click */
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4); /* Reduced shadow on active/pressed state */
+  background: #218838; /* Solid color when pressed */
+}
+
 
 .error-message {
   color: #dc3545; /* Red error message */
   font-size: 0.85em;
   margin-top: 5px;
+  text-align: left; /* Ensure error message aligns with input */
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* ========================================= */

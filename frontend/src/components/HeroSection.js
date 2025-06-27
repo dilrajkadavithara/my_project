@@ -23,7 +23,8 @@ function HeroSection({ heroSlides, mobileImage }) {
 
 
   return (
-    <section className="hero-section">
+    // Added id="hero-section" to the main section tag
+    <section className="hero-section" id="hero-section">
       {isMobile ? (
         <> {/* Use a React Fragment to return multiple elements */}
           <HeroImage imageUrl={actualMobileImage} altText={mobileAltText}>

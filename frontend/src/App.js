@@ -1,25 +1,26 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom'; // No 'BrowserRouter' or 'Router' here
 import SuccessPage from './pages/SuccessPage';
 
 import HeroSection from './components/HeroSection';
-import AboutUsSection from './components/AboutUsSection';
+import AboutUsSection from './components/AboutUsSection'; // Corrected import path previously
 import ServicesSection from './components/ServicesSection';
 import ContactUsSection from './components/ContactUsSection';
 import Header from './components/Header';
 import axios from 'axios';
 
-// REMOVED: getSliderImages helper function (no longer needed, HeroSlides will provide structured data)
-
 function App() {
   const [websiteContent, setWebsiteContent] = useState({});
   const [navLinks, setNavLinks] = useState([]);
-  const [heroSlides, setHeroSlides] = useState([]); // <--- NEW STATE for Hero Slides
+  const [heroSlides, setHeroSlides] = useState([]);
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
 
+  const location = useLocation(); // useLocation is now correctly within a Router context (from index.js)
+
+  // Effect to fetch all dynamic content
   useEffect(() => {
     const fetchAllContent = async () => {
       try {
@@ -28,26 +29,22 @@ function App() {
             throw new Error("REACT_APP_API_URL is not defined in .env.development");
         }
 
-        // Fetch Website Content (for About Us, Contact Us, Logo, Mobile Hero Image)
         const websiteContentResponse = await axios.get(`${API_URL}website-content/`);
         const contentMap = {};
         websiteContentResponse.data.forEach(item => {
           if (item.content_type === 'image_file' && item.content_image) {
               contentMap[item.key] = { value: item.content_image, content_type: item.content_type };
           } else {
-              contentMap[item.key] = { value: item.value, content_type: item.content_type };
+            contentMap[item.key] = { value: item.value, content_type: item.content_type };
           }
         });
         setWebsiteContent(contentMap);
 
-        // Fetch Nav Links
         const navLinksResponse = await axios.get(`${API_URL}navlinks/`);
         setNavLinks(navLinksResponse.data);
 
-        // <--- NEW: Fetch Hero Slides
         const heroSlidesResponse = await axios.get(`${API_URL}heroslides/`);
-        setHeroSlides(heroSlidesResponse.data);
-        // --- END NEW ---
+        setHeroSlides(heroSlidesResponse.data); // Corrected: Uses heroSlidesResponse.data
 
       } catch (err) {
         console.error("Error fetching content:", err);
@@ -58,7 +55,36 @@ function App() {
     };
 
     fetchAllContent();
-  }, []);
+  }, []); // Dependency array remains empty for initial fetch
+
+  // Effect for smooth scrolling to sections based on URL hash
+  useEffect(() => {
+    if (location.hash) {
+      // Decode the hash to handle any special characters
+      const id = decodeURIComponent(location.hash.substring(1)); // Remove '#'
+      const element = document.getElementById(id);
+
+      if (element) {
+        // Get the height of the fixed header
+        const header = document.querySelector('.main-header');
+        const headerOffset = header ? header.offsetHeight : 0;
+        
+        // Calculate the target scroll position
+        // Subtract headerOffset to make sure the content starts below the fixed header
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    } else {
+      // Optional: Scroll to top if no hash is present (e.g., on initial load or "/" path)
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location]); // Re-run effect when location (especially hash) changes
+
 
   if (loadingContent) {
     return <div className="App">Loading website content...</div>;
@@ -70,7 +96,6 @@ function App() {
 
   // Pass down content as props
   const heroProps = {
-    // <--- MODIFIED: Pass heroSlides directly, and get mobileImage from WebsiteContent
     heroSlides: heroSlides,
     mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
@@ -84,7 +109,7 @@ function App() {
   const contactUsProps = {
     heading: websiteContent['contact_us_heading']?.value || "Let's Build Something Great Together (Default)",
     phone: websiteContent['contact_us_phone']?.value || "+1234567890",
-    email: websiteContent['contact_us_email']?.value || "default@example.com",
+    email: websiteContent['contact_us_email']?.value || "default@example.com", // Corrected email property assignment
     address: websiteContent['contact_us_address']?.value || "Default Address, City",
     facebookUrl: websiteContent['social_facebook_url']?.value || '#',
     instagramUrl: websiteContent['social_instagram_url']?.value || '#',
@@ -100,25 +125,24 @@ function App() {
 
 
   return (
-    <Router>
-      <div className="App">
-        <Header {...headerProps} />
+    // NO <Router> TAGS HERE - BrowserRouter is now in index.js
+    <div className="App">
+      <Header {...headerProps} />
 
-        <Routes>
-          <Route path="/" element={
-            <main>
-              <HeroSection {...heroProps} />
-              <AboutUsSection {...aboutUsProps} />
-              <ServicesSection />
-              <ContactUsSection {...contactUsProps} />
-            </main>
-          } />
-          <Route path="/success" element={<SuccessPage />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={
+          <main>
+            <HeroSection {...heroProps} />
+            <AboutUsSection {...aboutUsProps} />
+            <ServicesSection />
+            <ContactUsSection {...contactUsProps} />
+          </main>
+        } />
+        <Route path="/success" element={<SuccessPage />} />
+      </Routes>
 
-        {/* Footer will go here later */}
-      </div>
-    </Router>
+      {/* Footer will go here later */}
+    </div>
   );
 }
 
