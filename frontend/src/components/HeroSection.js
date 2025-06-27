@@ -5,7 +5,7 @@ import HeroSlider from './HeroSlider';
 import HeroImage from './HeroImage';
 
 // Accept heroSlides and mobileImage props from App.js
-function HeroSection({ heroSlides, mobileImage }) { // <--- MODIFIED PROPS
+function HeroSection({ heroSlides, mobileImage }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Assuming 768px as mobile breakpoint
 
   useEffect(() => {
@@ -25,16 +25,31 @@ function HeroSection({ heroSlides, mobileImage }) { // <--- MODIFIED PROPS
   return (
     <section className="hero-section">
       {isMobile ? (
-        <HeroImage imageUrl={actualMobileImage} altText={mobileAltText}>
-          {/* Pass LeadCaptureForm as a child to HeroImage for overlay */}
-          <div className="hero-form-container">
+        <> {/* Use a React Fragment to return multiple elements */}
+          <HeroImage imageUrl={actualMobileImage} altText={mobileAltText}>
+            {/* The content overlay for mobile text */}
+            <div className="hero-slide-content-overlay">
+              <div className="hero-slide-content">
+                {/* We can decide if we want text here or purely in App.js */}
+                {heroSlides[0] && (
+                  <>
+                    <h1>{heroSlides[0].heading}</h1>
+                    <h2>{heroSlides[0].sub_heading}</h2>
+                    <p>{heroSlides[0].tagline}</p>
+                  </>
+                )}
+              </div>
+            </div>
+          </HeroImage>
+          {/* Mobile-specific form container - NOW OUTSIDE HeroImage */}
+          <div className="hero-form-mobile-container">
             <LeadCaptureForm />
           </div>
-        </HeroImage>
+        </>
       ) : (
         <HeroSlider slides={heroSlides}>
-          {/* Pass LeadCaptureForm as a child to HeroSlider for overlay */}
-          <div className="hero-form-container">
+          {/* Desktop-specific form container - STILL INSIDE HeroSlider */}
+          <div className="hero-form-desktop-container">
             <LeadCaptureForm />
           </div>
         </HeroSlider>

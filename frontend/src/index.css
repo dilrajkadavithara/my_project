@@ -1,18 +1,28 @@
-/* frontend/src/index.css - Global Styles */
-
-/* Basic Resets */
+/* ========================================= */
+/* 1. Global Section: Basic Resets & App Structure */
+/* ========================================= */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* Applying Google Fonts */
+  font-family: 'Open Sans', sans-serif; /* Body font */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   color: #333;
   background-color: #f4f4f4; /* Light grey background */
   overflow-x: hidden; /* Prevent horizontal scroll for now */
-  margin-top: 60px; /* Add top margin equal to header height (approx) */
+  margin-top: 60px; /* Add top margin equal to header height (approx) for fixed header */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* Headings font */
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 10px;
 }
 
 code {
@@ -31,68 +41,21 @@ main {
   flex: 1; /* Allows main content to grow and push footer down */
 }
 
-/* Global Section Styling */
+/* Global Section Base Styling (for consistency across all sections) */
 section {
-  padding: 80px 40px; /* More generous vertical padding for sections */
-  margin-bottom: 0; /* Remove margin-bottom as sections will typically stack without it */
+  padding: 80px 40px; /* Generous vertical padding */
+  margin-bottom: 0; /* No extra margin between sections */
   background-color: #fff;
   border-bottom: 1px solid #eee;
-  text-align: center; /* Center content within sections by default */
+  text-align: center; /* Default center align, can be overridden by specific section */
+  max-width: 1200px; /* Max width for main content areas */
+  margin: 0 auto; /* Center sections horizontally */
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box; /* Include padding in width/height */
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #333;
-  margin-top: 0;
-  margin-bottom: 15px;
-}
-
-p {
-  margin-bottom: 10px;
-}
-
-/* Basic form styling */
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.form-group input[type="text"],
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box; /* Include padding in width */
-}
-
-button {
-  background-color: #007bff; /* Primary blue color */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
-}
-
-/* Links */
+/* Global Link Styling */
 a {
   color: #007bff;
   text-decoration: none;
@@ -102,26 +65,26 @@ a:hover {
   text-decoration: underline;
 }
 
-/* --- Header Styling (CRITICAL FIXES HERE FOR BOTH DESKTOP AND MOBILE) --- */
+/* ========================================= */
+/* 2. Nav Bar Section (Header) */
+/* ========================================= */
 .main-header {
-  background-color: #343a40;
+  background-color: #343a40; /* Dark background for header */
   color: #fff;
   padding: 15px 40px;
   display: flex;
-  /* DESKTOP: space-between, MOBILE: center/space-between with flex-wrap */
   justify-content: space-between;
   align-items: center; /* Vertically center items on their line */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: fixed;
-  width: 100%;
+  position: fixed; /* Ensure it's fixed */
+  width: 100%;    /* Give it full width when fixed */
   top: 0;
   left: 0;
-  z-index: 9999; /* Ensure it stays on top */
+  z-index: 1000; /* Ensure it stays on top of everything else */
   box-sizing: border-box; /* Crucial for padding/width calculations */
 }
 
 .main-header .logo {
-  /* No flex-basis: 100% here by default for desktop */
   flex-shrink: 0; /* Prevent shrinking */
 }
 
@@ -129,9 +92,10 @@ a:hover {
   margin: 0;
   font-size: 1.8em;
   color: #fff;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat to logo */
 }
 
-/* Header Phone Number Styling (Desktop) */
+/* Header Phone Number Styling */
 .header-phone {
   margin: 0 auto; /* Pushes itself to center on desktop */
   padding: 0 20px;
@@ -152,7 +116,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Navigation & Hamburger Menu Styling (Desktop) */
+/* Navigation & Hamburger Menu Styling */
 .main-nav {
   display: flex; /* Always flex for desktop */
   flex-shrink: 0; /* Prevent shrinking */
@@ -164,10 +128,13 @@ a:hover {
   padding: 0;
   margin: 0;
   display: flex;
+  flex-wrap: wrap; /* Allow nav links to wrap if space is tight */
+  justify-content: flex-end; /* Push links to the right */
 }
 
 .main-nav li {
   margin-left: 25px; /* Space between links */
+  white-space: nowrap; /* Prevent links from breaking into multiple lines */
 }
 
 .main-nav a {
@@ -200,17 +167,22 @@ a:hover {
   transition: all 0.3s ease;
 }
 
-
-/* --- Hero Section Styling --- */
+/* ========================================= */
+/* 3. Hero Section (REVISED FOR DESKTOP H1 TRUNCATION, FORM POSITION, & CONTENT WIDTH) */
+/* ========================================= */
 .hero-section {
   position: relative;
   overflow: hidden;
-  min-height: 600px;
+  width: 100vw; /* CONDITION 1: Span all across viewport horizontally */
+  min-height: 90vh; /* CONDITION 1: 90% of viewport vertically, use min-height for flexibility */
   padding: 0;
-  color: #fff;
+  color: #fff; /* Default text color for overlay */
+  max-width: none; /* Crucial: Hero background should span full width, override global section max-width */
+  margin: 0;    /* Crucial: Hero background should span full width, override global section margin */
 }
 
 /* Hero Image (Mobile Background) & Hero Slider Background Styles */
+/* These remain absolute for full coverage of their respective containers */
 .hero-background-image,
 .hero-image-fallback,
 .hero-slider {
@@ -247,90 +219,101 @@ a:hover {
 
 /* Styles for the container holding text and form, layered on top of background */
 .hero-slide-content-overlay {
-  position: absolute;
+  position: absolute; /* Keeps it layered over the image/slider */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 2; /* Ensures it's above background */
+  
+  /* CRITICAL: Use flex on the overlay to position text and form */
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* Vertically center content */
-  align-items: flex-start; /* Align content to the left */
-  padding: 100px 40px;
+  flex-direction: row; /* Desktop: text and form side-by-side */
+  flex-wrap: nowrap; /* Prevent wrapping on desktop */
+  
+  justify-content: center; /* Horizontally center flex items (text + form block) */
+  align-items: center; /* CONDITION 2 & 3: Vertically center both text & form blocks */
+  
+  padding: 0 40px; /* Overall padding for the content overlay area */
   box-sizing: border-box;
-  max-width: 1200px;
+  max-width: 100%; /* Allow hero overlay to use full width for initial flex distribution */
   margin: 0 auto;
-  text-align: left;
 }
 
-/* Styles for the text content within the overlay (HeroSlider's text) */
+/* Styles for the text content within the overlay */
 .hero-slide-content {
-  max-width: 600px;
-  margin-bottom: 30px;
+  flex: 1; /* Text content grows to fill available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center text content within its own container */
+  align-items: flex-start; /* Align text to the left within its container */
+  margin-right: 20px; /* Adjusted space between text and form */
+  max-width: 850px; /* <--- CRITICAL FIX: Increased max-width for H1 to fit longer headings */
+  min-width: 300px; /* Ensure it has a minimum width */
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: left; /* Align text left */
 }
 
 .hero-slide-content h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
+  font-size: 3.8em; /* Impactful size */
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-weight: 700;
   color: #fff;
+  white-space: nowrap; /* CONDITION 4: Heading necessarily in single line */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if text is too long */
+  max-width: 100%; /* Ensure it respects parent width */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hero-slide-content h2 {
-  font-size: 2em;
-  margin-bottom: 10px;
+  font-size: 2.2em;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  font-weight: 500;
   color: #fff;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hero-slide-content p {
-  font-size: 1.2em;
+  font-size: 1.3em;
+  line-height: 1.5;
+  font-weight: 400;
   color: #fff;
-  margin-bottom: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
-/* Form container inside Hero Section */
-.hero-form-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  position: relative; /* Relative to hero-slide-content-overlay */
-  z-index: 3; /* Even higher z-index to be clearly above text and background */
-}
-/* --- END Hero Section Styling --- */
-
-
-/* Adjust specific section padding/alignment */
-.about-us-section,
-.services-section,
-.contact-us-section,
-.success-page-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  box-sizing: border-box;
+/* Form container inside Hero Section - BASE STYLES */
+.hero-form-desktop-container,
+.hero-form-mobile-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  position: relative; /* Maintain position context */
+  z-index: 3;
+  flex-shrink: 0; /* Prevent form from shrinking */
 }
 
-.about-us-section,
-.contact-us-section {
-  text-align: left;
-}
-
-/* Lead Capture Form Styling */
+/* ========================================= */
+/* 4. Form Section (Lead Capture Form) */
+/* ========================================= */
+/* Shared form styling already mostly in Global, specific overrides here */
 .lead-capture-form h3 {
   text-align: center;
-  color: #007bff;
+  color: #007bff; /* Use primary brand color */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
 }
 
 .lead-capture-form button {
   width: 100%;
   padding: 12px;
   font-size: 18px;
-  background-color: #28a745;
+  background-color: #28a745; /* Green submit button (secondary/accent) */
   border-color: #28a745;
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
 }
 
 .lead-capture-form button:hover {
@@ -339,32 +322,62 @@ a:hover {
 }
 
 .error-message {
-  color: #dc3545;
+  color: #dc3545; /* Red error message */
   font-size: 0.85em;
   margin-top: 5px;
 }
 
-/* Services Section Styling */
+/* ========================================= */
+/* 5. About Us Section */
+/* ========================================= */
+.about-us-section {
+  background-color: #f8f9fa; /* Slightly off-white background */
+  padding: 100px 40px; /* More padding for a substantial feel */
+  text-align: center; /* Center content for better presentation */
+  border-bottom: 1px solid #dee2e6; /* Subtle border */
+}
+
+.about-us-section h2 {
+  font-size: 2.8em; /* Larger heading */
+  color: #212529; /* Darker text */
+  margin-bottom: 30px; /* Space below heading */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+}
+
+.about-us-section p {
+  font-size: 1.1em; /* Slightly larger paragraph text */
+  line-height: 1.8;
+  max-width: 800px; /* Constrain paragraph width for readability */
+  margin: 0 auto 15px auto; /* Center paragraphs and add vertical spacing */
+  color: #495057; /* Medium grey text */
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+}
+
+/* ========================================= */
+/* 6. Services Section */
+/* ========================================= */
 .services-section {
-  background-color: #f8f9fa;
-  text-align: center;
+  background-color: #fff; /* White background for services */
+  text-align: center; /* Center heading */
 }
 
 .services-section h2 {
+  font-size: 2.5em; /* Heading size */
   text-align: center;
   margin-bottom: 40px;
+  color: #212529;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
 }
 
 .service-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 30px; /* Space between cards */
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
 }
 
-/* Service Card Styling */
 .service-card {
   background-color: #fff;
   border-radius: 8px;
@@ -392,7 +405,8 @@ a:hover {
 .service-card h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #007bff;
+  color: #007bff; /* Primary brand color */
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
 }
 
 .service-card p {
@@ -400,22 +414,41 @@ a:hover {
   color: #666;
   padding: 0 15px;
   margin-bottom: 0;
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
 }
 
-/* Contact Us Section Styling */
+/* ========================================= */
+/* 7. Contact Section */
+/* ========================================= */
 .contact-us-section {
-  background-color: #e9ecef;
+  background-color: #e9ecef; /* Slightly darker background */
   text-align: center;
+  padding: 100px 40px; /* Consistent padding */
+}
+
+.contact-us-section h2 {
+  font-size: 2.5em;
+  color: #212529;
+  margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+}
+
+.contact-us-section p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #495057;
+  margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
 }
 
 .social-links {
-    margin-top: 20px;
+    margin-top: 30px; /* More space for social links */
 }
 
 .social-links a {
   display: inline-block;
-  margin: 0 15px;
-  font-size: 1.2em;
+  margin: 0 18px; /* More space between icons */
+  font-size: 1.3em; /* Slightly larger for prominence */
   color: #007bff;
   transition: color 0.2s ease-in-out;
 }
@@ -424,27 +457,32 @@ a:hover {
   color: #0056b3;
 }
 
-/* Success Page Styling */
+/* ========================================= */
+/* 8. Success Page Section */
+/* ========================================= */
 .success-page-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px); /* Adjust for header/footer if present */
   text-align: center;
   padding: 50px;
+  background-color: #fff;
 }
 
 .success-page-section h2 {
-  color: #28a745;
+  color: #28a745; /* Green for success */
   font-size: 2.5em;
   margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
 }
 
 .success-page-section p {
   font-size: 1.2em;
   margin-bottom: 30px;
   max-width: 600px;
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
 }
 
 .success-page-section a {
@@ -454,96 +492,95 @@ a:hover {
   border-radius: 5px;
   text-decoration: none;
   font-size: 1.1em;
+  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
 }
 
 .success-page-section a:hover {
   background-color: #0056b3;
 }
 
-/* --- Basic Responsive Adjustments (Mobile first) --- */
+/* ========================================= */
+/* Responsive Adjustments (Mobile First) */
+/* ========================================= */
+
+/* Desktop-first approach for Hero form visibility */
+/* Hide mobile form by default on desktop screens */
+.hero-form-mobile-container {
+  display: none; /* Hidden on desktop */
+}
+
+/* Desktop Styles for Hero Section (apply >= 769px) */
+@media (min-width: 769px) {
+  /* Show desktop form, hide mobile form */
+  .hero-form-desktop-container {
+    display: block; /* Or flex, depending on internal form styling */
+    max-width: 450px; /* Constrain form width on desktop */
+    margin-left: auto; /* Push form to the right, respecting flex-basis */
+    margin-right: 30px; /* Proper margin on the right (from viewport edge) */
+    align-self: center; /* Vertically center form within overlay */
+  }
+
+  /* Adjust hero content for desktop layout */
+  .hero-slide-content {
+    margin-right: 20px; /* Space between text and desktop form */
+    /* Ensure max-width is sufficient for H1 without truncating */
+    max-width: 850px; /* Example: Increased max-width for H1 to fit longer headings */
+    min-width: 300px;
+    white-space: nowrap; /* Keep H1 on single line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Reset hero-slide-content-overlay flex direction for desktop */
+  .hero-slide-content-overlay {
+    flex-direction: row; /* Text and form side-by-side */
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+}
+
 @media (max-width: 768px) {
   section {
-    padding: 40px 15px;
+    padding: 40px 15px; /* Adjust global section padding for mobile */
   }
 
-  /* Hero Section Responsive */
-  .hero-section {
-    min-height: 450px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0;
-  }
-
-  .hero-slide-content-overlay {
-      padding: 80px 20px;
-      align-items: center;
-      text-align: center;
-  }
-
-  .hero-slide-content h1 {
-      font-size: 2.2em;
-  }
-
-  .hero-slide-content h2 {
-      font-size: 1.6em;
-  }
-
-  .hero-slide-content p {
-      font-size: 1em;
-  }
-
-  .hero-form-container {
-      width: 90%;
-      max-width: none;
-  }
-
-  /* Services Section Responsive */
-  .service-cards-grid {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-  }
-
-  .service-card-image {
-    height: 180px;
-  }
-
-  /* Header Responsive (CRITICAL FIXES HERE for desired mobile layout) */
+  /* Header Responsive (unchanged) */
   .main-header {
-    flex-wrap: wrap; /* Allow items to wrap into rows */
-    justify-content: center; /* Center items on their line (for logo, phone) */
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 10px 15px;
-    align-items: flex-start; /* Align start of rows */
+    align-items: flex-start;
   }
 
   .main-header .logo {
-    flex-basis: 100%; /* Logo takes full width, centers */
+    flex-basis: 100%;
     text-align: center;
-    margin-bottom: 10px; /* Space below logo */
-    order: 1; /* First element in mobile */
+    margin-bottom: 10px;
+    order: 1;
   }
 
   .header-phone {
-    flex-basis: 100%; /* Phone takes full width, goes to next line */
+    flex-basis: 100%;
     text-align: center;
-    margin: 0; /* Reset margins */
+    margin: 0;
     padding: 0;
-    order: 2; /* Second element in mobile */
-    display: block; /* Ensure it's displayed on mobile */ /* <--- CRITICAL FIX: Make phone visible on mobile */
+    order: 2;
+    display: block;
   }
 
   .main-nav {
-    display: none; /* Hide main nav by default on mobile */
+    display: none;
     flex-direction: column;
-    position: absolute; /* Position relative to body, not header */
-    top: 130px; /* <--- Adjusted top to be below logo+phone */
+    position: absolute;
+    top: 130px;
     left: 0;
     width: 100%;
     background-color: #343a40;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     padding: 20px 0;
     z-index: 999;
-    order: 4; /* Last element in mobile layout order */
+    order: 4;
   }
 
   .main-nav.open {
@@ -560,11 +597,108 @@ a:hover {
   }
 
   .mobile-menu-icon {
-    display: flex; /* Show hamburger icon on mobile */
-    order: 3; /* <--- CRITICAL FIX: Position hamburger as third element in the wrap */
-    position: absolute; /* Position relative to main-header */
-    top: 15px; /* Adjust based on header padding */
-    right: 15px; /* Adjust based on header padding */
-    margin: 0; /* Reset margins */
+    display: flex;
+    order: 3;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+  }
+
+  /* Hero Section Responsive for Mobile - REVISED */
+  .hero-section {
+    min-height: auto; /* Allow height to be determined by content */
+    height: auto; /* Ensure it wraps its content */
+    display: flex; /* Still a flex container */
+    flex-direction: column; /* Stack image and form vertically */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0; /* Remove padding to let children define spacing */
+    /* No max-width or margin auto here, handled by internal elements */
+  }
+
+  .hero-image-container,
+  .hero-image-fallback {
+      position: relative; /* Keep relative for overlay positioning */
+      width: 100%;
+      height: 350px; /* Fixed height for the image area */
+      overflow: hidden; /* Ensure image doesn't spill out */
+      flex-shrink: 0; /* Prevent it from shrinking */
+      margin-bottom: 0; /* No margin here, spacing will be between hero-image-container and mobile form */
+  }
+
+  .hero-background-image { /* Style the actual img tag within hero-image-container */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5); /* Keep dark filter */
+  }
+
+  .hero-slide-content-overlay {
+      position: absolute; /* Keep absolute to overlay on the image */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; /* Cover the entire image container */
+      padding: 30px 20px; /* Padding for text inside overlay */
+      display: flex; /* Flexbox for text centering */
+      flex-direction: column;
+      justify-content: center; /* Center text vertically */
+      align-items: center; /* Center text horizontally */
+      text-align: center;
+      box-sizing: border-box; /* Include padding in height/width */
+  }
+
+  .hero-slide-content {
+    margin-right: 0;
+    margin-bottom: 0; /* No margin-bottom, as form is now separate */
+    max-width: 100%;
+    text-align: center;
+    /* Remove gap property, it's not relevant here anymore */
+  }
+
+  .hero-slide-content h1 {
+    font-size: 2.2em;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    margin-bottom: 10px;
+  }
+
+  .hero-slide-content h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+
+  .hero-slide-content p {
+    font-size: 1em;
+  }
+
+  /* Hide desktop form, show mobile form */
+  .hero-form-desktop-container {
+    display: none;
+  }
+
+  .hero-form-mobile-container {
+    display: block; /* Show mobile form container */
+    width: 95%; /* Wider form on mobile */
+    max-width: 450px; /* Keep a reasonable max-width */
+    padding: 25px; /* Less padding on mobile */
+    margin: 30px auto; /* NEW: Add top/bottom margin and center horizontally */
+    box-sizing: border-box;
+  }
+
+
+  /* Services Section Responsive (unchanged) */
+  .service-cards-grid {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .service-card-image {
+    height: 180px;
   }
 }
