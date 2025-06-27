@@ -1,7 +1,7 @@
 # backend/my_app/admin.py
 from django.contrib import admin
-# REMOVED SiteImage import
-from .models import Lead, NavLink, Service, ServiceImage, WebsiteContent
+# --- NEW IMPORT ---
+from .models import Lead, NavLink, Service, ServiceImage, WebsiteContent, HeroSlide # <--- Import HeroSlide
 
 # Register your models here.
 admin.site.register(Lead)
@@ -15,6 +15,15 @@ class ServiceImageAdmin(admin.ModelAdmin):
     search_fields = ('service__title', 'alt_text')
 admin.site.register(ServiceImage, ServiceImageAdmin)
 
-# REVISED: WebsiteContentAdmin (back to simpler or default registration)
+# NEW: Register HeroSlide model
+class HeroSlideAdmin(admin.ModelAdmin):
+    list_display = ('heading', 'order', 'is_active', 'image', 'updated_at')
+    list_filter = ('is_active',)
+    search_fields = ('heading', 'sub_heading', 'tagline')
+    ordering = ('order',)
+admin.site.register(HeroSlide, HeroSlideAdmin) # <--- ADDED THIS LINE
+
+# Ensure WebsiteContent is just registered by default - no custom admin for it right now
 # REMOVED: admin.site.unregister(WebsiteContent)
-admin.site.register(WebsiteContent) # <--- Keep ONLY this line for WebsiteContent registration
+# REMOVED: custom WebsiteContentAdmin class
+admin.site.register(WebsiteContent) # <--- Ensure ONLY this line registers WebsiteContent

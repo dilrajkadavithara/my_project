@@ -1,4 +1,4 @@
-/* frontend/src/index.css - Additional Global Styles and Basic Layout */
+/* frontend/src/index.css - Global Styles */
 
 /* Basic Resets */
 body {
@@ -12,6 +12,7 @@ body {
   color: #333;
   background-color: #f4f4f4; /* Light grey background */
   overflow-x: hidden; /* Prevent horizontal scroll for now */
+  margin-top: 60px; /* Add top margin equal to header height (approx) */
 }
 
 code {
@@ -49,7 +50,7 @@ p {
   margin-bottom: 10px;
 }
 
-/* Basic form styling (from previous setup) */
+/* Basic form styling */
 .form-group {
   margin-bottom: 15px;
 }
@@ -101,60 +102,133 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Hero Section Specific Styling */
-.hero-section {
-  position: relative; /* Needed for absolute positioning of overlay and background */
-  overflow: hidden;   /* Hide overflow from slider images */
-  min-height: 600px;  /* Ensure it has enough height */
+/* --- Header Styling (CRITICAL FIXES HERE FOR BOTH DESKTOP AND MOBILE) --- */
+.main-header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 15px 40px;
   display: flex;
-  align-items: center; /* Vertically center the overlay content */
-  justify-content: flex-start; /* Align overlay content to the left */
-  padding: 0; /* Remove existing padding as overlay will handle it */
-  color: #fff; /* Default text color for overlay (assuming dark background images) */
-}
-
-.hero-content-overlay {
-  position: relative; /* Stacks above background */
-  z-index: 2; /* Ensures content is on top */
-  max-width: 1200px; /* Control content width */
-  margin: 0 auto; /* Center content on larger screens */
-  padding: 100px 40px; /* Padding for the content inside the hero section */
+  /* DESKTOP: space-between, MOBILE: center/space-between with flex-wrap */
+  justify-content: space-between;
+  align-items: center; /* Vertically center items on their line */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.hero-content-overlay h1,
-.hero-content-overlay h2,
-.hero-content-overlay p {
-  color: #fff; /* Ensure white text for headings and paragraphs */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for readability */
-}
-
-/* Hero Image (Mobile Background) */
-.hero-background-image,
-.hero-image-fallback {
-  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Cover the entire area */
-  z-index: 1; /* Place behind overlay content */
-  filter: brightness(0.5); /* Make image darker for text readability */
+  z-index: 9999; /* Ensure it stays on top */
+  box-sizing: border-box; /* Crucial for padding/width calculations */
 }
 
-/* Hero Slider (Desktop Background) */
+.main-header .logo {
+  /* No flex-basis: 100% here by default for desktop */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.main-header .logo h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #fff;
+}
+
+/* Header Phone Number Styling (Desktop) */
+.header-phone {
+  margin: 0 auto; /* Pushes itself to center on desktop */
+  padding: 0 20px;
+  flex-shrink: 0; /* Prevent shrinking */
+  order: 0; /* Default order for desktop (flex takes care of it) */
+}
+
+.header-phone a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.header-phone a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Navigation & Hamburger Menu Styling (Desktop) */
+.main-nav {
+  display: flex; /* Always flex for desktop */
+  flex-shrink: 0; /* Prevent shrinking */
+  order: 0; /* Default order for desktop */
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.main-nav li {
+  margin-left: 25px; /* Space between links */
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+}
+
+.main-nav a:hover {
+  color: #007bff;
+}
+
+.mobile-menu-icon {
+  display: none; /* Hidden by default on desktop */
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.mobile-menu-icon .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+
+/* --- Hero Section Styling --- */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  padding: 0;
+  color: #fff;
+}
+
+/* Hero Image (Mobile Background) & Hero Slider Background Styles */
+.hero-background-image,
+.hero-image-fallback,
 .hero-slider {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Place behind overlay content */
+  z-index: 1; /* Background layer */
   overflow: hidden;
+}
+
+.hero-background-image,
+.hero-image-fallback,
+.hero-slide {
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5); /* Make image darker for text readability */
 }
 
 .hero-slide {
@@ -163,34 +237,78 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 1s ease-in-out; /* Smooth fade transition */
-  opacity: 0; /* Hidden by default */
-  filter: brightness(0.5); /* Make image darker for text readability */
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
 }
 
 .hero-slide.active {
-  opacity: 1; /* Active slide is visible */
+  opacity: 1;
 }
 
-/* Adjust form container for better visibility on dark background */
-.hero-form-container {
-  background-color: rgba(255, 255, 255, 0.9); /* Keep it slightly transparent white */
-  padding: 30px; /* More padding */
-  border-radius: 10px; /* Slightly more rounded corners */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* More prominent shadow */
+/* Styles for the container holding text and form, layered on top of background */
+.hero-slide-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Ensures it's above background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  align-items: flex-start; /* Align content to the left */
+  padding: 100px 40px;
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
 }
+
+/* Styles for the text content within the overlay (HeroSlider's text) */
+.hero-slide-content {
+  max-width: 600px;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-slide-content h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.hero-slide-content h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.hero-slide-content p {
+  font-size: 1.2em;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+/* Form container inside Hero Section */
+.hero-form-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  position: relative; /* Relative to hero-slide-content-overlay */
+  z-index: 3; /* Even higher z-index to be clearly above text and background */
+}
+/* --- END Hero Section Styling --- */
+
 
 /* Adjust specific section padding/alignment */
-/* These styles ensure content within sections are properly constrained and aligned */
-.hero-section .hero-content, /* Target content within hero section */
 .about-us-section,
 .services-section,
 .contact-us-section,
 .success-page-section {
-  max-width: 1200px; /* Max width for content */
-  margin: 0 auto; /* Center content on larger screens */
+  max-width: 1200px;
+  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
   box-sizing: border-box;
@@ -198,20 +316,20 @@ a:hover {
 
 .about-us-section,
 .contact-us-section {
-  text-align: left; /* Align text left within these sections */
+  text-align: left;
 }
 
-/* Lead Capture Form Styling (refined from previous setup) */
+/* Lead Capture Form Styling */
 .lead-capture-form h3 {
   text-align: center;
-  color: #007bff; /* Use primary brand color */
+  color: #007bff;
 }
 
 .lead-capture-form button {
   width: 100%;
   padding: 12px;
   font-size: 18px;
-  background-color: #28a745; /* Green submit button (secondary/accent) */
+  background-color: #28a745;
   border-color: #28a745;
 }
 
@@ -221,15 +339,15 @@ a:hover {
 }
 
 .error-message {
-  color: #dc3545; /* Red error message */
+  color: #dc3545;
   font-size: 0.85em;
   margin-top: 5px;
 }
 
-/* Services Section Specific Styling (for grid) */
+/* Services Section Styling */
 .services-section {
-  background-color: #f8f9fa; /* Light background for services */
-  text-align: center; /* Center heading */
+  background-color: #f8f9fa;
+  text-align: center;
 }
 
 .services-section h2 {
@@ -239,11 +357,11 @@ a:hover {
 
 .service-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-  gap: 30px; /* Space between cards */
-  max-width: 1200px; /* Should be centered by parent section padding/margin */
-  margin: 0 auto; /* Center grid within its section */
-  padding: 0; /* No extra padding here */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 /* Service Card Styling */
@@ -254,27 +372,27 @@ a:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content in card */
+  align-items: center;
   padding-bottom: 20px;
   text-align: center;
   transition: transform 0.2s ease-in-out;
 }
 
 .service-card:hover {
-  transform: translateY(-5px); /* Lift card on hover */
+  transform: translateY(-5px);
 }
 
 .service-card-image {
   width: 100%;
-  height: 200px; /* Fixed height for consistency */
-  object-fit: cover; /* Cover the area, cropping if necessary */
+  height: 200px;
+  object-fit: cover;
   margin-bottom: 15px;
 }
 
 .service-card h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #007bff; /* Use primary brand color */
+  color: #007bff;
 }
 
 .service-card p {
@@ -286,8 +404,8 @@ a:hover {
 
 /* Contact Us Section Styling */
 .contact-us-section {
-  background-color: #e9ecef; /* Slightly darker background */
-  text-align: center; /* Center heading and contact details */
+  background-color: #e9ecef;
+  text-align: center;
 }
 
 .social-links {
@@ -297,8 +415,8 @@ a:hover {
 .social-links a {
   display: inline-block;
   margin: 0 15px;
-  font-size: 1.2em; /* Increase size of icon text */
-  color: #007bff; /* Primary blue for links */
+  font-size: 1.2em;
+  color: #007bff;
   transition: color 0.2s ease-in-out;
 }
 
@@ -312,13 +430,13 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 100px); /* Adjust for header/footer if present */
+  min-height: calc(100vh - 100px);
   text-align: center;
   padding: 50px;
 }
 
 .success-page-section h2 {
-  color: #28a745; /* Green for success */
+  color: #28a745;
   font-size: 2.5em;
   margin-bottom: 20px;
 }
@@ -342,7 +460,7 @@ a:hover {
   background-color: #0056b3;
 }
 
-/* Basic Responsive Adjustments (Mobile first) */
+/* --- Basic Responsive Adjustments (Mobile first) --- */
 @media (max-width: 768px) {
   section {
     padding: 40px 15px;
@@ -351,230 +469,102 @@ a:hover {
   /* Hero Section Responsive */
   .hero-section {
     min-height: 450px;
-    align-items: center; /* Center content on smaller screens */
+    align-items: center;
     justify-content: center;
-    text-align: center; /* Center text on small screens */
-    padding: 0; /* Remove section padding, overlay handles it */
+    text-align: center;
+    padding: 0;
   }
 
-  .hero-content-overlay {
-      padding: 80px 20px; /* Adjusted padding for overlay on mobile */
-      align-items: center; /* Center content on mobile */
+  .hero-slide-content-overlay {
+      padding: 80px 20px;
+      align-items: center;
+      text-align: center;
   }
 
-  .hero-content-overlay h1,
-  .hero-content-overlay h2 {
-      font-size: 2em; /* Smaller font on mobile */
+  .hero-slide-content h1 {
+      font-size: 2.2em;
+  }
+
+  .hero-slide-content h2 {
+      font-size: 1.6em;
+  }
+
+  .hero-slide-content p {
+      font-size: 1em;
   }
 
   .hero-form-container {
       width: 90%;
-      max-width: none; /* Allow it to take more width */
+      max-width: none;
   }
 
   /* Services Section Responsive */
   .service-cards-grid {
-    grid-template-columns: 1fr; /* Single column on small screens */
+    grid-template-columns: 1fr;
     padding: 0 15px;
   }
 
   .service-card-image {
     height: 180px;
   }
-}
 
-/* frontend/src/index.css - Header Styling */
-
-.main-header {
-  background-color: #343a40; /* Dark background for header */
-  color: #fff;
-  padding: 15px 40px; /* Padding for the header */
-  display: flex;
-  justify-content: space-between; /* Space out logo and nav */
-  align-items: center; /* Vertically align items */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky; /* Make header sticky */
-  top: 0;
-  z-index: 1000; /* Ensure it stays on top */
-}
-
-.main-header .logo h1 {
-  margin: 0; /* Remove default margin from h1 inside logo */
-  font-size: 1.8em;
-  color: #fff; /* Ensure logo text is white */
-}
-
-/* Basic Nav Styling (will be replaced by actual nav links later) */
-.main-nav p {
-  margin: 0; /* Remove default margin */
-  font-size: 1.1em;
-}
-
-/* Hide placeholder for mobile for now */
-.main-nav .placeholder-nav-text {
-    display: none;
-}
-
-/* Responsive adjustments for Header */
-@media (max-width: 768px) {
+  /* Header Responsive (CRITICAL FIXES HERE for desired mobile layout) */
   .main-header {
-    flex-direction: row; /* Keep content in a row for small header */
+    flex-wrap: wrap; /* Allow items to wrap into rows */
+    justify-content: center; /* Center items on their line (for logo, phone) */
     padding: 10px 15px;
+    align-items: flex-start; /* Align start of rows */
   }
 
-  .main-header .logo h1 {
-    font-size: 1.5em;
+  .main-header .logo {
+    flex-basis: 100%; /* Logo takes full width, centers */
+    text-align: center;
+    margin-bottom: 10px; /* Space below logo */
+    order: 1; /* First element in mobile */
   }
-}
 
-/* frontend/src/index.css - Navigation & Hamburger Menu Styling */
-
-.main-nav ul {
-  list-style: none; /* Remove bullet points */
-  padding: 0;
-  margin: 0;
-  display: flex; /* Display links in a row for desktop */
-}
-
-.main-nav li {
-  margin-left: 25px; /* Space between links */
-}
-
-.main-nav a {
-  color: #fff; /* White links for header */
-  text-decoration: none;
-  font-size: 1.1em;
-  font-weight: bold;
-  transition: color 0.2s ease-in-out;
-}
-
-.main-nav a:hover {
-  color: #007bff; /* Primary blue on hover */
-}
-
-/* Mobile Menu Icon (Hamburger) */
-.mobile-menu-icon {
-  display: none; /* Hidden by default on desktop */
-  cursor: pointer;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 25px;
-}
-
-.mobile-menu-icon .bar {
-  width: 100%;
-  height: 3px;
-  background-color: #fff; /* White bars */
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Responsive adjustments for Navigation */
-@media (max-width: 768px) {
-  .main-header {
-    justify-content: space-between; /* Ensure logo and icon space out */
+  .header-phone {
+    flex-basis: 100%; /* Phone takes full width, goes to next line */
+    text-align: center;
+    margin: 0; /* Reset margins */
+    padding: 0;
+    order: 2; /* Second element in mobile */
+    display: block; /* Ensure it's displayed on mobile */ /* <--- CRITICAL FIX: Make phone visible on mobile */
   }
 
   .main-nav {
     display: none; /* Hide main nav by default on mobile */
     flex-direction: column;
-    position: absolute;
-    top: 60px; /* Position below header */
+    position: absolute; /* Position relative to body, not header */
+    top: 130px; /* <--- Adjusted top to be below logo+phone */
     left: 0;
     width: 100%;
-    background-color: #343a40; /* Same as header background */
+    background-color: #343a40;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     padding: 20px 0;
-    z-index: 999; /* Below header, above content */
+    z-index: 999;
+    order: 4; /* Last element in mobile layout order */
   }
 
   .main-nav.open {
-    display: flex; /* Show when 'open' class is present */
+    display: flex;
   }
 
   .main-nav ul {
     flex-direction: column;
-    align-items: center; /* Center links in mobile menu */
+    align-items: center;
   }
 
   .main-nav li {
-    margin: 10px 0; /* Vertical spacing for mobile links */
+    margin: 10px 0;
   }
 
   .mobile-menu-icon {
     display: flex; /* Show hamburger icon on mobile */
-  }
-
-  /* Transform hamburger to 'X' when open */
-  .mobile-menu-icon.open .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-  .mobile-menu-icon.open .bar:nth-child(2) {
-    opacity: 0;
-  }
-  .mobile-menu-icon.open .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-}
-
-/* frontend/src/index.css - Header Phone Number Styling */
-
-.main-header {
-  /* Ensure main-header uses flex for alignment */
-  display: flex;
-  justify-content: space-between; /* Spacing for logo, phone, nav */
-  align-items: center; /* Vertically center items */
-}
-
-.header-phone {
-  margin: 0 auto; /* Center horizontally if space allows, otherwise just pushes */
-  padding: 0 20px; /* Some padding around the phone number */
-}
-
-.header-phone a {
-  color: #fff; /* White color for phone number */
-  text-decoration: none;
-  font-size: 1.2em; /* Slightly larger font for prominence */
-  font-weight: bold;
-  white-space: nowrap; /* Prevent phone number from breaking */
-}
-
-.header-phone a:hover {
-  color: #007bff; /* Primary blue on hover */
-  text-decoration: underline;
-}
-
-/* Responsive adjustments for Header Phone Number */
-@media (max-width: 768px) {
-  .main-header {
-    flex-wrap: wrap; /* Allow items to wrap to next line */
-    justify-content: center; /* Center items when wrapped */
-    padding: 10px 15px; /* Adjust header padding for mobile */
-  }
-
-  .main-header .logo {
-    flex-basis: 100%; /* Logo takes full width on top */
-    text-align: center;
-    margin-bottom: 10px; /* Space below logo */
-  }
-
-  .header-phone {
-    order: 3; /* Move phone to bottom on mobile, after logo, before nav icon/menu */
-    flex-basis: 100%; /* Phone number takes full width */
-    text-align: center;
-    margin: 10px 0; /* Vertical margin for phone number */
-    padding: 0;
-  }
-
-  .main-nav {
-    order: 4; /* Nav menu comes after phone number on mobile */
-  }
-
-  .mobile-menu-icon {
-    order: 2; /* Hamburger icon near the phone number/logo row */
-    position: absolute; /* Take out of flow to position top-right */
+    order: 3; /* <--- CRITICAL FIX: Position hamburger as third element in the wrap */
+    position: absolute; /* Position relative to main-header */
     top: 15px; /* Adjust based on header padding */
     right: 15px; /* Adjust based on header padding */
+    margin: 0; /* Reset margins */
   }
 }

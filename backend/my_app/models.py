@@ -1,8 +1,30 @@
 # backend/my_app/models.py
 from django.db import models
-from django.utils import timezone # Keep timezone import as it's a standard utility
+from django.utils import timezone
 
-# REMOVED: SiteImage model
+# NEW MODEL: HeroSlide
+class HeroSlide(models.Model):
+    # Text content for this specific slide
+    heading = models.CharField(max_length=255, help_text="Main heading for this slide")
+    sub_heading = models.CharField(max_length=255, blank=True, null=True, help_text="Subheading for this slide")
+    tagline = models.TextField(blank=True, null=True, help_text="Short tagline for this slide")
+
+    # Image for this specific slide (direct upload)
+    image = models.ImageField(upload_to='hero_slides/', help_text="Background image for this slide")
+    alt_text = models.CharField(max_length=255, blank=True, null=True, help_text="Alt text for the slide image")
+
+    order = models.IntegerField(default=0, help_text="Order in which slides appear")
+    is_active = models.BooleanField(default=True, help_text="Whether this slide is active")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name_plural = "Hero Slides"
+
+    def __str__(self):
+        return self.heading or f"Hero Slide #{self.id}"
+
 
 class Lead(models.Model):
     name = models.CharField(max_length=255)
@@ -54,19 +76,16 @@ class ServiceImage(models.Model):
     def __str__(self):
         return f"Image for {self.service.title} ({self.alt_text or 'No Alt Text'})"
 
-# REVISED: WebsiteContent model for direct image upload
 class WebsiteContent(models.Model):
     key = models.CharField(
         max_length=255,
         unique=True,
         help_text="Unique identifier for this content block (e.g., 'hero_main_heading', 'about_us_paragraph_1', 'hero_background_image_desktop', 'contact_us_phone', 'site_meta_title')"
     )
-    # Value field is used for text, but can be blank if content_image is used
     value = models.TextField(
         blank=True, null=True,
         help_text="The actual content: text or HTML. Optional if an Image File is uploaded."
     )
-    # NEW FIELD: Direct ImageField for content type 'image_file'
     content_image = models.ImageField(
         upload_to='website_content_images/', # New upload path for these images
         blank=True, null=True,
@@ -78,13 +97,11 @@ class WebsiteContent(models.Model):
         choices=[
             ('text', 'Text'),
             ('html', 'HTML'),
-            ('image_file', 'Image File'), # <--- NEW CHOICE: for direct image uploads
+            ('image_file', 'Image File'),
             ('link', 'Link URL'),
         ],
         help_text="Type of content: Text, HTML, Image File, or Link URL."
     )
-    # REMOVED: image_object ForeignKey field from previous version
-
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

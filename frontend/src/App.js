@@ -11,20 +11,12 @@ import ContactUsSection from './components/ContactUsSection';
 import Header from './components/Header';
 import axios from 'axios';
 
-// Helper function getSliderImages is outside the App component
-const getSliderImages = (websiteContent) => {
-    const images = [];
-    let i = 1;
-    while (websiteContent[`hero_slider_image_${i}`]) {
-        images.push(websiteContent[`hero_slider_image_${i}`].value);
-        i++;
-    }
-    return images;
-};
+// REMOVED: getSliderImages helper function (no longer needed, HeroSlides will provide structured data)
 
 function App() {
   const [websiteContent, setWebsiteContent] = useState({});
   const [navLinks, setNavLinks] = useState([]);
+  const [heroSlides, setHeroSlides] = useState([]); // <--- NEW STATE for Hero Slides
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
 
@@ -36,7 +28,7 @@ function App() {
             throw new Error("REACT_APP_API_URL is not defined in .env.development");
         }
 
-        // Fetch Website Content
+        // Fetch Website Content (for About Us, Contact Us, Logo, Mobile Hero Image)
         const websiteContentResponse = await axios.get(`${API_URL}website-content/`);
         const contentMap = {};
         websiteContentResponse.data.forEach(item => {
@@ -51,6 +43,11 @@ function App() {
         // Fetch Nav Links
         const navLinksResponse = await axios.get(`${API_URL}navlinks/`);
         setNavLinks(navLinksResponse.data);
+
+        // <--- NEW: Fetch Hero Slides
+        const heroSlidesResponse = await axios.get(`${API_URL}heroslides/`);
+        setHeroSlides(heroSlidesResponse.data);
+        // --- END NEW ---
 
       } catch (err) {
         console.error("Error fetching content:", err);
@@ -73,10 +70,8 @@ function App() {
 
   // Pass down content as props
   const heroProps = {
-    mainHeading: websiteContent['hero_main_heading']?.value || "Your Main Hero Heading (Default)",
-    subHeading: websiteContent['hero_sub_heading']?.value || "Your Sub Heading (Default)",
-    tagline: websiteContent['hero_tagline']?.value || "A short, compelling tagline for your service (Default)",
-    sliderImages: getSliderImages(websiteContent),
+    // <--- MODIFIED: Pass heroSlides directly, and get mobileImage from WebsiteContent
+    heroSlides: heroSlides,
     mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
 
@@ -87,7 +82,7 @@ function App() {
   };
 
   const contactUsProps = {
-    heading: websiteContent['contact_us_heading']?.value || "Get in Touch (Default)",
+    heading: websiteContent['contact_us_heading']?.value || "Let's Build Something Great Together (Default)",
     phone: websiteContent['contact_us_phone']?.value || "+1234567890",
     email: websiteContent['contact_us_email']?.value || "default@example.com",
     address: websiteContent['contact_us_address']?.value || "Default Address, City",
@@ -100,7 +95,7 @@ function App() {
   const headerProps = {
     logoText: websiteContent['logo_text']?.value || "my_project",
     navLinks: navLinks,
-    headerPhoneNumber: websiteContent['header_phone_number']?.value || null, // <--- NEW PROP
+    headerPhoneNumber: websiteContent['header_phone_number']?.value || null,
   };
 
 

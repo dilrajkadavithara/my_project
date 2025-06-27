@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Accept headerPhoneNumber prop from App.js
-function Header({ logoText, navLinks, headerPhoneNumber }) { // <--- Accept headerPhoneNumber prop
+function Header({ logoText, navLinks, headerPhoneNumber }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -13,7 +13,7 @@ function Header({ logoText, navLinks, headerPhoneNumber }) { // <--- Accept head
   // Helper to generate phone link
   const getPhoneLink = (phoneNumber) => {
     if (!phoneNumber) return '#';
-    return `tel:${phoneNumber.replace(/\s/g, '')}`; // Remove spaces for the tel: link
+    return `tel:${phoneNumber.replace(/\s/g, '')}`;
   };
 
   return (
@@ -22,7 +22,7 @@ function Header({ logoText, navLinks, headerPhoneNumber }) { // <--- Accept head
         <Link to="/"><h1>{logoText || "My Project"}</h1></Link>
       </div>
 
-      {headerPhoneNumber && ( // <--- NEW: Display phone number if it exists
+      {headerPhoneNumber && ( // <--- Phone number is here, as a direct child of main-header
         <div className="header-phone">
           <a href={getPhoneLink(headerPhoneNumber)}>
             {headerPhoneNumber}

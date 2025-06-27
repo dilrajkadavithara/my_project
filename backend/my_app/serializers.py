@@ -1,7 +1,7 @@
 # backend/my_app/serializers.py
 from rest_framework import serializers
-# REMOVED SiteImage import
-from .models import Lead, NavLink, Service, ServiceImage, WebsiteContent
+# --- NEW IMPORT ---
+from .models import Lead, NavLink, Service, ServiceImage, WebsiteContent, HeroSlide # <--- Import HeroSlide
 
 class LeadSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,11 +27,16 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
-# REMOVED: SiteImageSerializer
-
-# REVISED: WebsiteContentSerializer (removed image_object field as it's gone from model)
 class WebsiteContentSerializer(serializers.ModelSerializer):
-    # REMOVED: image_object = SiteImageSerializer(read_only=True)
     class Meta:
         model = WebsiteContent
-        fields = '__all__' # Now includes content_image directly
+        fields = '__all__'
+
+# NEW: HeroSlideSerializer
+class HeroSlideSerializer(serializers.ModelSerializer):
+    # Image field will generate absolute URL
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = HeroSlide
+        fields = '__all__' # Include all fields from the HeroSlide model
