@@ -1,11 +1,11 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom'; // No 'BrowserRouter' or 'Router' here
+import { Routes, Route, useLocation } from 'react-router-dom';
 import SuccessPage from './pages/SuccessPage';
 
 import HeroSection from './components/HeroSection';
-import AboutUsSection from './components/AboutUsSection'; // Corrected import path previously
+import AboutUsSection from './components/AboutUsSection';
 import ServicesSection from './components/ServicesSection';
 import ContactUsSection from './components/ContactUsSection';
 import Header from './components/Header';
@@ -18,7 +18,7 @@ function App() {
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
 
-  const location = useLocation(); // useLocation is now correctly within a Router context (from index.js)
+  const location = useLocation();
 
   // Effect to fetch all dynamic content
   useEffect(() => {
@@ -44,7 +44,7 @@ function App() {
         setNavLinks(navLinksResponse.data);
 
         const heroSlidesResponse = await axios.get(`${API_URL}heroslides/`);
-        setHeroSlides(heroSlidesResponse.data); // Corrected: Uses heroSlidesResponse.data
+        setHeroSlides(heroSlidesResponse.data);
 
       } catch (err) {
         console.error("Error fetching content:", err);
@@ -55,22 +55,18 @@ function App() {
     };
 
     fetchAllContent();
-  }, []); // Dependency array remains empty for initial fetch
+  }, []);
 
   // Effect for smooth scrolling to sections based on URL hash
   useEffect(() => {
     if (location.hash) {
-      // Decode the hash to handle any special characters
-      const id = decodeURIComponent(location.hash.substring(1)); // Remove '#'
+      const id = decodeURIComponent(location.hash.substring(1));
       const element = document.getElementById(id);
 
       if (element) {
-        // Get the height of the fixed header
         const header = document.querySelector('.main-header');
         const headerOffset = header ? header.offsetHeight : 0;
         
-        // Calculate the target scroll position
-        // Subtract headerOffset to make sure the content starts below the fixed header
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - headerOffset;
 
@@ -80,10 +76,9 @@ function App() {
         });
       }
     } else {
-      // Optional: Scroll to top if no hash is present (e.g., on initial load or "/" path)
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [location]); // Re-run effect when location (especially hash) changes
+  }, [location]);
 
 
   if (loadingContent) {
@@ -100,16 +95,34 @@ function App() {
     mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
 
+  // --- NEW/UPDATED About Us Props ---
+  // Collect all features into an array
+  const aboutUsFeatures = [
+    websiteContent['about_us_feature_1']?.value,
+    websiteContent['about_us_feature_2']?.value,
+    websiteContent['about_us_feature_3']?.value,
+    websiteContent['about_us_feature_4']?.value,
+    websiteContent['about_us_feature_5']?.value,
+  ].filter(feature => feature); // Filter out any null/undefined/empty string features
+
   const aboutUsProps = {
     heading: websiteContent['about_us_heading']?.value || "About Our Company (Default)",
     paragraph1: websiteContent['about_us_paragraph_1']?.value || "Default first paragraph.",
-    paragraph2: websiteContent['about_us_paragraph_2']?.value || "Default second paragraph.",
+    paragraph2: websiteContent['about_us_paragraph_2']?.value, // No default fallback, relies on Django content
+    aboutUsImage: websiteContent['about_us_main_image']?.value || 'https://via.placeholder.com/600x400?text=About+Us+Image+Placeholder',
+    features: aboutUsFeatures, // Pass the array of features
+    badgeYearsText: websiteContent['about_us_badge_years_text']?.value,
+    badgeCustomersText: websiteContent['about_us_badge_customers_text']?.value,
+    ctaText: websiteContent['about_us_cta_text']?.value,
+    ctaLink: websiteContent['about_us_cta_link']?.value,
   };
+  // --- END NEW/UPDATED About Us Props ---
+
 
   const contactUsProps = {
     heading: websiteContent['contact_us_heading']?.value || "Let's Build Something Great Together (Default)",
     phone: websiteContent['contact_us_phone']?.value || "+1234567890",
-    email: websiteContent['contact_us_email']?.value || "default@example.com", // Corrected email property assignment
+    email: websiteContent['contact_us_email']?.value || "default@example.com",
     address: websiteContent['contact_us_address']?.value || "Default Address, City",
     facebookUrl: websiteContent['social_facebook_url']?.value || '#',
     instagramUrl: websiteContent['social_instagram_url']?.value || '#',
@@ -125,7 +138,6 @@ function App() {
 
 
   return (
-    // NO <Router> TAGS HERE - BrowserRouter is now in index.js
     <div className="App">
       <Header {...headerProps} />
 
@@ -133,7 +145,7 @@ function App() {
         <Route path="/" element={
           <main>
             <HeroSection {...heroProps} />
-            <AboutUsSection {...aboutUsProps} />
+            <AboutUsSection {...aboutUsProps} /> {/* Pass aboutUsProps */}
             <ServicesSection />
             <ContactUsSection {...contactUsProps} />
           </main>

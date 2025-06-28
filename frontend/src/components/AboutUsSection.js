@@ -1,15 +1,61 @@
 // frontend/src/components/AboutUsSection.js
 import React from 'react';
 
-// Accept props from App.js
-function AboutUsSection({ heading, paragraph1, paragraph2 }) {
-  // Potential image will be handled here if passed as a prop
+// Accept all new props from App.js for features, badges, and CTA
+function AboutUsSection({ 
+  heading, 
+  paragraph1, 
+  paragraph2, // Will be empty/null now
+  aboutUsImage, 
+  features, // New: array of feature strings
+  badgeYearsText, // New: text for years badge
+  badgeCustomersText, // New: text for customers badge
+  ctaText, // New: text for CTA button
+  ctaLink // New: link for CTA button
+}) { 
   return (
-    // Added id="about-us-section" to the main section tag
     <section className="about-us-section" id="about-us-section">
-      <h2>{heading}</h2> {/* Use dynamic content */}
-      <p>{paragraph1}</p> {/* Use dynamic content */}
-      {paragraph2 && <p>{paragraph2}</p>} {/* Use dynamic content, render only if paragraph2 exists */}
+      {/* Moved heading outside grid for full width, consistent with inspiration image */}
+      <h2>{heading}</h2> 
+      
+      <div className="about-us-grid-container">
+        <div className="about-us-content">
+          <p>{paragraph1}</p> 
+          {/* We already removed paragraph2 from Django, so this will no longer render */}
+          {/* {paragraph2 && <p>{paragraph2}</p>} */} 
+
+          {features && features.length > 0 && ( // Render features list if available
+            <ul className="about-us-features">
+              {features.map((feature, index) => (
+                // Changed emoji to a hyphen to avoid parsing issues
+                <li key={index}><span className="feature-icon">-</span> {feature}</li> 
+              ))}
+            </ul>
+          )}
+
+          {ctaText && ctaLink && ( // Render CTA button if text and link are available
+            <a href={ctaLink} className="cta-button">{ctaText}</a>
+          )}
+        </div>
+
+        {aboutUsImage && (
+          <div className="about-us-image-container">
+            <img 
+              src={aboutUsImage} 
+              alt="About Us" 
+              className="about-us-image" 
+              onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/cccccc/ffffff?text=About+Us+Image'; }}
+            />
+            {/* Badges positioned absolutely over the image in CSS */}
+            {badgeYearsText && (
+              <div className="about-us-badge years-badge">{badgeYearsText}</div>
+            )}
+            {badgeCustomersText && (
+              <div className="about-us-badge customers-badge">{badgeCustomersText}</div>
+            )}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

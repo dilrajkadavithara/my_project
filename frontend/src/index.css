@@ -417,51 +417,183 @@ a:hover {
 }
 
 /* ========================================= */
-/* 5. About Us Section */
+/* 5. About Us Section - STYLED WITH IMAGE */
 /* ========================================= */
 .about-us-section {
-  background-color: #f8f9fa; /* Slightly off-white background */
-  padding: 100px 40px; /* More padding for a substantial feel */
-  text-align: center; /* Center content for better presentation */
-  border-bottom: 1px solid #dee2e6; /* Subtle border */
+  background-color: #1a202c; /* Dark background inspired by image */
+  padding: 100px 0; /* Vertical padding only here */
+  text-align: center; 
+  border-bottom: 1px solid #2d3748; /* Darker subtle border */
+  color: #fff; /* Default text color for this section */
+  max-width: unset; /* Override global max-width for full horizontal span */
+  box-sizing: border-box; /* Ensure padding is included in total width */
 }
 
 .about-us-section h2 {
-  font-size: 2.8em; /* Larger heading */
-  color: #212529; /* Darker text */
-  margin-bottom: 30px; /* Space below heading */
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  font-size: 3.2em; /* Larger, more impactful heading */
+  color: #fff; /* White heading */
+  margin-bottom: 60px; /* More space below heading */
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 800; /* Extra bold */
+  max-width: 900px; /* Constrain heading width */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 40px; /* Horizontal padding for the heading itself */
+  box-sizing: border-box; /* Include padding in heading width */
 }
 
-.about-us-section p {
-  font-size: 1.1em; /* Slightly larger paragraph text */
-  line-height: 1.8;
-  max-width: 800px; /* Constrain paragraph width for readability */
-  margin: 0 auto 15px auto; /* Center paragraphs and add vertical spacing */
-  color: #495057; /* Medium grey text */
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+.about-us-grid-container {
+  display: grid; /* Use CSS Grid for precise column control */
+  grid-template-columns: minmax(450px, 1fr) minmax(450px, 1fr); /* Two columns, text can go down to 450px, image fixed size */
+  gap: 80px; /* Space between columns */
+  align-items: start; /* Align items to the start (top) of their grid cells */
+  max-width: 1400px; /* Significantly increased max-width for wider content span */
+  margin: 0 auto; /* Center the grid container */
+  padding: 0 40px; /* Horizontal padding for the entire grid content */
+  box-sizing: border-box; /* Include padding in width */
 }
+
+.about-us-content {
+  /* No flex properties needed here as parent is now grid */
+  /* grid-column: 1 / 2; (implicitly handled by order) */
+  min-width: 450px; /* Minimum width for the content column */
+  text-align: left; 
+  background-color: transparent; 
+  padding: 0; 
+  border-radius: 0; 
+  box-shadow: none; 
+  color: #cbd5e0; 
+  display: flex; /* Still flex for internal stacking of p, ul, a */
+  flex-direction: column; 
+  justify-content: space-between; /* Distribute space vertically between elements */
+  height: 100%; /* Make content box fill its grid cell height */
+}
+
+.about-us-content p {
+  font-size: 1.15em; 
+  line-height: 1.8;
+  margin-bottom: 30px; 
+}
+
+.about-us-features {
+  list-style: none; 
+  padding: 0;
+  margin-bottom: 40px; 
+}
+
+.about-us-features li {
+  font-size: 1.15em;
+  color: #fff; 
+  margin-bottom: 15px; 
+  display: flex;
+  align-items: flex-start; /* Align icon and text to the top for multi-line text */
+  font-weight: 600; 
+}
+
+.about-us-features .feature-icon {
+  margin-right: 15px; 
+  color: #48bb78; 
+  font-size: 1.4em; 
+  line-height: 1; 
+  width: 24px; 
+  text-align: center;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.cta-button {
+  display: inline-block;
+  background: linear-gradient(45deg, #4299e1, #3182ce); 
+  color: white;
+  padding: 15px 30px; 
+  border-radius: 8px; 
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4); 
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  align-self: flex-start; /* Align CTA button to the left within its flex container */
+}
+
+.cta-button:hover {
+  background: linear-gradient(45deg, #3182ce, #2c5282); 
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(66, 153, 225, 0.6);
+  text-decoration: none; 
+}
+
+.about-us-image-container {
+  /* No flex properties needed here as parent is now grid */
+  /* grid-column: 2 / 3; (implicitly handled by order) */
+  width: 100%; /* Ensure it fills its grid cell */
+  height: 100%; /* IMPORTANT: Make image container fill its grid cell height */
+  position: relative; 
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
+  border-radius: 12px; 
+  overflow: hidden; 
+}
+
+.about-us-image {
+  width: 100%; 
+  height: 100%; /* Image fills its container height */
+  display: block; 
+  border-radius: 12px; 
+  object-fit: cover; /* Ensure image covers the area, cropping if necessary */
+}
+
+/* Badges styling */
+.about-us-badge {
+  position: absolute;
+  background-color: #f6ad55; 
+  color: #2d3748; 
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9em;
+  z-index: 10; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.about-us-badge.years-badge {
+  top: 20px;
+  right: 20px;
+}
+
+.about-us-badge.customers-badge {
+  bottom: 20px;
+  left: 20px;
+  background-color: #ecc94b; 
+}
+
+.about-us-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
 
 /* ========================================= */
 /* 6. Services Section */
 /* ========================================= */
 .services-section {
-  background-color: #fff; /* White background for services */
-  text-align: center; /* Center heading */
+  background-color: #fff; 
+  text-align: center; 
 }
 
 .services-section h2 {
-  font-size: 2.5em; /* Heading size */
+  font-size: 2.5em; 
   text-align: center;
   margin-bottom: 40px;
   color: #212529;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  font-family: 'Montserrat', sans-serif; 
 }
 
 .service-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-  gap: 30px; /* Space between cards */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 30px; 
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
@@ -494,8 +626,8 @@ a:hover {
 .service-card h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #007bff; /* Primary brand color */
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  color: #007bff; 
+  font-family: 'Montserrat', sans-serif; 
 }
 
 .service-card p {
@@ -503,23 +635,23 @@ a:hover {
   color: #666;
   padding: 0 15px;
   margin-bottom: 0;
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+  font-family: 'Open Sans', sans-serif; 
 }
 
 /* ========================================= */
 /* 7. Contact Section */
 /* ========================================= */
 .contact-us-section {
-  background-color: #e9ecef; /* Slightly darker background */
+  background-color: #e9ecef; 
   text-align: center;
-  padding: 100px 40px; /* Consistent padding */
+  padding: 100px 40px; 
 }
 
 .contact-us-section h2 {
   font-size: 2.5em;
   color: #212529;
   margin-bottom: 30px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  font-family: 'Montserrat', sans-serif; 
 }
 
 .contact-us-section p {
@@ -527,17 +659,17 @@ a:hover {
   line-height: 1.7;
   color: #495057;
   margin-bottom: 10px;
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+  font-family: 'Open Sans', sans-serif; 
 }
 
 .social-links {
-    margin-top: 30px; /* More space for social links */
+    margin-top: 30px; 
 }
 
 .social-links a {
   display: inline-block;
-  margin: 0 18px; /* More space between icons */
-  font-size: 1.3em; /* Slightly larger for prominence */
+  margin: 0 18px; 
+  font-size: 1.3em; 
   color: #007bff;
   transition: color 0.2s ease-in-out;
 }
@@ -554,24 +686,24 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 100px); /* Adjust for header/footer if present */
+  min-height: calc(100vh - 100px); 
   text-align: center;
   padding: 50px;
   background-color: #fff;
 }
 
 .success-page-section h2 {
-  color: #28a745; /* Green for success */
+  color: #28a745; 
   font-size: 2.5em;
   margin-bottom: 20px;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
+  font-family: 'Montserrat', sans-serif; 
 }
 
 .success-page-section p {
   font-size: 1.2em;
   margin-bottom: 30px;
   max-width: 600px;
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+  font-family: 'Open Sans', sans-serif; 
 }
 
 .success-page-section a {
@@ -581,7 +713,7 @@ a:hover {
   border-radius: 5px;
   text-decoration: none;
   font-size: 1.1em;
-  font-family: 'Open Sans', sans-serif; /* Apply Open Sans */
+  font-family: 'Open Sans', sans-serif; 
 }
 
 .success-page-section a:hover {
@@ -595,34 +727,33 @@ a:hover {
 /* Desktop-first approach for Hero form visibility */
 /* Hide mobile form by default on desktop screens */
 .hero-form-mobile-container {
-  display: none; /* Hidden on desktop */
+  display: none; 
 }
 
 /* Desktop Styles for Hero Section (apply >= 769px) */
 @media (min-width: 769px) {
   /* Show desktop form, hide mobile form */
   .hero-form-desktop-container {
-    display: block; /* Or flex, depending on internal form styling */
-    max-width: 450px; /* Constrain form width on desktop */
-    margin-left: auto; /* Push form to the right, respecting flex-basis */
-    margin-right: 30px; /* Proper margin on the right (from viewport edge) */
-    align-self: center; /* Vertically center form within overlay */
+    display: block; 
+    max-width: 450px; 
+    margin-left: auto; 
+    margin-right: 30px; 
+    align-self: center; 
   }
 
   /* Adjust hero content for desktop layout */
   .hero-slide-content {
-    margin-right: 20px; /* Space between text and desktop form */
-    /* Ensure max-width is sufficient for H1 without truncating */
-    max-width: 850px; /* Example: Increased max-width for H1 to fit longer headings */
+    margin-right: 20px; 
+    max-width: 850px; 
     min-width: 300px;
-    white-space: nowrap; /* Keep H1 on single line */
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   /* Reset hero-slide-content-overlay flex direction for desktop */
   .hero-slide-content-overlay {
-    flex-direction: row; /* Text and form side-by-side */
+    flex-direction: row; 
     justify-content: center;
     align-items: center;
     padding: 0 40px;
@@ -631,7 +762,7 @@ a:hover {
 
 @media (max-width: 768px) {
   section {
-    padding: 40px 15px; /* Adjust global section padding for mobile */
+    padding: 40px 15px; 
   }
 
   /* Header Responsive (unchanged) */
@@ -696,57 +827,55 @@ a:hover {
 
   /* Hero Section Responsive for Mobile - REVISED */
   .hero-section {
-    min-height: auto; /* Allow height to be determined by content */
-    height: auto; /* Ensure it wraps its content */
-    display: flex; /* Still a flex container */
-    flex-direction: column; /* Stack image and form vertically */
+    min-height: auto; 
+    height: auto; 
+    display: flex; 
+    flex-direction: column; 
     justify-content: flex-start;
     align-items: center;
-    padding: 0; /* Remove padding to let children define spacing */
-    /* No max-width or margin auto here, handled by internal elements */
+    padding: 0; 
   }
 
   .hero-image-container,
   .hero-image-fallback {
-      position: relative; /* Keep relative for overlay positioning */
+      position: relative; 
       width: 100%;
-      height: 350px; /* Fixed height for the image area */
-      overflow: hidden; /* Ensure image doesn't spill out */
-      flex-shrink: 0; /* Prevent it from shrinking */
-      margin-bottom: 0; /* No margin here, spacing will be between hero-image-container and mobile form */
+      height: 350px; 
+      overflow: hidden; 
+      flex-shrink: 0; 
+      margin-bottom: 0; 
   }
 
-  .hero-background-image { /* Style the actual img tag within hero-image-container */
+  .hero-background-image { 
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.5); /* Keep dark filter */
+      filter: brightness(0.5); 
   }
 
   .hero-slide-content-overlay {
-      position: absolute; /* Keep absolute to overlay on the image */
+      position: absolute; 
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%; /* Cover the entire image container */
-      padding: 30px 20px; /* Padding for text inside overlay */
-      display: flex; /* Flexbox for text centering */
+      height: 100%; 
+      padding: 30px 20px; 
+      display: flex; 
       flex-direction: column;
-      justify-content: center; /* Center text vertically */
-      align-items: center; /* Center text horizontally */
+      justify-content: center; 
+      align-items: center; 
       text-align: center;
-      box-sizing: border-box; /* Include padding in height/width */
+      box-sizing: border-box; 
   }
 
   .hero-slide-content {
     margin-right: 0;
-    margin-bottom: 0; /* No margin-bottom, as form is now separate */
+    margin-bottom: 0; 
     max-width: 100%;
     text-align: center;
-    /* Remove gap property, it's not relevant here anymore */
   }
 
   .hero-slide-content h1 {
@@ -768,16 +897,76 @@ a:hover {
 
   /* Hide desktop form, show mobile form */
   .hero-form-desktop-container {
-    display: none;
+    display: none; 
   }
 
   .hero-form-mobile-container {
-    display: block; /* Show mobile form container */
-    width: 95%; /* Wider form on mobile */
-    max-width: 450px; /* Keep a reasonable max-width */
-    padding: 25px; /* Less padding on mobile */
-    margin: 30px auto; /* NEW: Add top/bottom margin and center horizontally */
+    display: block; 
+    width: 95%; 
+    max-width: 450px; 
+    padding: 25px; 
+    margin: 30px auto; 
     box-sizing: border-box;
+  }
+
+  /* About Us Section Responsive */
+  .about-us-grid-container {
+      grid-template-columns: 1fr; /* Single column on mobile */
+      gap: 30px; 
+      padding: 0 20px; /* Adjust padding for mobile */
+  }
+
+  .about-us-image-container {
+      width: 100%; 
+      max-width: none; 
+      margin-bottom: 20px; 
+      height: 250px; /* Adjust height for mobile */
+  }
+
+  .about-us-content { 
+      text-align: center; 
+      padding-right: 0; 
+      padding: 0; /* Remove padding as grid gap handles it, or add if preferred */
+      min-width: unset; 
+      /* No flex for internal stacking here, let content flow naturally or use default block behavior */
+      display: block; /* Revert to block display for mobile */
+  }
+
+  .about-us-content p {
+    margin-bottom: 20px; /* Ensure space between p and features */
+  }
+
+  .about-us-features {
+    margin-bottom: 20px; /* Space below features on mobile */
+  }
+
+  .about-us-features li {
+    font-size: 1em; 
+    text-align: center; /* Center list items on mobile */
+    justify-content: center; /* Center content within flex item */
+    padding: 0 10px; /* Add slight padding for very narrow screens */
+  }
+
+  .about-us-features .feature-icon {
+    margin-right: 10px; /* Adjust spacing for mobile */
+  }
+
+  .cta-button {
+    width: 100%; 
+    padding: 12px 20px;
+    font-size: 1.1em;
+    align-self: center; /* Center button on mobile */
+  }
+
+  /* Badges responsive positioning */
+  .about-us-badge.years-badge {
+    top: 10px; 
+    right: 10px;
+  }
+
+  .about-us-badge.customers-badge {
+    bottom: 10px; 
+    left: 10px;
   }
 
 
