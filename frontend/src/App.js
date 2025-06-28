@@ -95,28 +95,34 @@ function App() {
     mobileImage: websiteContent['hero_background_image_mobile']?.value || 'https://via.placeholder.com/800x600?text=Hero+Mobile+Placeholder'
   };
 
-  // --- NEW/UPDATED About Us Props ---
-  // Collect all features into an array
+  // --- About Us Props (unchanged from last correct version) ---
   const aboutUsFeatures = [
     websiteContent['about_us_feature_1']?.value,
     websiteContent['about_us_feature_2']?.value,
     websiteContent['about_us_feature_3']?.value,
     websiteContent['about_us_feature_4']?.value,
     websiteContent['about_us_feature_5']?.value,
-  ].filter(feature => feature); // Filter out any null/undefined/empty string features
+  ].filter(feature => feature); 
 
   const aboutUsProps = {
     heading: websiteContent['about_us_heading']?.value || "About Our Company (Default)",
     paragraph1: websiteContent['about_us_paragraph_1']?.value || "Default first paragraph.",
-    paragraph2: websiteContent['about_us_paragraph_2']?.value, // No default fallback, relies on Django content
+    paragraph2: websiteContent['about_us_paragraph_2']?.value, 
     aboutUsImage: websiteContent['about_us_main_image']?.value || 'https://via.placeholder.com/600x400?text=About+Us+Image+Placeholder',
-    features: aboutUsFeatures, // Pass the array of features
+    features: aboutUsFeatures, 
     badgeYearsText: websiteContent['about_us_badge_years_text']?.value,
     badgeCustomersText: websiteContent['about_us_badge_customers_text']?.value,
     ctaText: websiteContent['about_us_cta_text']?.value,
     ctaLink: websiteContent['about_us_cta_link']?.value,
   };
-  // --- END NEW/UPDATED About Us Props ---
+  // --- END About Us Props ---
+
+  // --- NEW Services Section Props ---
+  const servicesSectionProps = {
+    servicesHeading: websiteContent['services_section_heading']?.value || "Our Services",
+    servicesSubheading: websiteContent['services_section_subheading']?.value || "Explore our comprehensive range of offerings."
+  };
+  // --- END NEW Services Section Props ---
 
 
   const contactUsProps = {
@@ -145,8 +151,8 @@ function App() {
         <Route path="/" element={
           <main>
             <HeroSection {...heroProps} />
-            <AboutUsSection {...aboutUsProps} /> {/* Pass aboutUsProps */}
-            <ServicesSection />
+            <AboutUsSection {...aboutUsProps} /> 
+            <ServicesSection {...servicesSectionProps} /> {/* Pass servicesSectionProps */}
             <ContactUsSection {...contactUsProps} />
           </main>
         } />

@@ -227,7 +227,7 @@ a:hover {
   
   /* CRITICAL: Use flex on the overlay to position text and form */
   display: flex;
-  flex-direction: row; /* Desktop: text and form side-by-side */
+  flex-direction: row; /* Desktop: text and form side-by-where */
   flex-wrap: nowrap; /* Prevent wrapping on desktop */
   
   justify-content: center; /* Horizontally center flex items (text + form block) */
@@ -396,9 +396,9 @@ a:hover {
 }
 
 .lead-capture-form button[type="submit"]:hover {
-  background: linear-gradient(45deg, #218838, #1e7e34); /* Darker gradient on hover */
+  background: linear-gradient(45deg, #3182ce, #2c5282); /* Darker gradient on hover */
   transform: translateY(-3px); /* More pronounced lift effect on hover */
-  box-shadow: 0 12px 25px rgba(40, 167, 69, 0.7); /* Even more prominent shadow on hover */
+  box-shadow: 0 12px 25px rgba(40, 167, 69, 0.7); /* Even stronger shadow on hover */
 }
 
 .lead-capture-form button[type="submit"]:active {
@@ -444,7 +444,8 @@ a:hover {
 
 .about-us-grid-container {
   display: grid; /* Use CSS Grid for precise column control */
-  grid-template-columns: minmax(450px, 1fr) minmax(450px, 1fr); /* Two columns, text can go down to 450px, image fixed size */
+  /* Rebalanced columns: 1.2fr for content, 1fr for image. This assumes image is roughly square */
+  grid-template-columns: minmax(550px, 1.5fr) minmax(450px, 1fr); 
   gap: 80px; /* Space between columns */
   align-items: start; /* Align items to the start (top) of their grid cells */
   max-width: 1400px; /* Significantly increased max-width for wider content span */
@@ -455,8 +456,7 @@ a:hover {
 
 .about-us-content {
   /* No flex properties needed here as parent is now grid */
-  /* grid-column: 1 / 2; (implicitly handled by order) */
-  min-width: 450px; /* Minimum width for the content column */
+  min-width: 450px; /* Increased minimum width for text to ensure readability and fill space */
   text-align: left; 
   background-color: transparent; 
   padding: 0; 
@@ -526,7 +526,6 @@ a:hover {
 
 .about-us-image-container {
   /* No flex properties needed here as parent is now grid */
-  /* grid-column: 2 / 3; (implicitly handled by order) */
   width: 100%; /* Ensure it fills its grid cell */
   height: 100%; /* IMPORTANT: Make image container fill its grid cell height */
   position: relative; 
@@ -540,7 +539,7 @@ a:hover {
   height: 100%; /* Image fills its container height */
   display: block; 
   border-radius: 12px; 
-  object-fit: cover; /* Ensure image covers the area, cropping if necessary */
+  object-fit: cover; 
 }
 
 /* Badges styling */
@@ -578,65 +577,130 @@ a:hover {
 /* 6. Services Section */
 /* ========================================= */
 .services-section {
-  background-color: #fff; 
+  background-color: #1a202c; /* Dark background */
+  padding: 100px 0; /* Vertical padding only, inner content handles horizontal */
   text-align: center; 
+  border-bottom: 1px solid #2d3748; /* Dark subtle border */
+  color: #fff; /* Default text color for this section */
+  max-width: unset; /* Allow full horizontal span */
+  box-sizing: border-box; /* Include padding in width */
 }
 
-.services-section h2 {
-  font-size: 2.5em; 
-  text-align: center;
-  margin-bottom: 40px;
-  color: #212529;
-  font-family: 'Montserrat', sans-serif; 
+.services-section .services-heading {
+  font-size: 3.2em; /* Large, impactful heading */
+  color: #fff;
+  margin-bottom: 20px; /* Space below heading */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; /* Extra bold */
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 40px; /* Horizontal padding for heading */
+}
+
+.services-section .services-subheading {
+  font-size: 1.3em;
+  color: #cbd5e0; /* Lighter gray for subheading */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px; /* More space below subheading before cards */
+  padding: 0 40px; /* Horizontal padding for subheading */
 }
 
 .service-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-  gap: 30px; 
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0;
+  /* GUARANTEED 3 COLUMNS:
+     Repeat 3 times, each column takes 1 fraction of space.
+     The overall max-width of the grid will then control the column size. */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px; /* Desktop gap: 40px, consistent with About Us section */
+  /* REMOVED MAX-WIDTH: Allow grid to span more horizontally, controlled by section padding */
+  margin: 0 auto; /* Center the grid */
+  padding: 0 80px; /* Increased horizontal padding for the grid itself for wider span */
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .service-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  background-color: #2d3748; /* Darker card background */
+  border-radius: 12px; /* More rounded corners */
+  /* Prominent shadows on static and hover */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+  overflow: hidden; /* Ensure content doesn't overflow visually */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 30px; /* More padding at bottom */
   text-align: center;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out, border 0.3s ease-in-out;
+  border: 2px solid transparent; /* Subtle border that can change on hover */
+  cursor: pointer; /* Indicate clickability */
+  position: relative; /* For ripple effect */
+  /* Adjusted min-height for optimal visual balance in 3-column layout */
+  min-height: 360px; /* Reduced min-height for a more compact card */
+  justify-content: space-between; /* Space out image/title/paragraph vertically */
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px); /* Stronger lift effect */
+  box-shadow: 0 18px 35px rgba(0,0,0,0.5); /* Even stronger shadow on hover */
+  background: linear-gradient(135deg, #2d3748, #4a5568); /* Subtle background gradient on hover */
+  border-color: #4299e1; /* Accent border on hover */
+}
+
+/* Image zoom effect on hover */
+.service-card:hover .service-card-image {
+  transform: scale(1.05); /* Gentle zoom on image */
 }
 
 .service-card-image {
   width: 100%;
-  height: 200px;
+  height: 180px; /* Reduced image height for a more compact card */
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Adjusted space below image */
+  border-top-left-radius: 10px; /* Match card radius */
+  border-top-right-radius: 10px;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for zoom */
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .service-card h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: #007bff; 
+  font-size: 1.6em; /* Slightly larger title */
+  margin-bottom: 12px;
+  color: #fff; /* White title */
   font-family: 'Montserrat', sans-serif; 
 }
 
 .service-card p {
-  font-size: 0.95em;
-  color: #666;
-  padding: 0 15px;
-  margin-bottom: 0;
-  font-family: 'Open Sans', sans-serif; 
+  font-size: 1.0em; /* Good size for description */
+  color: #cbd5e0; /* Lighter gray for description */
+  padding: 0 20px; /* Horizontal padding for text inside card */
+  margin-bottom: 0; 
+  flex-grow: 1; /* Allow paragraph to grow and fill space */
 }
+
+/* Ripple effect (CSS only for now, JS click handler needed for dynamic origin) */
+/* This is a visual placeholder, a JS implementation would be more dynamic */
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(66, 153, 225, 0.5); /* Blue glow */
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.service-card:active::after {
+  transform: translate(-50%, -50%) scale(20); /* Expands on click */
+  opacity: 1;
+  transition: transform 0s, opacity 0s; /* Instant start */
+}
+
 
 /* ========================================= */
 /* 7. Contact Section */
@@ -913,49 +977,47 @@ a:hover {
   .about-us-grid-container {
       grid-template-columns: 1fr; /* Single column on mobile */
       gap: 30px; 
-      padding: 0 20px; /* Adjust padding for mobile */
+      padding: 0 20px; 
   }
 
   .about-us-image-container {
       width: 100%; 
       max-width: none; 
       margin-bottom: 20px; 
-      height: 250px; /* Adjust height for mobile */
+      height: 250px; 
   }
 
   .about-us-content { 
       text-align: center; 
       padding-right: 0; 
-      padding: 0; /* Remove padding as grid gap handles it, or add if preferred */
+      padding: 0; 
       min-width: unset; 
-      /* No flex for internal stacking here, let content flow naturally or use default block behavior */
-      display: block; /* Revert to block display for mobile */
+      display: block; 
   }
 
   .about-us-content p {
-    margin-bottom: 20px; /* Ensure space between p and features */
+    margin-bottom: 20px; 
   }
 
   .about-us-features {
-    margin-bottom: 20px; /* Space below features on mobile */
+    margin-bottom: 20px; 
   }
 
   .about-us-features li {
     font-size: 1em; 
-    text-align: center; /* Center list items on mobile */
-    justify-content: center; /* Center content within flex item */
-    padding: 0 10px; /* Add slight padding for very narrow screens */
+    text-align: left; 
+    justify-content: flex-start; 
   }
 
   .about-us-features .feature-icon {
-    margin-right: 10px; /* Adjust spacing for mobile */
+    margin-right: 10px; 
   }
 
   .cta-button {
     width: 100%; 
     padding: 12px 20px;
     font-size: 1.1em;
-    align-self: center; /* Center button on mobile */
+    align-self: center; 
   }
 
   /* Badges responsive positioning */
@@ -970,13 +1032,41 @@ a:hover {
   }
 
 
-  /* Services Section Responsive (unchanged) */
+  /* Services Section Responsive */
+  .services-section .services-heading {
+    font-size: 2.2em; /* Smaller on mobile */
+    padding: 0 20px;
+  }
+
+  .services-section .services-subheading {
+    font-size: 1em;
+    margin-bottom: 40px; /* Reduced margin for mobile */
+    padding: 0 20px;
+  }
+
   .service-cards-grid {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 30px; /* Mobile gap */
+    padding: 0 20px; /* Adjust padding for mobile */
+  }
+
+  .service-card {
+    min-height: auto; /* Allow height to adjust */
+    height: auto; /* Allow height to adjust */
+    padding-bottom: 20px; /* Adjust padding for mobile */
   }
 
   .service-card-image {
-    height: 180px;
+    height: 180px; /* Smaller image height on mobile */
+    margin-bottom: 15px; /* Adjust margin for mobile */
+  }
+
+  .service-card h3 {
+    font-size: 1.4em; /* Smaller title on mobile */
+  }
+
+  .service-card p {
+    font-size: 0.9em; /* Smaller description on mobile */
+    padding: 0 15px; /* Adjust padding for mobile */
   }
 }

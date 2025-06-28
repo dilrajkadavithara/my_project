@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import axios from 'axios';
 
-function ServicesSection() {
+// Accept new heading and subheading props
+function ServicesSection({ servicesHeading, servicesSubheading }) { 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,19 +32,31 @@ function ServicesSection() {
     fetchServices();
   }, []); // Empty dependency array means this runs once on mount
 
-  if (loading) return <section className="services-section" id="services-section"><div>Loading Services...</div></section>;
-  if (error) return <section className="services-section" id="services-section"><div>Error: {error}</div></section>;
-  if (services.length === 0) return <section className="services-section" id="services-section"><div>No services available.</div></section>;
-
+  // Display loading, error, or no services messages while maintaining the section structure
+  if (loading) return <section className="services-section" id="services-section"><div className="section-loading-message">Loading Services...</div></section>;
+  if (error) return <section className="services-section" id="services-section"><div className="section-error-message">Error: {error}</div></section>;
+  
   return (
-    // Added id="services-section" to the main section tag
     <section className="services-section" id="services-section">
-      <h2>Our Services (Dynamic)</h2>
-      <div className="service-cards-grid">
-        {services.map(service => (
-          <ServiceCard key={service.id} service={service} />
-        ))}
-      </div>
+      {/* Conditionally render headings only if content is not empty and not in loading/error state */}
+      {!loading && !error && (
+        <>
+          {servicesHeading && <h2 className="services-heading">{servicesHeading}</h2>}
+          {servicesSubheading && <p className="services-subheading">{servicesSubheading}</p>}
+        </>
+      )}
+
+      {services.length === 0 && !loading && !error && (
+        <div className="section-no-content-message">No services available.</div>
+      )}
+
+      {services.length > 0 && ( // Only render grid if services are available
+        <div className="service-cards-grid">
+          {services.map(service => (
+            <ServiceCard key={service.id} service={service} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
