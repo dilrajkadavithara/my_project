@@ -1,14 +1,16 @@
 import React from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.css'; // This is line 4 where the error is reported
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'; // <--- Import BrowserRouter
+import { BrowserRouter } from 'react-router-dom';
+ 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter> {/* <--- Wrap your App component with BrowserRouter */}
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>

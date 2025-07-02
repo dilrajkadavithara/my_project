@@ -1,8 +1,15 @@
 /* ========================================= */
 /* 1. Global Section: Basic Resets & App Structure */
 /* ========================================= */
-body {
+
+html {
   margin: 0;
+  padding: 0;
+  scroll-behavior: smooth; /* <<<< ADDED: Ensure smooth scrolling works across the board */
+}
+
+body {
+  /* margin: 0; */
   /* Applying Google Fonts */
   font-family: 'Open Sans', sans-serif; /* Body font */
   -webkit-font-smoothing: antialiased;
@@ -11,7 +18,7 @@ body {
   color: #333;
   background-color: #f4f4f4; /* Light grey background */
   overflow-x: hidden; /* Prevent horizontal scroll for now */
-  margin-top: 60px; /* Add top margin equal to header height (approx) for fixed header */
+  /*margin-top: 60px; /* Add top margin equal to header height (approx) for fixed header */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -69,20 +76,21 @@ a:hover {
 /* 2. Nav Bar Section (Header) */
 /* ========================================= */
 .main-header {
-  background-color: #343a40; /* Dark background for header */
+  position: absolute;   /* ✅ Scrolls away but still overlays Hero */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;           /* Still above hero image */
+  background-color: transparent;  /* ✅ No background */
   color: #fff;
   padding: 15px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Vertically center items on their line */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: fixed; /* Ensure it's fixed */
-  width: 100%;    /* Give it full width when fixed */
-  top: 0;
-  left: 0;
-  z-index: 1000; /* Ensure it stays on top of everything else */
-  box-sizing: border-box; /* Crucial for padding/width calculations */
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: none;      /* ✅ No shadow needed when it's not sticky */
 }
+
 
 .main-header .logo {
   flex-shrink: 0; /* Prevent shrinking */
@@ -106,7 +114,7 @@ a:hover {
 .header-phone a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.8em;
   font-weight: bold;
   white-space: nowrap;
 }
@@ -172,14 +180,17 @@ a:hover {
 /* ========================================= */
 .hero-section {
   position: relative;
-  overflow: hidden;
-  width: 100vw; /* CONDITION 1: Span all across viewport horizontally */
-  min-height: 90vh; /* CONDITION 1: 90% of viewport vertically, use min-height for flexibility */
+  overflow-x: clip; /* NEW: Hide any accidental horizontal overflow cleanly */
+  overflow-y: hidden;
+  width: 100vw; /* Keep this to span full width */
+  min-height: 90vh;
   padding: 0;
-  color: #fff; /* Default text color for overlay */
-  max-width: none; /* Crucial: Hero background should span full width, override global section max-width */
-  margin: 0;    /* Crucial: Hero background should span full width, override global section margin */
+  color: #fff;
+  margin: 0 auto;
+  max-width: 100%; /* Override global max-width (again) */
+  box-sizing: border-box;
 }
+
 
 /* Hero Image (Mobile Background) & Hero Slider Background Styles */
 .hero-background-image,
@@ -287,22 +298,23 @@ a:hover {
 /* Form container inside Hero Section - BASE STYLES */
 .hero-form-desktop-container,
 .hero-form-mobile-container {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 40px;
-  border-radius: 12px;
-  /* Enhanced shadow for a more pronounced lift */
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Stronger initial shadow */
-  position: relative; /* Maintain position context */
-  z-index: 3;
-  flex-shrink: 0; /* Prevent form from shrinking */
-  /* Added for a subtle lift effect */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* CHANGED: Darker background for cohesion with website theme */
+    background-color: rgba(28, 34, 48, 0.95); /* Consistent with footer card background, but semi-transparent */
+    padding: 40px;
+    border-radius: 12px;
+    /* Enhanced shadow for a more pronounced lift */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Slightly stronger shadow */
+    position: relative; /* Maintain position context */
+    z-index: 3;
+    flex-shrink: 0; /* Prevent form from shrinking */
+    /* Added for a subtle lift effect */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .hero-form-desktop-container:hover,
 .hero-form-mobile-container:hover {
-  transform: translateY(-8px); /* More pronounced lift */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4); /* Even stronger shadow on hover */
+    transform: translateY(-8px); /* More pronounced lift */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Even stronger shadow on hover */
 }
 
 /* ========================================= */
@@ -310,110 +322,124 @@ a:hover {
 /* ========================================= */
 
 
+.lead-capture-form {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
 .lead-capture-form h3 {
-  text-align: center;
-  color: #007bff; /* Use primary brand color */
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat */
-  margin-bottom: 25px; /* More space below heading */
-  font-size: 1.8em;
-  position: relative;
-  padding-bottom: 10px; /* Space for underline */
+    text-align: center;
+    /* CHANGED: Accent color for heading, consistent with footer/about us */
+    color: #8ab4f8; /* Blue accent, matches footer heading/links */
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-.lead-capture-form h3::after { /* Stylish underline effect */
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background-color: #28a745; /* Accent color for underline */
-  border-radius: 5px;
+.lead-capture-form h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    /* CHANGED: Accent color for underline, consistent with footer icons */
+    background-color: #ffcc00; /* Yellow accent, matches footer icons */
+    border-radius: 5px;
 }
 
 .lead-capture-form .form-group {
-  margin-bottom: 20px; /* Space between form groups */
-  text-align: left; /* Align labels/inputs left */
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .lead-capture-form label {
-  display: block; /* Ensure label is on its own line */
-  margin-bottom: 8px; /* Space between label and input */
-  font-weight: 600; /* Slightly bolder labels */
-  color: #555;
-  font-size: 0.95em;
-  font-family: 'Open Sans', sans-serif;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    /* CHANGED: Lighter color for labels on dark background */
+    color: #cbd5e0; /* Light grey, consistent with paragraph text on dark backgrounds */
+    font-size: 0.95em;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .lead-capture-form input[type="text"],
 .lead-capture-form input[type="tel"] {
-  width: 100%;
-  padding: 12px 15px; /* More generous padding */
-  border: 2px solid #ced4da; /* Subtle border */
-  border-radius: 8px; /* Rounded corners for inputs */
-  font-size: 1.1em; /* Larger text in inputs */
-  color: #333;
-  /* Enhanced transitions for zoom and shadow */
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  box-sizing: border-box; /* Include padding and border in width */
-  font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    padding: 12px 15px;
+    /* CHANGED: Darker background for inputs to blend with form, subtle border */
+    background-color: #2d3748; /* Darker grey, similar to darker parts of theme */
+    border: 2px solid rgba(138, 180, 248, 0.3); /* Subtle blueish border */
+    border-radius: 8px;
+    font-size: 1.1em;
+    /* CHANGED: White text inside input */
+    color: #fff;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .lead-capture-form input[type="text"]:focus,
 .lead-capture-form input[type="tel"]:focus {
-  border-color: #007bff; /* Highlight border on focus */
-  /* More prominent shadow on focus */
-  box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.3), 0 5px 15px rgba(0, 123, 255, 0.2);
-  transform: scale(1.01); /* Subtle zoom effect on focus */
-  outline: none; /* Remove default outline */
+    /* CHANGED: Accent color for focus border, subtle blue shadow */
+    border-color: #4299e1; /* Brighter blue accent */
+    box-shadow: 0 0 0 0.3rem rgba(66, 153, 225, 0.3), 0 5px 15px rgba(66, 153, 225, 0.2);
+    transform: scale(1.01);
+    outline: none;
 }
 
 .lead-capture-form input[type="text"]:hover,
 .lead-capture-form input[type="tel"]:hover {
-  border-color: #007bff; /* Highlight border on hover */
-  transform: scale(1.005); /* Very subtle zoom on hover to indicate interactiveness */
+    /* CHANGED: Accent color for hover border */
+    border-color: #4299e1; /* Brighter blue accent */
+    transform: scale(1.005);
 }
 
-
 .lead-capture-form button[type="submit"] {
-  width: 100%;
-  padding: 15px; /* Larger padding for a more substantial button */
-  font-size: 1.2em; /* Larger font size */
-  font-weight: bold;
-  /* Use a gradient for a modern, inviting look */
-  background: linear-gradient(45deg, #28a745, #218838); /* Green gradient */
-  color: white;
-  border: none; /* No border for a cleaner look */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer;
-  /* More prominent shadow for the button */
-  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5); /* Stronger initial shadow */
-  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat to button text */
-  text-transform: uppercase; /* Make text uppercase for emphasis */
-  letter-spacing: 1px; /* Add some letter spacing */
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    /* CHANGED: Blue gradient for submit button, consistent with CTA buttons */
+    background: linear-gradient(45deg, #4299e1, #3182ce); /* Blue gradient, consistent with About Us CTA */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    /* Stronger initial shadow for button */
+    box-shadow: 0 8px 20px rgba(66, 153, 225, 0.5); /* Blue shadow */
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .lead-capture-form button[type="submit"]:hover {
-  background: linear-gradient(45deg, #3182ce, #2c5282); /* Darker gradient on hover */
-  transform: translateY(-3px); /* More pronounced lift effect on hover */
-  box-shadow: 0 12px 25px rgba(40, 167, 69, 0.7); /* Even stronger shadow on hover */
+    /* CHANGED: Darker blue gradient on hover */
+    background: linear-gradient(45deg, #3182ce, #2c5282); /* Darker blue gradient */
+    transform: translateY(-3px);
+    /* Even stronger blue shadow on hover */
+    box-shadow: 0 12px 25px rgba(66, 153, 225, 0.7); /* Stronger blue shadow */
 }
 
 .lead-capture-form button[type="submit"]:active {
-  transform: translateY(0); /* "Press" effect on click */
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.4); /* Reduced shadow on active/pressed state */
-  background: #218838; /* Solid color when pressed */
+    transform: translateY(0);
+    /* Reduced blue shadow on active/pressed state */
+    box-shadow: 0 4px 10px rgba(66, 153, 225, 0.4);
+    background: #3182ce; /* Solid blue when pressed */
 }
 
-
 .error-message {
-  color: #dc3545; /* Red error message */
-  font-size: 0.85em;
-  margin-top: 5px;
-  text-align: left; /* Ensure error message aligns with input */
-  font-family: 'Open Sans', sans-serif;
+    color: #dc3545; /* Red error message, ensure it contrasts well on dark background */
+    font-size: 0.85em;
+    margin-top: 5px;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
 }
 
 /* ========================================= */
@@ -430,7 +456,7 @@ a:hover {
 }
 
 .about-us-section h2 {
-  font-size: 3.2em; /* Larger, more impactful heading */
+  font-size: 2rem; /* Larger, mo re impactful heading */
   color: #fff; /* White heading */
   margin-bottom: 60px; /* More space below heading */
   font-family: 'Montserrat', sans-serif; 
@@ -587,7 +613,7 @@ a:hover {
 }
 
 .services-section .services-heading {
-  font-size: 3.2em; /* Large, impactful heading */
+  font-size: 2em; /* Large, impactful heading */
   color: #fff;
   margin-bottom: 20px; /* Space below heading */
   font-family: 'Montserrat', sans-serif;
@@ -702,45 +728,6 @@ a:hover {
 }
 
 
-/* ========================================= */
-/* 7. Contact Section */
-/* ========================================= */
-.contact-us-section {
-  background-color: #e9ecef; 
-  text-align: center;
-  padding: 100px 40px; 
-}
-
-.contact-us-section h2 {
-  font-size: 2.5em;
-  color: #212529;
-  margin-bottom: 30px;
-  font-family: 'Montserrat', sans-serif; 
-}
-
-.contact-us-section p {
-  font-size: 1.1em;
-  line-height: 1.7;
-  color: #495057;
-  margin-bottom: 10px;
-  font-family: 'Open Sans', sans-serif; 
-}
-
-.social-links {
-    margin-top: 30px; 
-}
-
-.social-links a {
-  display: inline-block;
-  margin: 0 18px; 
-  font-size: 1.3em; 
-  color: #007bff;
-  transition: color 0.2s ease-in-out;
-}
-
-.social-links a:hover {
-  color: #0056b3;
-}
 
 /* ========================================= */
 /* 8. Success Page Section */
@@ -926,7 +913,7 @@ a:hover {
       left: 0;
       width: 100%;
       height: 100%; 
-      padding: 30px 20px; 
+      padding: 20px 15px; 
       display: flex; 
       flex-direction: column;
       justify-content: center; 
@@ -943,20 +930,22 @@ a:hover {
   }
 
   .hero-slide-content h1 {
-    font-size: 2.2em;
+    font-size: 1.8rem;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .hero-slide-content h2 {
     font-size: 1.6em;
     margin-bottom: 10px;
+    display: none;
   }
 
   .hero-slide-content p {
     font-size: 1em;
+    display: none;
   }
 
   /* Hide desktop form, show mobile form */
@@ -968,16 +957,20 @@ a:hover {
     display: block; 
     width: 95%; 
     max-width: 450px; 
-    padding: 25px; 
-    margin: 30px auto; 
+    padding: 20px; 
+    margin: 20px auto; 
     box-sizing: border-box;
   }
 
   /* About Us Section Responsive */
+  .about-us-section {
+  padding: 60px 0; /* ↓ From 100px */
+  }
+
   .about-us-grid-container {
       grid-template-columns: 1fr; /* Single column on mobile */
-      gap: 30px; 
-      padding: 0 20px; 
+      gap: 20px; 
+      padding: 0 15px; 
   }
 
   .about-us-image-container {
@@ -996,7 +989,14 @@ a:hover {
   }
 
   .about-us-content p {
+    font-size: 1em;
     margin-bottom: 20px; 
+  }
+
+  .about-us-section h2 {
+    font-size: 1.1em; /* <<<< ADJUSTED: Smaller font size for mobile */
+    line-height: 1.3; /* Ensures good line spacing on mobile */
+    margin-bottom: 20px; /* Reduced margin for mobile */
   }
 
   .about-us-features {
@@ -1015,8 +1015,8 @@ a:hover {
 
   .cta-button {
     width: 100%; 
-    padding: 12px 20px;
-    font-size: 1.1em;
+    padding: 12px 18px;
+    font-size: 1em;
     align-self: center; 
   }
 
@@ -1031,11 +1031,16 @@ a:hover {
     left: 10px;
   }
 
+  .services-section{
+   padding: 60px 0 80px; /* Top reduced from 100px to 60px */
+  } 
+  
 
   /* Services Section Responsive */
   .services-section .services-heading {
-    font-size: 2.2em; /* Smaller on mobile */
+    font-size: 1.4rem; /* Smaller on mobile */
     padding: 0 20px;
+    margin-bottom: 15px;
   }
 
   .services-section .services-subheading {
@@ -1070,3 +1075,240 @@ a:hover {
     padding: 0 15px; /* Adjust padding for mobile */
   }
 }
+
+/* ========================================= */
+/* 9. Footer Section */
+/* ========================================= */
+.main-footer {
+    background-color: #0d1117;
+    color: #ffffff;
+    padding: 2rem 1rem; /* Default padding for all screen sizes */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-heading {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.7rem; /* Prominent size for the main footer heading */
+    color: #fff; /* White color to stand out on dark background */
+    margin-bottom: 2rem; /* Space below the heading before the cards */
+    padding-top: 2rem; /* Add some top padding to separate from content above */
+    padding-left: 20px; /* Consistent horizontal padding */
+    padding-right: 20px; /* Consistent horizontal padding */
+}
+
+.footer-content {
+    display: grid; /* Use CSS Grid for the main 2-column layout */
+    grid-template-columns: 1fr 1fr; /* <<<< ADJUSTED: Equal width for left (2 items) and right (3 items) columns */
+    gap: 2rem; /* Space between the left and right main columns */
+    max-width: 1200px; /* Constrain content width for larger screens */
+    margin: 0 auto; /* Center the footer content */
+    padding: 0 20px; /* Horizontal padding for the content inside main-footer */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Main Left and Right Columns - now grid items of footer-content */
+.footer-left {
+    display: grid; /* <<<< REVERTED: Back to grid */
+    grid-template-columns: 1fr; /* 1 column for cards inside footer-left (stacks them vertically) */
+    gap: 1.5rem; /* Space between individual cards */
+    height: 100%; /* Keep this, as it worked to manage internal card compactness and might aid outer height */
+}
+
+.footer-right {
+    display: grid; /* <<<< REVERTED: Back to grid */
+    grid-template-columns: 1fr; /* 1 column for cards inside footer-right (stacks them vertically) */
+    gap: 1.5rem; /* Space between individual cards */
+    height: 100%; /* Keep this, as it worked to manage internal card compactness and might aid outer height */
+}
+/* Ensure equal card height with flex-grow (within their respective grids) */
+.footer-card {
+    background-color: #1c2230;
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
+    height: auto; /* Allow height to adjust based on content */
+    display: flex; /* For internal content alignment */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: start; /* Prevents individual cards from stretching vertically */
+}
+
+.footer-card h3 {
+    font-size: 1.2rem;
+    color: #8ab4f8; /* Blue accent color */
+    border-bottom: 1px solid #8ab4f8;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.footer-card p {
+    font-size: 0.95rem; /* Slightly smaller font for body text in cards */
+    line-height: 1.5;
+    color: #cbd5e0; /* Lighter text color for readability on dark background */
+}
+
+/* Utility classes for icon-text alignment within footer cards */
+.flex-align-start {
+    display: flex;
+    align-items: flex-start; /* Aligns items to the start (top) of the cross axis */
+    gap: 0.5rem; /* Space between icon and text */
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center; /* Aligns items to the center of the cross axis */
+    gap: 0.5rem; /* Space between icon and text */
+}
+
+.footer-icon {
+    margin-right: 0.5rem; /* Kept for compatibility if used standalone, but `gap` is preferred */
+    color: #ffcc00; /* Yellow accent for icons */
+    font-size: 1.1em; /* Ensure icons are appropriately sized */
+    flex-shrink: 0; /* Prevent icons from shrinking */
+}
+
+/* New Special Message Card Styling (from mockup) */
+.special-message-card {
+    background-color: #4c5fd5; /* Purple/Blue color from mockup */
+    color: #fff;
+    font-weight: 600;
+    padding: 1.2rem; /* Match footer-card padding */
+    border-radius: 12px; /* Match footer-card border-radius */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Match footer-card shadow */
+    text-align: center; /* Center the text as in mockup */
+    display: flex; /* Use flex to vertically center content if space allows */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+}
+
+.special-message-card p {
+    margin-bottom: 0; /* Remove paragraph default margin to keep it compact */
+    font-size: 1.05rem; /* Slightly larger text for emphasis */
+    line-height: 1.4;
+}
+
+/* === Social Media Icons === */
+.social-icons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.social-icon { /* This targets the <a> tag */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem; /* Sizes the <i> tag icons */
+    background-color: #222;
+    color: #fff;
+    padding: 0.6rem;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; /* Remove underline from social links */
+}
+
+/* Specific brand colors for social media icons */
+.social-icon .fab.fa-facebook-f {
+    color: #3b5998; /* Facebook blue */
+}
+
+.social-icon .fab.fa-instagram {
+    color: #E1306C; /* Instagram pink-red */
+}
+
+.social-icon .fab.fa-youtube {
+    color: #FF0000; /* YouTube red */
+}
+
+.social-icon .fab.fa-whatsapp {
+    color: #25D366; /* WhatsApp green */
+}
+
+.social-icon:hover {
+    background-color: #8ab4f8; /* Blue on hover */
+    color: #0d1117; /* Dark text on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+    box-shadow: 0 6px 12px rgba(138, 180, 248, 0.4); /* Light shadow for hover */
+}
+
+/* === Footer Bottom === */
+.footer-bottom {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-top: 1px solid #333;
+    padding-top: 1.2rem;
+}
+
+/* === Responsive Layout for Footer === */
+@media (max-width: 1024px) {
+    .footer-heading {
+      font-size: 1.6rem;
+    }
+    .footer-content {
+        grid-template-columns: 1fr; /* Single column for footer content on mobile */
+        padding: 0 15px; /* Adjust padding for smaller screens */
+    }
+
+    .footer-left,
+    .footer-right {
+        grid-template-columns: 1fr; /* Still 1 column for cards on mobile */
+    }
+
+    .footer-left {
+        margin-bottom: 2rem; /* Add space between stacked main columns on mobile */
+    }
+
+    .footer-card {
+        margin-bottom: 1rem; /* Add some space between stacked cards on mobile */
+    }
+
+    .footer-card:last-child {
+        margin-bottom: 0; /* No margin on the last card to prevent extra space */
+    }
+}
+
+/* TEMPORARY TEST: Large Heading Size (FOR DEBUGGING/TESTING ONLY) */
+.footer-left .footer-card:first-child h3 { /* Targets the h3 in the very first card of the left column */
+    font-size: 2rem !important; /* Using !important to force application for testing */
+    line-height: 1; /* Adjust line-height to manage spacing */
+    white-space: nowrap; /* Prevent wrapping if it's too big */
+    overflow: hidden; /* Hide overflow if it's still too big */
+    text-overflow: ellipsis; /* Add ellipsis if text is cut */
+}
+
+/* Styling for paragraphs in "Direct Contact" card (left column, first card) */
+.footer-left .footer-card:first-child p {
+    font-size: 1.5rem !important; /* Using !important temporarily for testing/debugging */
+    line-height: 1.5; /* Standard line-height for readability */
+    margin-bottom: 1rem !important; /* Adjust margin below paragraphs */
+}
+
+/* Styling for heading of the second card in the left column (Operating Hours) */
+.footer-left .footer-card:nth-child(2) h3 {
+    font-size: 2rem !important; /* TEMPORARY: For testing/debugging, will likely be too large for final design */
+    line-height: 1.2 !important;
+}
+
+/* Styling for paragraphs in the second card in the left column (Operating Hours) */
+.footer-left .footer-card:nth-child(2) p {
+    font-size: 1.5rem !important; /* TEMPORARY: For testing/debugging, will likely be too large for final design */
+    line-height: 1.5 !important;
+    margin-bottom: 1rem !important;
+}
+
+@media (max-width: 768px) {
+  .main-header .logo h1 {
+    font-size: 1.4rem; /* ✅ Smaller logo on mobile */
+  }
+
+  .header-phone a {
+    font-size:  1.1rem; /* ✅ Smaller phone number */
+  }
+}
+
+

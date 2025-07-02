@@ -2,25 +2,23 @@
 import React, { useState, useEffect } from 'react';
 
 // Accept 'slides' and 'children' props
-function HeroSlider({ slides, children }) { // <--- ADDED children prop
+function HeroSlider({ slides, children }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   useEffect(() => {
     if (!slides || slides.length <= 1) {
-      // If only one slide, ensure it's displayed, no interval needed
-      setCurrentSlideIndex(0); // Ensure first slide is active if only one
-      return; // Do nothing more if 0 or 1 slide
+      setCurrentSlideIndex(0);
+      return;
     }
 
     const slideInterval = setInterval(() => {
       setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
-    return () => clearInterval(slideInterval); // Cleanup interval on component unmount
-  }, [slides]); // Re-run effect if slides prop changes
+    return () => clearInterval(slideInterval);
+  }, [slides]);
 
   if (!slides || slides.length === 0) {
-    // Fallback if no slides are provided
     return (
       <div className="hero-slider-fallback" style={{ backgroundImage: `url('https://via.placeholder.com/1500x800?text=No+Hero+Slides')` }}>
         <div className="hero-slide-content-overlay">
@@ -28,13 +26,13 @@ function HeroSlider({ slides, children }) { // <--- ADDED children prop
             <h1>No Slides Available</h1>
             <p>Please add content to Hero Slides in the admin.</p>
           </div>
-          {children} {/* Render children (LeadCaptureForm) here for fallback */}
+          {children}
         </div>
       </div>
     );
   }
 
-  const currentSlide = slides[currentSlideIndex]; // Get the active slide object
+  const currentSlide = slides[currentSlideIndex];
 
   return (
     <div className="hero-slider">
@@ -43,17 +41,24 @@ function HeroSlider({ slides, children }) { // <--- ADDED children prop
           key={slide.id || index}
           className={`hero-slide ${index === currentSlideIndex ? 'active' : ''}`}
           style={{ backgroundImage: `url(${slide.image})` }}
-        ></div>
+        >
+          {/* Hidden image for SEO */}
+          <img
+            src={slide.image}
+            alt={slide.heading || "Hero Slide Image"}
+            style={{ display: 'none' }}
+            loading="lazy"
+          />
+        </div>
       ))}
 
-      {/* This is the content overlay that moves with the slider */}
       <div className="hero-slide-content-overlay">
         <div className="hero-slide-content">
-          <h1>{currentSlide.heading}</h1> {/* <--- RENDER DYNAMIC TEXT */}
-          <h2>{currentSlide.sub_heading}</h2> {/* <--- RENDER DYNAMIC TEXT */}
-          <p>{currentSlide.tagline}</p>      {/* <--- RENDER DYNAMIC TEXT */}
+          <h1>{currentSlide.heading}</h1>
+          <h2>{currentSlide.sub_heading}</h2>
+          <p>{currentSlide.tagline}</p>
         </div>
-        {children} {/* <--- RENDER CHILDREN (LeadCaptureForm) */}
+        {children}
       </div>
     </div>
   );

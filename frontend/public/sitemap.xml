@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Static React Pages -->
+  <url>
+    <loc>https://josecarcare.com/</loc>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/about</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/services</loc>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/contact</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/success</loc>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- Dynamic Detail Pages (example) -->
+  <url>
+    <loc>https://josecarcare.com/services/ceramic-coating</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/services/paint-protection-film</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/services/car-painting</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/services/borophine-coating</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://josecarcare.com/services/car-wash</loc>
+    <priority>0.70</priority>
+  </url>
+
+</urlset>
+  

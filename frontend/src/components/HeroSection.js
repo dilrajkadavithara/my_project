@@ -4,6 +4,7 @@ import LeadCaptureForm from './LeadCaptureForm';
 import HeroSlider from './HeroSlider';
 import HeroImage from './HeroImage';
 
+
 // Accept heroSlides and mobileImage props from App.js
 function HeroSection({ heroSlides, mobileImage }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Assuming 768px as mobile breakpoint

@@ -1,7 +1,7 @@
 // frontend/src/components/LeadCaptureForm.js
 import React, { useState } from 'react';
-import axios from 'axios'; // <--- Uncomment this line
-import { useNavigate } from 'react-router-dom'; // <--- Uncomment this line and import
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LeadCaptureForm() {
   const [name, setName] = useState('');
@@ -9,11 +9,10 @@ function LeadCaptureForm() {
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
 
-  const navigate = useNavigate(); // <--- Activate useNavigate hook
+  const navigate = useNavigate();
 
   const handleNameChange = (e) => {
     const value = e.target.value;
-    // Allow only letters and spaces, disallow numbers
     if (!/^[a-zA-Z\s]*$/.test(value)) {
       setNameError('Name can only contain letters and spaces.');
     } else {
@@ -24,7 +23,6 @@ function LeadCaptureForm() {
 
   const handlePhoneNumberChange = (e) => {
     const value = e.target.value;
-    // Allow only digits
     if (!/^\d*$/.test(value)) {
       setPhoneError('Phone number can only contain digits.');
     } else {
@@ -35,23 +33,19 @@ function LeadCaptureForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Clear previous errors
     setNameError('');
     setPhoneError('');
 
     let isValid = true;
 
-    // Final validation before submission
     if (!name.trim()) {
       setNameError('Name is required.');
       isValid = false;
-    } else if (!/^[a-zA-Z\s]+$/.test(name.trim())) { // Ensure at least one letter
-        setNameError('Name must contain only letters and spaces.');
-        isValid = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(name.trim())) {
+      setNameError('Name must contain only letters and spaces.');
+      isValid = false;
     }
 
-    // Phone number validation: strictly 10 digits, starting with 6, 7, 8, or 9
     if (!phoneNumber.trim()) {
       setPhoneError('Phone number is required.');
       isValid = false;
@@ -60,30 +54,26 @@ function LeadCaptureForm() {
       isValid = false;
     }
 
-    if (!isValid) {
-      return; // Stop submission if validation fails
-    }
+    if (!isValid) return;
 
-    // Prepare data for API
     const formData = {
       name: name.trim(),
-      phone_number: phoneNumber.trim(), // Match backend model field name
+      phone_number: phoneNumber.trim(),
     };
 
-    // <--- Activate API call and redirection
     try {
       const API_URL = process.env.REACT_APP_API_URL;
       if (!API_URL) {
-          throw new Error("REACT_APP_API_URL is not defined in .env.development");
+        throw new Error("REACT_APP_API_URL is not defined in .env");
       }
+
       await axios.post(`${API_URL}leads/`, formData);
-      console.log('Lead submitted successfully:', formData);
-      navigate('/success'); // Redirect to success page
+      navigate('/success');
+
     } catch (error) {
       console.error('Error submitting lead:', error);
-      alert('Failed to submit lead. Please try again.'); // Or set state for error message
+      alert('Failed to submit. Please try again later.');
     }
-    // End API call and redirection
   };
 
   return (
