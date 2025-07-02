@@ -29,3 +29,7 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Media uploads from backend
+backend/media/*
+!backend/media/.gitkeep  # Optional: Keep folder structure 
