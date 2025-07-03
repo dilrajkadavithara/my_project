@@ -1,0 +1,42 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Node.js / Frontend dependencies
+/frontend/node_modules/
+/frontend/.pnp
+/frontend/.pnp.js
+
+# Frontend testing
+/frontend/coverage
+
+# Frontend production build output
+/frontend/build/
+
+# Python / Django
+/backend/__pycache__/
+/backend/*.pyc
+/backend/*.sqlite3
+/backend/.venv/
+/backend/staticfiles/
+/backend/media/
+
+# Environment variables (CRITICAL for both frontend and backend)
+.env
+/backend/.env
+/backend/.env.dev
+/backend/.env.prod
+/backend/.env.staging
+
+/frontend/.env
+/frontend/.env.development
+/frontend/.env.production
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# Misc / Logs
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
