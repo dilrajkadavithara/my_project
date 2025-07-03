@@ -1,22 +1,41 @@
 # backend/my_project_backend/settings.py
 
 from pathlib import Path
-import os # Import os for environment variables
+import os
+from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file
+# Determine which .env file to load
+
+# Check if a DJANGO_ENV environment variable is set
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development') # Default to 'development'
+
+if DJANGO_ENV == 'production':
+    # Looks for .env.prod directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
+    load_dotenv(os.path.join(BASE_DIR, '.env.prod'))
+elif DJANGO_ENV == 'staging':
+    # Looks for .env.staging directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
+    load_dotenv(os.path.join(BASE_DIR, '.env.staging'))
+else: # Default to development
+    # Looks for .env.dev directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
+    load_dotenv(os.path.join(BASE_DIR, '.env.dev'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-your-secret-key-here' # Will use .env later
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # Will toggle based on .env later
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = [] # Will configure later
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
 
 
 # Application definition
@@ -30,12 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'my_app',
     'rest_framework',
-    'corsheaders', # <--- ADDED: Django CORS Headers
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # <--- ADDED: CORS Middleware, place it high
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,12 +87,20 @@ WSGI_APPLICATION = 'my_project_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
     }
-}
+else:
+    # Fallback to SQLite for local development if DATABASE_URL is not set
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -100,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata' # Set to India's timezone (IST)
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -111,6 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -118,19 +146,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Settings (ADDED FOR REACT FRONTEND)
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",      # Allow your React dev server
-    "http://127.0.0.1:3000",      # Allow if accessed via 127.0.0.1
-    # Add your production frontend domain here later, e.g., "https://www.yourdomain.com"
-]
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in CORS_ALLOWED_ORIGINS if origin.strip()]
 
-# If you need to allow all origins during development (less secure, only for dev!):
-# CORS_ALLOW_ALL_ORIGINS = True
-# Be very careful with CORS_ALLOW_ALL_ORIGINS in production!
-
-# For production, you might also need to configure CORS_ALLOW_CREDENTIALS = True
-# if your frontend sends cookies/authentication headers across origins.
-# CORS_ALLOW_CREDENTIALS = True # Add if needed later
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+CORS_ALLOW_CREDENTIALS = os.environ.get('CORS_ALLOW_CREDENTIALS', 'False').lower() == 'true'
 
 # Media files settings (for user-uploaded content like ServiceImages)
 MEDIA_URL = '/media/'
