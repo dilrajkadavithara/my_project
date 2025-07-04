@@ -20,15 +20,16 @@ function AboutUsSection({
       
       <div className="about-us-grid-container">
         <div className="about-us-content">
-          <p>{paragraph1}</p> 
+          {/* Render paragraph1 using dangerouslySetInnerHTML */}
+          {paragraph1 && <p dangerouslySetInnerHTML={{ __html: paragraph1 }}></p>}
           {/* We already removed paragraph2 from Django, so this will no longer render */}
-          {/* {paragraph2 && <p>{paragraph2}</p>} */} 
+          {/* {paragraph2 && <p dangerouslySetInnerHTML={{ __html: paragraph2 }}></p>} */} 
 
           {features && features.length > 0 && ( // Render features list if available
             <ul className="about-us-features">
               {features.map((feature, index) => (
-                // Changed emoji to a hyphen to avoid parsing issues
-                <li key={index}><span className="feature-icon">-</span> {feature}</li> 
+                // Render each feature using dangerouslySetInnerHTML
+                <li key={index}><span className="feature-icon">-</span> <span dangerouslySetInnerHTML={{ __html: feature }}></span></li> 
               ))}
             </ul>
           )}
