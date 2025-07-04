@@ -498,19 +498,19 @@ a:hover {
 .about-us-content p {
   font-size: 1.15em; 
   line-height: 1.8;
-  margin-bottom: 30px; 
+  margin-bottom: 15px; 
 }
 
 .about-us-features {
   list-style: none; 
   padding: 0;
-  margin-bottom: 40px; 
+  margin-bottom: 20px; 
 }
 
 .about-us-features li {
   font-size: 1.15em;
   color: #fff; 
-  margin-bottom: 15px; 
+  margin-bottom: 8px; 
   display: flex;
   align-items: flex-start; /* Align icon and text to the top for multi-line text */
   font-weight: 600; 
