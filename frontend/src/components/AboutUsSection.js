@@ -29,7 +29,7 @@ function AboutUsSection({
             <ul className="about-us-features">
               {features.map((feature, index) => (
                 // Render each feature using dangerouslySetInnerHTML
-                <li key={index}><span className="feature-icon">-</span> <span dangerouslySetInnerHTML={{ __html: feature }}></span></li> 
+                <li key={index} dangerouslySetInnerHTML={{ __html: feature }}></li>
               ))}
             </ul>
           )}
