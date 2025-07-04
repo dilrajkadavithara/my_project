@@ -498,23 +498,23 @@ a:hover {
 .about-us-content p {
   font-size: 1.15em; 
   line-height: 1.8;
-  margin-bottom: 5px; 
+  margin-bottom: 2px; 
 }
 
 .about-us-features {
   list-style: none; 
   padding: 0;
-  margin-bottom: 5px; 
+  margin-bottom: 2px; 
 }
 
 .about-us-features li {
   font-size: 1.15em;
   color: #fff; 
-  margin-bottom: 3px; 
+  margin-bottom: 1px; 
   display: flex;
   align-items: flex-start; /* Align icon and text to the top for multi-line text */
   font-weight: 600; 
-}
+} 
 
 .about-us-features .feature-icon {
   margin-right: 15px; 
