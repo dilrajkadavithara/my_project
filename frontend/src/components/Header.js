@@ -1,13 +1,11 @@
-// frontend/src/components/Header.js
+// src/components/Header.js
+
 import React, { useState } from 'react';
 
-// Accept headerPhoneNumber prop from App.js
 function Header({ logoText, navLinks, headerPhoneNumber }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const getPhoneLink = (phoneNumber) => {
     if (!phoneNumber) return '#';
@@ -24,45 +22,45 @@ function Header({ logoText, navLinks, headerPhoneNumber }) {
 
   return (
     <header className="main-header">
-      <div className="logo">
-        <a href="#hero-section">
-          <h1>{logoText || "My Project"}</h1>
-        </a>
-      </div>
-
-      {headerPhoneNumber && (
-        <div className="header-phone">
-          <a href={getPhoneLink(headerPhoneNumber)}>
-            {headerPhoneNumber}
+      <div className="main-header-inner">
+        <div className="logo">
+          <a href="#hero-section">
+            <h1>{logoText || "My Project"}</h1>
           </a>
         </div>
-      )}
 
-      <nav className={`main-nav ${isMobileMenuOpen ? 'open' : ''}`}>
-        <ul>
-          {navLinks.map(link => {
-            const targetId = sectionIdMap[link.url_path];
-            const targetHash = targetId ? `#${targetId}` : link.url_path;
+        {headerPhoneNumber && (
+          <div className="header-phone">
+            <a href={getPhoneLink(headerPhoneNumber)}>{headerPhoneNumber}</a>
+          </div>
+        )}
 
-            return (
-              <li key={link.id}>
-                <a
-                  href={targetHash}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.text}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+        <nav className={`main-nav ${isMobileMenuOpen ? 'open' : ''}`}>
+          <ul>
+            {navLinks.map(link => {
+              const targetId = sectionIdMap[link.url_path];
+              const targetHash = targetId ? `#${targetId}` : link.url_path;
 
-      {/* Hamburger Menu */}
-      <div className="mobile-menu-icon" onClick={toggleMobileMenu}>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
+              return (
+                <li key={link.id}>
+                  <a
+                    href={targetHash}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        {/* Hamburger Menu */}
+        <div className="mobile-menu-icon" onClick={toggleMobileMenu}>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
       </div>
     </header>
   );
