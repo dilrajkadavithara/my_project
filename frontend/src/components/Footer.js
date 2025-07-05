@@ -1,3 +1,6 @@
+console.log("websiteContent", websiteContent);
+
+
 // frontend/src/components/Footer.js
 import React from "react";
 
