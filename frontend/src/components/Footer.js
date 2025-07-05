@@ -1,7 +1,3 @@
-console.log("websiteContent", websiteContent);
-
-
-// frontend/src/components/Footer.js
 import React from "react";
 
 // SVG ICON COMPONENTS
@@ -38,6 +34,9 @@ const WhatsappIcon = () => (
 );
 
 const Footer = ({ websiteContent }) => {
+  // Debug: Log websiteContent object in browser console
+  console.log("websiteContent", websiteContent);
+
   const socials = [
     {
       icon: <FacebookIcon />,
