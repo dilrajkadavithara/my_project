@@ -58,7 +58,6 @@ function App() {
               <>
                 <AboutUsSection websiteContent={websiteContent} />
                 <ServicesSection websiteContent={websiteContent} />
-                <ContactUsSection websiteContent={websiteContent} />
               </>
             } />
             <Route path="/success" element={<SuccessPage />} />
