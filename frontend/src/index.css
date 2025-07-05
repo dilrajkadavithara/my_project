@@ -1311,4 +1311,33 @@ a:hover {
   }
 }
 
+/* === FOOTER PLACEHOLDER & CARD HEIGHT FIXES === */
+
+.footer-card {
+    min-height: 180px; /* Ensures cards have a minimum height for uniformity */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.footer-card .placeholder {
+    color: #bbb !important;
+    font-style: italic;
+    font-size: 0.98rem;
+    letter-spacing: 0.01em;
+}
+
+.footer-card p.placeholder {
+    margin-bottom: 0;
+}
+
+.footer-card .social-icons .placeholder {
+    color: #bbb !important;
+    font-style: italic;
+    font-size: 0.95rem;
+    margin: 0 auto;
+}
+
+
 
