@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom'; // <--- MODIFIED: Added useLocation
 
 import SuccessPage from './pages/SuccessPage';
 import HeroSection from './components/HeroSection';
@@ -20,6 +20,8 @@ function App() {
   const [heroSlides, setHeroSlides] = useState([]);
   const [loadingContent, setLoadingContent] = useState(true);
   const [errorContent, setErrorContent] = useState(null);
+
+  const location = useLocation(); // <--- ADDED: useLocation hook
 
   useEffect(() => {
     const fetchAllContent = async () => {
@@ -57,6 +59,20 @@ function App() {
     fetchAllContent();
   }, []);
 
+  // NEW useEffect for smooth scrolling to hash links
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1)); // Remove '#'
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Optional: Scroll to top on initial load or if hash is cleared
+      // Consider if you want this behavior. If not, you can remove this 'else' block.
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]); // Re-run when location (hash) changes
+
   if (loadingContent) {
     return <div className="App">Loading website content...</div>;
   }
@@ -82,7 +98,7 @@ function App() {
     heading: websiteContent['about_us_heading']?.value || "About Our Company (Default)",
     paragraph1: websiteContent['about_us_paragraph_1']?.value || "Default first paragraph.",
     paragraph2: websiteContent['about_us_paragraph_2']?.value,
-    aboutUsImage: websiteContent['about_us_main_image']?.value || 'https://via.placeholder.com/600x400?text=About+Us+Image+Placeholder',
+    aboutUsImage: websiteContent['about_us_main_image']?.value || 'https://via.placeholder.co/600x400?text=About+Us+Image+Placeholder',
     features: aboutUsFeatures,
     badgeYearsText: websiteContent['about_us_badge_years_text']?.value,
     badgeCustomersText: websiteContent['about_us_badge_customers_text']?.value,
@@ -122,4 +138,4 @@ function App() {
   );
 }
 
-export default App;
+export default Ap
