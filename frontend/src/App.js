@@ -6,7 +6,6 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import AboutUsSection from './components/AboutUsSection';
 import ServicesSection from './components/ServicesSection';
-import ContactUsSection from './components/ContactUsSection';
 import Footer from './components/Footer';
 import SuccessPage from './pages/SuccessPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
