@@ -1,6 +1,7 @@
 // frontend/src/components/Header.js
 import React, { useState } from 'react';
 
+// Accept headerPhoneNumber prop from App.js
 function Header({ logoText, navLinks, headerPhoneNumber }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,25 +22,10 @@ function Header({ logoText, navLinks, headerPhoneNumber }) {
     '/contact': 'contact-section',
   };
 
-  // Handle navlink click for smooth scroll
-  const handleNavClick = (e, targetId) => {
-    if (targetId) {
-      e.preventDefault();
-      setIsMobileMenuOpen(false);
-      const el = document.getElementById(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Update the URL hash without page jump
-        window.history.replaceState(null, '', `#${targetId}`);
-      }
-    }
-    // Else: let it proceed as a normal navigation (e.g., for true routes)
-  };
-
   return (
     <header className="main-header">
       <div className="logo">
-        <a href="#hero-section" onClick={e => handleNavClick(e, 'hero-section')}>
+        <a href="#hero-section">
           <h1>{logoText || "My Project"}</h1>
         </a>
       </div>
@@ -62,7 +48,7 @@ function Header({ logoText, navLinks, headerPhoneNumber }) {
               <li key={link.id}>
                 <a
                   href={targetHash}
-                  onClick={e => handleNavClick(e, targetId)}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.text}
                 </a>
