@@ -5,24 +5,21 @@
 html {
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth; /* <<<< ADDED: Ensure smooth scrolling works across the board */
+  scroll-behavior: smooth;
 }
 
 body {
-  /* margin: 0; */
-  /* Applying Google Fonts */
-  font-family: 'Open Sans', sans-serif; /* Body font */
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   color: #333;
-  background-color: #f4f4f4; /* Light grey background */
-  overflow-x: hidden; /* Prevent horizontal scroll for now */
-  /*margin-top: 60px; /* Add top margin equal to header height (approx) for fixed header */
+  background-color: #f4f4f4;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif; /* Headings font */
+    font-family: 'Montserrat', sans-serif;
     color: #333;
     margin-top: 0;
     margin-bottom: 15px;
@@ -33,36 +30,32 @@ p {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Global App Structure */
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures app takes full viewport height */
+  min-height: 100vh;
 }
 
 main {
-  flex: 1; /* Allows main content to grow and push footer down */
+  flex: 1;
 }
 
-/* Global Section Base Styling (for consistency across all sections) */
 section {
-  padding: 80px 40px; /* Generous vertical padding */
-  margin-bottom: 0; /* No extra margin between sections */
+  padding: 80px 40px;
+  margin-bottom: 0;
   background-color: #fff;
   border-bottom: 1px solid #eee;
-  text-align: center; /* Default center align, can be overridden by specific section */
-  max-width: 1200px; /* Max width for main content areas */
-  margin: 0 auto; /* Center sections horizontally */
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  box-sizing: border-box; /* Include padding in width/height */
+  box-sizing: border-box;
 }
 
-/* Global Link Styling */
 a {
   color: #007bff;
   text-decoration: none;
@@ -76,39 +69,37 @@ a:hover {
 /* 2. Nav Bar Section (Header) */
 /* ========================================= */
 .main-header {
-  position: absolute;   /* ✅ Scrolls away but still overlays Hero */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;           /* Still above hero image */
-  background-color: transparent;  /* ✅ No background */
+  z-index: 10;
+  background-color: transparent;
   color: #fff;
   padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  box-shadow: none;      /* ✅ No shadow needed when it's not sticky */
+  box-shadow: none;
 }
 
-
 .main-header .logo {
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
 }
 
 .main-header .logo h1 {
   margin: 0;
   font-size: 1.8em;
   color: #fff;
-  font-family: 'Montserrat', sans-serif; /* Apply Montserrat to logo */
+  font-family: 'Montserrat', sans-serif;
 }
 
-/* Header Phone Number Styling */
 .header-phone {
-  margin: 0 auto; /* Pushes itself to center on desktop */
+  margin: 0 auto;
   padding: 0 20px;
-  flex-shrink: 0; /* Prevent shrinking */
-  order: 0; /* Default order for desktop (flex takes care of it) */
+  flex-shrink: 0;
+  order: 0;
 }
 
 .header-phone a {
@@ -124,11 +115,10 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Navigation & Hamburger Menu Styling */
 .main-nav {
-  display: flex; /* Always flex for desktop */
-  flex-shrink: 0; /* Prevent shrinking */
-  order: 0; /* Default order for desktop */
+  display: flex;
+  flex-shrink: 0;
+  order: 0;
 }
 
 .main-nav ul {
@@ -136,13 +126,13 @@ a:hover {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap; /* Allow nav links to wrap if space is tight */
-  justify-content: flex-end; /* Push links to the right */
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .main-nav li {
-  margin-left: 25px; /* Space between links */
-  white-space: nowrap; /* Prevent links from breaking into multiple lines */
+  margin-left: 25px;
+  white-space: nowrap;
 }
 
 .main-nav a {
@@ -158,13 +148,13 @@ a:hover {
 }
 
 .mobile-menu-icon {
-  display: none; /* Hidden by default on desktop */
+  display: none;
   cursor: pointer;
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
   height: 25px;
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
 }
 
 .mobile-menu-icon .bar {
@@ -176,23 +166,21 @@ a:hover {
 }
 
 /* ========================================= */
-/* 3. Hero Section (REVISED FOR DESKTOP H1 TRUNCATION, FORM POSITION, & CONTENT WIDTH) */
+/* 3. Hero Section */
 /* ========================================= */
 .hero-section {
   position: relative;
-  overflow-x: clip; /* NEW: Hide any accidental horizontal overflow cleanly */
+  overflow-x: clip;
   overflow-y: hidden;
-  width: 100vw; /* Keep this to span full width */
+  width: 100vw;
   min-height: 90vh;
   padding: 0;
   color: #fff;
   margin: 0 auto;
-  max-width: 100%; /* Override global max-width (again) */
+  max-width: 100%;
   box-sizing: border-box;
 }
 
-
-/* Hero Image (Mobile Background) & Hero Slider Background Styles */
 .hero-background-image,
 .hero-image-fallback,
 .hero-slider {
@@ -201,7 +189,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Background layer */
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -210,7 +198,7 @@ a:hover {
 .hero-slide {
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5); /* Make image darker for text readability */
+  filter: brightness(0.5);
 }
 
 .hero-slide {
@@ -227,54 +215,48 @@ a:hover {
   opacity: 1;
 }
 
-/* Styles for the container holding text and form, layered on top of background */
 .hero-slide-content-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; /* Ensures it's above background */
-  
-  /* CRITICAL: Use flex on the overlay to position text and form */
+  z-index: 2;
   display: flex;
-  flex-direction: row; /* Desktop: text and form side-by-where */
-  flex-wrap: nowrap; /* Prevent wrapping on desktop */
-  
-  justify-content: center; /* Horizontally center flex items (text + form block) */
-  align-items: center; /* CONDITION 2 & 3: Vertically center both text & form blocks */
-  
-  padding: 0 40px; /* Overall padding for the content overlay area */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
   box-sizing: border-box;
-  max-width: 100%; /* Allow hero overlay to use full width for initial flex distribution */
+  max-width: 100%;
   margin: 0 auto;
 }
 
-/* Styles for the text content within the overlay */
 .hero-slide-content {
-  flex: 1; /* Text content grows to fill available space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center text content within its own container */
-  align-items: flex-start; /* Align text to the left within its container */
-  margin-right: 20px; /* Adjusted space between text and form */
-  max-width: 950px; /* <--- CRITICAL FIX: Increased max-width for H1 to fit longer headings */
-  min-width: 300px; /* Ensure it has a minimum width */
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 20px;
+  max-width: 950px;
+  min-width: 300px;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  text-align: left; /* Align text left */
+  text-align: left;
 }
 
 .hero-slide-content h1 {
-  font-size: 3em; /* Impactful size */
+  font-size: 3em;
   line-height: 1.1;
   margin-bottom: 20px;
   font-weight: 700;
   color: #fff;
-  white-space: nowrap; /* CONDITION 4: Heading necessarily in single line */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis if text is too long */
-  max-width: 100%; /* Ensure it respects parent width */
+  text-overflow: ellipsis;
+  max-width: 100%;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -295,33 +277,28 @@ a:hover {
   font-family: 'Open Sans', sans-serif;
 }
 
-/* Form container inside Hero Section - BASE STYLES */
+/* Form container inside Hero Section */
 .hero-form-desktop-container,
 .hero-form-mobile-container {
-    /* CHANGED: Darker background for cohesion with website theme */
-    background-color: rgba(28, 34, 48, 0.95); /* Consistent with footer card background, but semi-transparent */
-    padding: 40px;
-    border-radius: 12px;
-    /* Enhanced shadow for a more pronounced lift */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Slightly stronger shadow */
-    position: relative; /* Maintain position context */
-    z-index: 3;
-    flex-shrink: 0; /* Prevent form from shrinking */
-    /* Added for a subtle lift effect */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: rgba(28, 34, 48, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .hero-form-desktop-container:hover,
 .hero-form-mobile-container:hover {
-    transform: translateY(-8px); /* More pronounced lift */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5); /* Even stronger shadow on hover */
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 /* ========================================= */
 /* 4. Form Section (Lead Capture Form) - STYLED */
 /* ========================================= */
-
-
 .lead-capture-form {
   background-color: transparent !important;
   padding: 0 !important;
@@ -330,383 +307,344 @@ a:hover {
   box-shadow: none !important;
 }
 .lead-capture-form h3 {
-    text-align: center;
-    /* CHANGED: Accent color for heading, consistent with footer/about us */
-    color: #8ab4f8; /* Blue accent, matches footer heading/links */
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 25px;
-    font-size: 1.8em;
-    position: relative;
-    padding-bottom: 10px;
+  text-align: center;
+  color: #8ab4f8;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  position: relative;
+  padding-bottom: 10px;
 }
-
 .lead-capture-form h3::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    /* CHANGED: Accent color for underline, consistent with footer icons */
-    background-color: #ffcc00; /* Yellow accent, matches footer icons */
-    border-radius: 5px;
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #ffcc00;
+  border-radius: 5px;
 }
-
 .lead-capture-form .form-group {
-    margin-bottom: 20px;
-    text-align: left;
+  margin-bottom: 20px;
+  text-align: left;
 }
-
 .lead-capture-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    /* CHANGED: Lighter color for labels on dark background */
-    color: #cbd5e0; /* Light grey, consistent with paragraph text on dark backgrounds */
-    font-size: 0.95em;
-    font-family: 'Open Sans', sans-serif;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #cbd5e0;
+  font-size: 0.95em;
+  font-family: 'Open Sans', sans-serif;
 }
-
 .lead-capture-form input[type="text"],
 .lead-capture-form input[type="tel"] {
-    width: 100%;
-    padding: 12px 15px;
-    /* CHANGED: Darker background for inputs to blend with form, subtle border */
-    background-color: #2d3748; /* Darker grey, similar to darker parts of theme */
-    border: 2px solid rgba(138, 180, 248, 0.3); /* Subtle blueish border */
-    border-radius: 8px;
-    font-size: 1.1em;
-    /* CHANGED: White text inside input */
-    color: #fff;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #2d3748;
+  border: 2px solid rgba(138, 180, 248, 0.3);
+  border-radius: 8px;
+  font-size: 1.1em;
+  color: #fff;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
-
 .lead-capture-form input[type="text"]:focus,
 .lead-capture-form input[type="tel"]:focus {
-    /* CHANGED: Accent color for focus border, subtle blue shadow */
-    border-color: #4299e1; /* Brighter blue accent */
-    box-shadow: 0 0 0 0.3rem rgba(66, 153, 225, 0.3), 0 5px 15px rgba(66, 153, 225, 0.2);
-    transform: scale(1.01);
-    outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 0.3rem rgba(66, 153, 225, 0.3), 0 5px 15px rgba(66, 153, 225, 0.2);
+  transform: scale(1.01);
+  outline: none;
 }
-
 .lead-capture-form input[type="text"]:hover,
 .lead-capture-form input[type="tel"]:hover {
-    /* CHANGED: Accent color for hover border */
-    border-color: #4299e1; /* Brighter blue accent */
-    transform: scale(1.005);
+  border-color: #4299e1;
+  transform: scale(1.005);
 }
-
 .lead-capture-form button[type="submit"] {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.2em;
-    font-weight: bold;
-    /* CHANGED: Blue gradient for submit button, consistent with CTA buttons */
-    background: linear-gradient(45deg, #4299e1, #3182ce); /* Blue gradient, consistent with About Us CTA */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    /* Stronger initial shadow for button */
-    box-shadow: 0 8px 20px rgba(66, 153, 225, 0.5); /* Blue shadow */
-    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  background: linear-gradient(45deg, #4299e1, #3182ce);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(66, 153, 225, 0.5);
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-
 .lead-capture-form button[type="submit"]:hover {
-    /* CHANGED: Darker blue gradient on hover */
-    background: linear-gradient(45deg, #3182ce, #2c5282); /* Darker blue gradient */
-    transform: translateY(-3px);
-    /* Even stronger blue shadow on hover */
-    box-shadow: 0 12px 25px rgba(66, 153, 225, 0.7); /* Stronger blue shadow */
+  background: linear-gradient(45deg, #3182ce, #2c5282);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(66, 153, 225, 0.7);
 }
-
 .lead-capture-form button[type="submit"]:active {
-    transform: translateY(0);
-    /* Reduced blue shadow on active/pressed state */
-    box-shadow: 0 4px 10px rgba(66, 153, 225, 0.4);
-    background: #3182ce; /* Solid blue when pressed */
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(66, 153, 225, 0.4);
+  background: #3182ce;
 }
-
 .error-message {
-    color: #dc3545; /* Red error message, ensure it contrasts well on dark background */
-    font-size: 0.85em;
-    margin-top: 5px;
-    text-align: left;
-    font-family: 'Open Sans', sans-serif;
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* ========================================= */
 /* 5. About Us Section - STYLED WITH IMAGE */
 /* ========================================= */
 .about-us-section {
-  background-color: #1a202c; /* Dark background inspired by image */
-  padding: 100px 0; /* Vertical padding only here */
-  text-align: center; 
-  border-bottom: 1px solid #2d3748; /* Darker subtle border */
-  color: #fff; /* Default text color for this section */
-  max-width: unset; /* Override global max-width for full horizontal span */
-  box-sizing: border-box; /* Ensure padding is included in total width */
+  background-color: #1a202c;
+  padding: 100px 0;
+  text-align: center;
+  border-bottom: 1px solid #2d3748;
+  color: #fff;
+  max-width: unset;
+  box-sizing: border-box;
 }
 
 .about-us-section h2 {
-  font-size: 2rem; /* Larger, mo re impactful heading */
-  color: #fff; /* White heading */
-  margin-bottom: 60px; /* More space below heading */
-  font-family: 'Montserrat', sans-serif; 
-  font-weight: 800; /* Extra bold */
-  max-width: 900px; /* Constrain heading width */
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 60px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 40px; /* Horizontal padding for the heading itself */
-  box-sizing: border-box; /* Include padding in heading width */
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 .about-us-grid-container {
-  display: grid; /* Use CSS Grid for precise column control */
-  /* Rebalanced columns: 1.2fr for content, 1fr for image. This assumes image is roughly square */
-  grid-template-columns: minmax(550px, 1.5fr) minmax(450px, 1fr); 
-  gap: 80px; /* Space between columns */
-  align-items: start; /* Align items to the start (top) of their grid cells */
-  max-width: 1400px; /* Significantly increased max-width for wider content span */
-  margin: 0 auto; /* Center the grid container */
-  padding: 0 40px; /* Horizontal padding for the entire grid content */
-  box-sizing: border-box; /* Include padding in width */
+  display: grid;
+  grid-template-columns: minmax(550px, 1.5fr) minmax(450px, 1fr);
+  gap: 80px;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 .about-us-content {
-  /* No flex properties needed here as parent is now grid */
-  min-width: 450px; /* Increased minimum width for text to ensure readability and fill space */
-  text-align: left; 
-  background-color: transparent; 
-  padding: 0; 
-  border-radius: 0; 
-  box-shadow: none; 
-  color: #cbd5e0; 
-  display: flex; /* Still flex for internal stacking of p, ul, a */
-  flex-direction: column; 
-  justify-content: space-between; /* Distribute space vertically between elements */
-  height: 100%; /* Make content box fill its grid cell height */
+  min-width: 450px;
+  text-align: left;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #cbd5e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .about-us-content p {
-  font-size: 1.15em; 
+  font-size: 1.15em;
   line-height: 1.8;
-  margin-bottom: 2px; 
+  margin-bottom: 2px;
 }
 
 .about-us-features {
-  list-style: none; 
+  list-style: none;
   padding: 0;
-  margin-bottom: 2px; 
+  margin-bottom: 2px;
 }
 
 .about-us-features li {
   font-size: 1.15em;
-  color: #fff; 
-  margin-bottom: 1px; 
+  color: #fff;
+  margin-bottom: 1px;
   display: flex;
-  align-items: flex-start; /* Align icon and text to the top for multi-line text */
-  font-weight: 600; 
-} 
+  align-items: flex-start;
+  font-weight: 600;
+}
 
 .about-us-features .feature-icon {
-  margin-right: 15px; 
-  color: #48bb78; 
-  font-size: 1.4em; 
-  line-height: 1; 
-  width: 24px; 
+  margin-right: 15px;
+  color: #48bb78;
+  font-size: 1.4em;
+  line-height: 1;
+  width: 24px;
   text-align: center;
-  flex-shrink: 0; /* Prevent icon from shrinking */
+  flex-shrink: 0;
 }
 
 .cta-button {
   display: inline-block;
-  background: linear-gradient(45deg, #4299e1, #3182ce); 
+  background: linear-gradient(45deg, #4299e1, #3182ce);
   color: white;
-  padding: 15px 30px; 
-  border-radius: 8px; 
+  padding: 15px 30px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 1.2em;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4); 
+  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  align-self: flex-start; /* Align CTA button to the left within its flex container */
+  align-self: flex-start;
 }
 
 .cta-button:hover {
-  background: linear-gradient(45deg, #3182ce, #2c5282); 
+  background: linear-gradient(45deg, #3182ce, #2c5282);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(66, 153, 225, 0.6);
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .about-us-image-container {
-  /* No flex properties needed here as parent is now grid */
-  width: 100%; /* Ensure it fills its grid cell */
-  height: 100%; /* IMPORTANT: Make image container fill its grid cell height */
-  position: relative; 
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3); 
-  border-radius: 12px; 
-  overflow: hidden; 
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .about-us-image {
-  width: 100%; 
-  height: 100%; /* Image fills its container height */
-  display: block; 
-  border-radius: 12px; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
-/* Badges styling */
 .about-us-badge {
   position: absolute;
-  background-color: #f6ad55; 
-  color: #2d3748; 
+  background-color: #f6ad55;
+  color: #2d3748;
   padding: 8px 15px;
   border-radius: 8px;
   font-weight: bold;
   font-size: 0.9em;
-  z-index: 10; 
+  z-index: 10;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: all 0.2s ease-in-out;
 }
-
 .about-us-badge.years-badge {
   top: 20px;
   right: 20px;
 }
-
 .about-us-badge.customers-badge {
   bottom: 20px;
   left: 20px;
-  background-color: #ecc94b; 
+  background-color: #ecc94b;
 }
-
 .about-us-badge:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
-
 /* ========================================= */
 /* 6. Services Section */
 /* ========================================= */
 .services-section {
-  background-color: #1a202c; /* Dark background */
-  padding: 100px 0; /* Vertical padding only, inner content handles horizontal */
-  text-align: center; 
-  border-bottom: 1px solid #2d3748; /* Dark subtle border */
-  color: #fff; /* Default text color for this section */
-  max-width: unset; /* Allow full horizontal span */
-  box-sizing: border-box; /* Include padding in width */
+  background-color: #1a202c;
+  padding: 100px 0;
+  text-align: center;
+  border-bottom: 1px solid #2d3748;
+  color: #fff;
+  max-width: unset;
+  box-sizing: border-box;
 }
 
 .services-section .services-heading {
-  font-size: 2em; /* Large, impactful heading */
+  font-size: 2em;
   color: #fff;
-  margin-bottom: 20px; /* Space below heading */
+  margin-bottom: 20px;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 800; /* Extra bold */
+  font-weight: 800;
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 40px; /* Horizontal padding for heading */
+  padding: 0 40px;
 }
 
 .services-section .services-subheading {
   font-size: 1.3em;
-  color: #cbd5e0; /* Lighter gray for subheading */
+  color: #cbd5e0;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 80px; /* More space below subheading before cards */
-  padding: 0 40px; /* Horizontal padding for subheading */
+  margin-bottom: 80px;
+  padding: 0 40px;
 }
 
 .service-cards-grid {
   display: grid;
-  /* GUARANTEED 3 COLUMNS:
-     Repeat 3 times, each column takes 1 fraction of space.
-     The overall max-width of the grid will then control the column size. */
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 40px; /* Desktop gap: 40px, consistent with About Us section */
-  /* REMOVED MAX-WIDTH: Allow grid to span more horizontally, controlled by section padding */
-  margin: 0 auto; /* Center the grid */
-  padding: 0 80px; /* Increased horizontal padding for the grid itself for wider span */
-  box-sizing: border-box; /* Include padding in width */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin: 0 auto;
+  padding: 0 80px;
+  box-sizing: border-box;
 }
 
 .service-card {
-  background-color: #2d3748; /* Darker card background */
-  border-radius: 12px; /* More rounded corners */
-  /* Prominent shadows on static and hover */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
-  overflow: hidden; /* Ensure content doesn't overflow visually */
+  background-color: #2d3748;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 30px; /* More padding at bottom */
+  padding-bottom: 30px;
   text-align: center;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background 0.3s ease-in-out, border 0.3s ease-in-out;
-  border: 2px solid transparent; /* Subtle border that can change on hover */
-  cursor: pointer; /* Indicate clickability */
-  position: relative; /* For ripple effect */
-  /* Adjusted min-height for optimal visual balance in 3-column layout */
-  min-height: 360px; /* Reduced min-height for a more compact card */
-  justify-content: space-between; /* Space out image/title/paragraph vertically */
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  min-height: 360px;
+  justify-content: space-between;
 }
 
 .service-card:hover {
-  transform: translateY(-8px); /* Stronger lift effect */
-  box-shadow: 0 18px 35px rgba(0,0,0,0.5); /* Even stronger shadow on hover */
-  background: linear-gradient(135deg, #2d3748, #4a5568); /* Subtle background gradient on hover */
-  border-color: #4299e1; /* Accent border on hover */
+  transform: translateY(-8px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.5);
+  background: linear-gradient(135deg, #2d3748, #4a5568);
+  border-color: #4299e1;
 }
 
-/* Image zoom effect on hover */
 .service-card:hover .service-card-image {
-  transform: scale(1.05); /* Gentle zoom on image */
+  transform: scale(1.05);
 }
 
 .service-card-image {
   width: 100%;
-  height: 180px; /* Reduced image height for a more compact card */
+  height: 180px;
   object-fit: cover;
-  margin-bottom: 20px; /* Adjusted space below image */
-  border-top-left-radius: 10px; /* Match card radius */
+  margin-bottom: 20px;
+  border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  transition: transform 0.3s ease-in-out; /* Smooth transition for zoom */
-  flex-shrink: 0; /* Prevent image from shrinking */
+  transition: transform 0.3s ease-in-out;
+  flex-shrink: 0;
 }
 
 .service-card h3 {
-  font-size: 1.6em; /* Slightly larger title */
+  font-size: 1.6em;
   margin-bottom: 12px;
-  color: #fff; /* White title */
-  font-family: 'Montserrat', sans-serif; 
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .service-card p {
-  font-size: 1.0em; /* Good size for description */
-  color: #cbd5e0; /* Lighter gray for description */
-  padding: 0 20px; /* Horizontal padding for text inside card */
-  margin-bottom: 0; 
-  flex-grow: 1; /* Allow paragraph to grow and fill space */
+  font-size: 1.0em;
+  color: #cbd5e0;
+  padding: 0 20px;
+  margin-bottom: 0;
+  flex-grow: 1;
 }
 
-/* Ripple effect (CSS only for now, JS click handler needed for dynamic origin) */
-/* This is a visual placeholder, a JS implementation would be more dynamic */
 .service-card::after {
   content: '';
   position: absolute;
@@ -714,20 +652,17 @@ a:hover {
   left: 50%;
   width: 5px;
   height: 5px;
-  background: rgba(66, 153, 225, 0.5); /* Blue glow */
+  background: rgba(66, 153, 225, 0.5);
   border-radius: 50%;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-
 .service-card:active::after {
-  transform: translate(-50%, -50%) scale(20); /* Expands on click */
+  transform: translate(-50%, -50%) scale(20);
   opacity: 1;
-  transition: transform 0s, opacity 0s; /* Instant start */
+  transition: transform 0s, opacity 0s;
 }
-
-
 
 /* ========================================= */
 /* 8. Success Page Section */
@@ -737,26 +672,23 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 100px); 
+  min-height: calc(100vh - 100px);
   text-align: center;
   padding: 50px;
   background-color: #fff;
 }
-
 .success-page-section h2 {
-  color: #28a745; 
+  color: #28a745;
   font-size: 2.5em;
   margin-bottom: 20px;
-  font-family: 'Montserrat', sans-serif; 
+  font-family: 'Montserrat', sans-serif;
 }
-
 .success-page-section p {
   font-size: 1.2em;
   margin-bottom: 30px;
   max-width: 600px;
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'Open Sans', sans-serif;
 }
-
 .success-page-section a {
   background-color: #007bff;
   color: white;
@@ -764,9 +696,8 @@ a:hover {
   border-radius: 5px;
   text-decoration: none;
   font-size: 1.1em;
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'Open Sans', sans-serif;
 }
-
 .success-page-section a:hover {
   background-color: #0056b3;
 }
@@ -774,570 +705,204 @@ a:hover {
 /* ========================================= */
 /* Responsive Adjustments (Mobile First) */
 /* ========================================= */
-
-/* Desktop-first approach for Hero form visibility */
-/* Hide mobile form by default on desktop screens */
-.hero-form-mobile-container {
-  display: none; 
-}
-
-/* Desktop Styles for Hero Section (apply >= 769px) */
+.hero-form-mobile-container { display: none; }
 @media (min-width: 769px) {
-  /* Show desktop form, hide mobile form */
-  .hero-form-desktop-container {
-    display: block; 
-    max-width: 450px; 
-    margin-left: auto; 
-    margin-right: 30px; 
-    align-self: center; 
-  }
-
-  /* Adjust hero content for desktop layout */
-  .hero-slide-content {
-    margin-right: 20px; 
-    max-width: 850px; 
-    min-width: 300px;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Reset hero-slide-content-overlay flex direction for desktop */
-  .hero-slide-content-overlay {
-    flex-direction: row; 
-    justify-content: center;
-    align-items: center;
-    padding: 0 40px;
-  }
+  .hero-form-desktop-container { display: block; max-width: 450px; margin-left: auto; margin-right: 30px; align-self: center; }
+  .hero-slide-content { margin-right: 20px; max-width: 850px; min-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hero-slide-content-overlay { flex-direction: row; justify-content: center; align-items: center; padding: 0 40px; }
 }
-
 @media (max-width: 768px) {
-  section {
-    padding: 40px 15px; 
-  }
-
-  /* Header Responsive (unchanged) */
-  .main-header {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px 15px;
-    align-items: flex-start;
-  }
-
-  .main-header .logo {
-    flex-basis: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-    order: 1;
-  }
-
-  .header-phone {
-    flex-basis: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    order: 2;
-    display: block;
-  }
-
-  .main-nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 130px;
-    left: 0;
-    width: 100%;
-    background-color: #343a40;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 20px 0;
-    z-index: 999;
-    order: 4;
-  }
-
-  .main-nav.open {
-    display: flex;
-  }
-
-  .main-nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main-nav li {
-    margin: 10px 0;
-  }
-
-  .mobile-menu-icon {
-    display: flex;
-    order: 3;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    margin: 0;
-  }
-
-  /* Hero Section Responsive for Mobile - REVISED */
-  .hero-section {
-    min-height: auto; 
-    height: auto; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0; 
-  }
-
-  .hero-image-container,
-  .hero-image-fallback {
-      position: relative; 
-      width: 100%;
-      height: 350px; 
-      overflow: hidden; 
-      flex-shrink: 0; 
-      margin-bottom: 0; 
-  }
-
-  .hero-background-image { 
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.5); 
-  }
-
-  .hero-slide-content-overlay {
-      position: absolute; 
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; 
-      padding: 20px 15px; 
-      display: flex; 
-      flex-direction: column;
-      justify-content: center; 
-      align-items: center; 
-      text-align: center;
-      box-sizing: border-box; 
-  }
-
-  .hero-slide-content {
-    margin-right: 0;
-    margin-bottom: 0; 
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .hero-slide-content h1 {
-    font-size: 1.8rem;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    margin-bottom: 8px;
-  }
-
-  .hero-slide-content h2 {
-    font-size: 1.6em;
-    margin-bottom: 10px;
-    display: none;
-  }
-
-  .hero-slide-content p {
-    font-size: 1em;
-    display: none;
-  }
-
-  /* Hide desktop form, show mobile form */
-  .hero-form-desktop-container {
-    display: none; 
-  }
-
-  .hero-form-mobile-container {
-    display: block; 
-    width: 95%; 
-    max-width: 450px; 
-    padding: 20px; 
-    margin: 20px auto; 
-    box-sizing: border-box;
-  }
-
-  /* About Us Section Responsive */
-  .about-us-section {
-  padding: 60px 0; /* ↓ From 100px */
-  }
-
-  .about-us-grid-container {
-      grid-template-columns: 1fr; /* Single column on mobile */
-      gap: 20px; 
-      padding: 0 15px; 
-  }
-
-  .about-us-image-container {
-      width: 100%; 
-      max-width: none; 
-      margin-bottom: 20px; 
-      height: 250px; 
-  }
-
-  .about-us-content { 
-      text-align: center; 
-      padding-right: 0; 
-      padding: 0; 
-      min-width: unset; 
-      display: block; 
-  }
-
-  .about-us-content p {
-    font-size: 1em;
-    margin-bottom: 20px; 
-  }
-
-  .about-us-section h2 {
-    font-size: 1.1em; /* <<<< ADJUSTED: Smaller font size for mobile */
-    line-height: 1.3; /* Ensures good line spacing on mobile */
-    margin-bottom: 20px; /* Reduced margin for mobile */
-  }
-
-  .about-us-features {
-    margin-bottom: 20px; 
-  }
-
-  .about-us-features li {
-    font-size: 1em; 
-    text-align: left; 
-    justify-content: flex-start; 
-  }
-
-  .about-us-features .feature-icon {
-    margin-right: 10px; 
-  }
-
-  .cta-button {
-    width: 100%; 
-    padding: 12px 18px;
-    font-size: 1em;
-    align-self: center; 
-  }
-
-  /* Badges responsive positioning */
-  .about-us-badge.years-badge {
-    top: 10px; 
-    right: 10px;
-  }
-
-  .about-us-badge.customers-badge {
-    bottom: 10px; 
-    left: 10px;
-  }
-
-  .services-section{
-   padding: 60px 0 80px; /* Top reduced from 100px to 60px */
-  } 
-  
-
-  /* Services Section Responsive */
-  .services-section .services-heading {
-    font-size: 1.4rem; /* Smaller on mobile */
-    padding: 0 20px;
-    margin-bottom: 15px;
-  }
-
-  .services-section .services-subheading {
-    font-size: 1em;
-    margin-bottom: 40px; /* Reduced margin for mobile */
-    padding: 0 20px;
-  }
-
-  .service-cards-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 30px; /* Mobile gap */
-    padding: 0 20px; /* Adjust padding for mobile */
-  }
-
-  .service-card {
-    min-height: auto; /* Allow height to adjust */
-    height: auto; /* Allow height to adjust */
-    padding-bottom: 20px; /* Adjust padding for mobile */
-  }
-
-  .service-card-image {
-    height: 180px; /* Smaller image height on mobile */
-    margin-bottom: 15px; /* Adjust margin for mobile */
-  }
-
-  .service-card h3 {
-    font-size: 1.4em; /* Smaller title on mobile */
-  }
-
-  .service-card p {
-    font-size: 0.9em; /* Smaller description on mobile */
-    padding: 0 15px; /* Adjust padding for mobile */
-  }
+  section { padding: 40px 15px; }
+  .main-header { flex-wrap: wrap; justify-content: center; padding: 10px 15px; align-items: flex-start; }
+  .main-header .logo { flex-basis: 100%; text-align: center; margin-bottom: 10px; order: 1; }
+  .header-phone { flex-basis: 100%; text-align: center; margin: 0; padding: 0; order: 2; display: block; }
+  .main-nav { display: none; flex-direction: column; position: absolute; top: 130px; left: 0; width: 100%; background-color: #343a40; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 20px 0; z-index: 999; order: 4; }
+  .main-nav.open { display: flex; }
+  .main-nav ul { flex-direction: column; align-items: center; }
+  .main-nav li { margin: 10px 0; }
+  .mobile-menu-icon { display: flex; order: 3; position: absolute; top: 15px; right: 15px; margin: 0; }
+  .hero-section { min-height: auto; height: auto; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 0; }
+  .hero-image-container, .hero-image-fallback { position: relative; width: 100%; height: 350px; overflow: hidden; flex-shrink: 0; margin-bottom: 0; }
+  .hero-background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+  .hero-slide-content-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 20px 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; }
+  .hero-slide-content { margin-right: 0; margin-bottom: 0; max-width: 100%; text-align: center; }
+  .hero-slide-content h1 { font-size: 1.8rem; white-space: normal; overflow: visible; text-overflow: clip; margin-bottom: 8px; }
+  .hero-slide-content h2 { font-size: 1.6em; margin-bottom: 10px; display: none; }
+  .hero-slide-content p { font-size: 1em; display: none; }
+  .hero-form-desktop-container { display: none; }
+  .hero-form-mobile-container { display: block; width: 95%; max-width: 450px; padding: 20px; margin: 20px auto; box-sizing: border-box; }
+  .about-us-section { padding: 60px 0; }
+  .about-us-grid-container { grid-template-columns: 1fr; gap: 20px; padding: 0 15px; }
+  .about-us-image-container { width: 100%; max-width: none; margin-bottom: 20px; height: 250px; }
+  .about-us-content { text-align: center; padding-right: 0; padding: 0; min-width: unset; display: block; }
+  .about-us-content p { font-size: 1em; margin-bottom: 20px; }
+  .about-us-section h2 { font-size: 1.1em; line-height: 1.3; margin-bottom: 20px; }
+  .about-us-features { margin-bottom: 20px; }
+  .about-us-features li { font-size: 1em; text-align: left; justify-content: flex-start; }
+  .about-us-features .feature-icon { margin-right: 10px; }
+  .cta-button { width: 100%; padding: 12px 18px; font-size: 1em; align-self: center; }
+  .about-us-badge.years-badge { top: 10px; right: 10px; }
+  .about-us-badge.customers-badge { bottom: 10px; left: 10px; }
+  .services-section{ padding: 60px 0 80px; }
+  .services-section .services-heading { font-size: 1.4rem; padding: 0 20px; margin-bottom: 15px; }
+  .services-section .services-subheading { font-size: 1em; margin-bottom: 40px; padding: 0 20px; }
+  .service-cards-grid { grid-template-columns: 1fr; gap: 30px; padding: 0 20px; }
+  .service-card { min-height: auto; height: auto; padding-bottom: 20px; }
+  .service-card-image { height: 180px; margin-bottom: 15px; }
+  .service-card h3 { font-size: 1.4em; }
+  .service-card p { font-size: 0.9em; padding: 0 15px; }
 }
 
 /* ========================================= */
-/* 9. Footer Section */
+/* 9. Footer Section (REVISED 3+2 GRID) */
 /* ========================================= */
 .main-footer {
-    background-color: #0d1117;
-    color: #ffffff;
-    padding: 2rem 1rem; /* Default padding for all screen sizes */
-    font-family: 'Segoe UI', sans-serif;
+  background-color: #0d1117;
+  color: #ffffff;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .footer-heading {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.7rem; /* Prominent size for the main footer heading */
-    color: #fff; /* White color to stand out on dark background */
-    margin-bottom: 2rem; /* Space below the heading before the cards */
-    padding-top: 2rem; /* Add some top padding to separate from content above */
-    padding-left: 20px; /* Consistent horizontal padding */
-    padding-right: 20px; /* Consistent horizontal padding */
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.footer-content {
-    display: grid; /* Use CSS Grid for the main 2-column layout */
-    grid-template-columns: 1fr 1fr; /* <<<< ADJUSTED: Equal width for left (2 items) and right (3 items) columns */
-    gap: 2rem; /* Space between the left and right main columns */
-    max-width: 1200px; /* Constrain content width for larger screens */
-    margin: 0 auto; /* Center the footer content */
-    padding: 0 20px; /* Horizontal padding for the content inside main-footer */
-    box-sizing: border-box; /* Include padding in width */
+/* GRID: 3 cards on left, 2 cards on right */
+.footer-grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr;
+  gap: 2.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
-
-/* Main Left and Right Columns - now grid items of footer-content */
 .footer-left {
-    display: grid; /* <<<< REVERTED: Back to grid */
-    grid-template-columns: 1fr; /* 1 column for cards inside footer-left (stacks them vertically) */
-    gap: 1.5rem; /* Space between individual cards */
-    height: 100%; /* Keep this, as it worked to manage internal card compactness and might aid outer height */
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1.3rem;
+  height: 100%;
 }
-
 .footer-right {
-    display: grid; /* <<<< REVERTED: Back to grid */
-    grid-template-columns: 1fr; /* 1 column for cards inside footer-right (stacks them vertically) */
-    gap: 1.5rem; /* Space between individual cards */
-    height: 100%; /* Keep this, as it worked to manage internal card compactness and might aid outer height */
-}
-/* Ensure equal card height with flex-grow (within their respective grids) */
-.footer-card {
-    background-color: #1c2230;
-    padding: 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
-    height: auto; /* Allow height to adjust based on content */
-    display: flex; /* For internal content alignment */
-    flex-direction: column;
-    justify-content: flex-start;
-    align-self: start; /* Prevents individual cards from stretching vertically */
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.3rem;
+  height: 100%;
 }
 
+.footer-card {
+  background-color: #1c2230;
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: start;
+}
 .footer-card h3 {
-    font-size: 1.2rem;
-    color: #8ab4f8; /* Blue accent color */
-    border-bottom: 1px solid #8ab4f8;
-    padding-bottom: 0.4rem;
-    margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  color: #8ab4f8;
+  border-bottom: 1px solid #8ab4f8;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
 }
-
 .footer-card p {
-    font-size: 0.95rem; /* Slightly smaller font for body text in cards */
-    line-height: 1.5;
-    color: #cbd5e0; /* Lighter text color for readability on dark background */
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #cbd5e0;
 }
 
-/* Utility classes for icon-text alignment within footer cards */
 .flex-align-start {
-    display: flex;
-    align-items: flex-start; /* Aligns items to the start (top) of the cross axis */
-    gap: 0.5rem; /* Space between icon and text */
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
-
 .flex-align-center {
-    display: flex;
-    align-items: center; /* Aligns items to the center of the cross axis */
-    gap: 0.5rem; /* Space between icon and text */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-
 .footer-icon {
-    margin-right: 0.5rem; /* Kept for compatibility if used standalone, but `gap` is preferred */
-    color: #ffcc00; /* Yellow accent for icons */
-    font-size: 1.1em; /* Ensure icons are appropriately sized */
-    flex-shrink: 0; /* Prevent icons from shrinking */
+  margin-right: 0.5rem;
+  color: #ffcc00;
+  font-size: 1.1em;
+  flex-shrink: 0;
 }
-
-/* New Special Message Card Styling (from mockup) */
 .special-message-card {
-    background-color: #4c5fd5; /* Purple/Blue color from mockup */
-    color: #fff;
-    font-weight: 600;
-    padding: 1.2rem; /* Match footer-card padding */
-    border-radius: 12px; /* Match footer-card border-radius */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Match footer-card shadow */
-    text-align: center; /* Center the text as in mockup */
-    display: flex; /* Use flex to vertically center content if space allows */
-    align-items: center; /* Vertically center content */
-    justify-content: center; /* Horizontally center content */
+  background-color: #4c5fd5;
+  color: #fff;
+  font-weight: 600;
+  padding: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .special-message-card p {
-    margin-bottom: 0; /* Remove paragraph default margin to keep it compact */
-    font-size: 1.05rem; /* Slightly larger text for emphasis */
-    line-height: 1.4;
+  margin-bottom: 0;
+  font-size: 1.05rem;
+  line-height: 1.4;
 }
-
-/* === Social Media Icons === */
+/* Social media icons */
 .social-icons {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
 }
-
-.social-icon { /* This targets the <a> tag */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.2rem; /* Sizes the <i> tag icons */
-    background-color: #222;
-    color: #fff;
-    padding: 0.6rem;
-    border-radius: 50%;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none; /* Remove underline from social links */
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  background-color: #222;
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
 }
-
-/* Specific brand colors for social media icons */
-.social-icon .fab.fa-facebook-f {
-    color: #3b5998; /* Facebook blue */
-}
-
-.social-icon .fab.fa-instagram {
-    color: #E1306C; /* Instagram pink-red */
-}
-
-.social-icon .fab.fa-youtube {
-    color: #FF0000; /* YouTube red */
-}
-
-.social-icon .fab.fa-whatsapp {
-    color: #25D366; /* WhatsApp green */
-}
-
+.social-icon .fab.fa-facebook-f { color: #3b5998; }
+.social-icon .fab.fa-instagram { color: #E1306C; }
+.social-icon .fab.fa-youtube { color: #FF0000; }
+.social-icon .fab.fa-whatsapp { color: #25D366; }
 .social-icon:hover {
-    background-color: #8ab4f8; /* Blue on hover */
-    color: #0d1117; /* Dark text on hover */
-    transform: translateY(-3px); /* Subtle lift effect */
-    box-shadow: 0 6px 12px rgba(138, 180, 248, 0.4); /* Light shadow for hover */
+  background-color: #8ab4f8;
+  color: #0d1117;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(138, 180, 248, 0.4);
 }
-
-/* === Footer Bottom === */
 .footer-bottom {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #aaa;
-    border-top: 1px solid #333;
-    padding-top: 1.2rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+  padding-top: 1.2rem;
 }
 
-/* === Responsive Layout for Footer === */
+/* Responsive Layout for Footer */
 @media (max-width: 1024px) {
-    .footer-heading {
-      font-size: 1.6rem;
-    }
-    .footer-content {
-        grid-template-columns: 1fr; /* Single column for footer content on mobile */
-        padding: 0 15px; /* Adjust padding for smaller screens */
-    }
-
-    .footer-left,
-    .footer-right {
-        grid-template-columns: 1fr; /* Still 1 column for cards on mobile */
-    }
-
-    .footer-left {
-        margin-bottom: 2rem; /* Add space between stacked main columns on mobile */
-    }
-
-    .footer-card {
-        margin-bottom: 1rem; /* Add some space between stacked cards on mobile */
-    }
-
-    .footer-card:last-child {
-        margin-bottom: 0; /* No margin on the last card to prevent extra space */
-    }
+  .footer-heading { font-size: 1.6rem; }
+  .footer-grid-container { grid-template-columns: 1fr; padding: 0 15px; }
+  .footer-left, .footer-right { grid-template-rows: 1fr; }
+  .footer-left { margin-bottom: 2rem; }
+  .footer-card { margin-bottom: 1rem; }
+  .footer-card:last-child { margin-bottom: 0; }
 }
-
-/* TEMPORARY TEST: Large Heading Size (FOR DEBUGGING/TESTING ONLY) */
-.footer-left .footer-card:first-child h3 { /* Targets the h3 in the very first card of the left column */
-    font-size: 2rem !important; /* Using !important to force application for testing */
-    line-height: 1; /* Adjust line-height to manage spacing */
-    white-space: nowrap; /* Prevent wrapping if it's too big */
-    overflow: hidden; /* Hide overflow if it's still too big */
-    text-overflow: ellipsis; /* Add ellipsis if text is cut */
-}
-
-/* Styling for paragraphs in "Direct Contact" card (left column, first card) */
-.footer-left .footer-card:first-child p {
-    font-size: 1.5rem !important; /* Using !important temporarily for testing/debugging */
-    line-height: 1.5; /* Standard line-height for readability */
-    margin-bottom: 1rem !important; /* Adjust margin below paragraphs */
-}
-
-/* Styling for heading of the second card in the left column (Operating Hours) */
-.footer-left .footer-card:nth-child(2) h3 {
-    font-size: 2rem !important; /* TEMPORARY: For testing/debugging, will likely be too large for final design */
-    line-height: 1.2 !important;
-}
-
-/* Styling for paragraphs in the second card in the left column (Operating Hours) */
-.footer-left .footer-card:nth-child(2) p {
-    font-size: 1.5rem !important; /* TEMPORARY: For testing/debugging, will likely be too large for final design */
-    line-height: 1.5 !important;
-    margin-bottom: 1rem !important;
-}
-
 @media (max-width: 768px) {
-  .main-header .logo h1 {
-    font-size: 1.4rem; /* ✅ Smaller logo on mobile */
-  }
-
-  .header-phone a {
-    font-size:  1.1rem; /* ✅ Smaller phone number */
-  }
+  .main-header .logo h1 { font-size: 1.4rem; }
+  .header-phone a { font-size:  1.1rem; }
 }
-
-/* === FOOTER PLACEHOLDER & CARD HEIGHT FIXES === */
-
-.footer-card {
-    min-height: 180px; /* Ensures cards have a minimum height for uniformity */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.footer-card .placeholder {
-    color: #bbb !important;
-    font-style: italic;
-    font-size: 0.98rem;
-    letter-spacing: 0.01em;
-}
-
-.footer-card p.placeholder {
-    margin-bottom: 0;
-}
-
-.footer-card .social-icons .placeholder {
-    color: #bbb !important;
-    font-style: italic;
-    font-size: 0.95rem;
-    margin: 0 auto;
-}
-
-
-
