@@ -258,7 +258,7 @@ a:hover {
   justify-content: center; /* Vertically center text content within its own container */
   align-items: flex-start; /* Align text to the left within its container */
   margin-right: 20px; /* Adjusted space between text and form */
-  max-width: 900px; /* <--- CRITICAL FIX: Increased max-width for H1 to fit longer headings */
+  max-width: 950px; /* <--- CRITICAL FIX: Increased max-width for H1 to fit longer headings */
   min-width: 300px; /* Ensure it has a minimum width */
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -266,7 +266,7 @@ a:hover {
 }
 
 .hero-slide-content h1 {
-  font-size: 3.2em; /* Impactful size */
+  font-size: 3em; /* Impactful size */
   line-height: 1.1;
   margin-bottom: 20px;
   font-weight: 700;
