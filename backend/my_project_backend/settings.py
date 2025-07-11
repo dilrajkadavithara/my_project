@@ -15,14 +15,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development') # Default to 'development'
 
 if DJANGO_ENV == 'production':
-    # Looks for .env.prod directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
-    load_dotenv(os.path.join(BASE_DIR, '.env.prod'))
+    # Looks for .env.prod directly in the backend directory
+    # Added 'override=True' to ensure variables from .env.prod are always loaded.
+    load_dotenv(os.path.join(BASE_DIR, '.env.prod'), override=True)
 elif DJANGO_ENV == 'staging':
-    # Looks for .env.staging directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
-    load_dotenv(os.path.join(BASE_DIR, '.env.staging'))
+    # Looks for .env.staging directly in the backend directory
+    load_dotenv(os.path.join(BASE_DIR, '.env.staging'), override=True)
 else: # Default to development
-    # Looks for .env.dev directly in the backend directory (C:\Users\dilra\OneDrive\Desktop\my_project\backend\)
-    load_dotenv(os.path.join(BASE_DIR, '.env.dev'))
+    # Looks for .env.dev directly in the backend directory
+    load_dotenv(os.path.join(BASE_DIR, '.env.dev'), override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_app',
+    'my_app', # <--- If your /api/website-content/ view is in a different app, adjust this logger name below!
     'rest_framework',
     'corsheaders',
 ]
@@ -127,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'Asia/Kolkata' # This is correct for your location
 
 USE_I18N = True
 
@@ -155,3 +156,69 @@ CORS_ALLOW_CREDENTIALS = os.environ.get('CORS_ALLOW_CREDENTIALS', 'False').lower
 # Media files settings (for user-uploaded content like ServiceImages)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# ----------------------------------------------------------------------
+# NEW: LOGGING Configuration for Production Error Capture
+# ----------------------------------------------------------------------
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',  # Log only errors (and above) to this file
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django_errors.log'), # This will create 'logs' folder inside 'backend'
+            'maxBytes': 1024*1024*5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO', # Log INFO and above to console/file
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'], # Specifically log request errors (like 500s) to file
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # IMPORTANT: Change 'my_app' below if your app with /api/website-content/ is named differently!
+        'my_app': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+# Ensure the logs directory exists at the BASE_DIR/logs path
+# BASE_DIR is Path(__file__).resolve().parent.parent, which means /path/to/backend/
+# So logs will be created at /path/to/backend/logs/
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
+
+# ----------------------------------------------------------------------
+# END: LOGGING Configuration
+# ----------------------------------------------------------------------
+
+# ... (any other custom settings you might have below this point) ...
