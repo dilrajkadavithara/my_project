@@ -1,128 +1,87 @@
 // frontend/src/components/Footer.js
-import React from "react";
+import React from 'react';
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaWhatsapp,
-  FaPhone,
-  FaEnvelope,
+  FaPhoneAlt,
   FaClock,
   FaMapMarkerAlt,
-} from "react-icons/fa";
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp
+} from 'react-icons/fa';
 
-const subtlePlaceholder = (text) => (
-  <span style={{ color: "#bbb", fontStyle: "italic" }}>{text}</span>
-);
-
-const Footer = ({ websiteContent }) => {
-  const socials = [
-    {
-      icon: <FaFacebookF />,
-      url: websiteContent['social_facebook_url']?.value,
-      label: "Facebook",
-    },
-    {
-      icon: <FaInstagram />,
-      url: websiteContent['social_instagram_url']?.value,
-      label: "Instagram",
-    },
-    {
-      icon: <FaWhatsapp />,
-      url: websiteContent['social_whatsapp_phone']?.value
-        ? `https://wa.me/${websiteContent['social_whatsapp_phone'].value.replace(/\D/g, '')}`
-        : null,
-      label: "WhatsApp",
-    },
-  ];
-  const anySocials = socials.some((s) => s.url);
-
-  const phone = websiteContent['footer_phone']?.value || subtlePlaceholder("Phone coming soon");
-  const email = websiteContent['footer_email']?.value || subtlePlaceholder("Email coming soon");
-  const weekdays = websiteContent['footer_hours_weekdays']?.value || subtlePlaceholder("Information coming soon");
-  const sunday = websiteContent['footer_hours_sunday']?.value || subtlePlaceholder("Information coming soon");
-  const usp = websiteContent['footer_usp']?.value || subtlePlaceholder("Information coming soon");
-  const location1 = websiteContent['footer_location_1']?.value || subtlePlaceholder("Information coming soon");
-  const location2 = websiteContent['footer_location_2']?.value || subtlePlaceholder("Information coming soon");
-  const copyright = websiteContent['footer_copyright']?.value || "© 2025 Jos Car Care. All rights reserved.";
-
+function Footer({ websiteContent, navLinks }) {
   return (
-    <footer className="main-footer" id="contact-section">
+    <footer className="main-footer">
       <div className="footer-grid-container">
-        {/* Left column */}
+        {/* Left Column: 2 Cards */}
         <div className="footer-col footer-col-left">
-          <div className="footer-card direct-contact">
+          {/* Direct Contact */}
+          <div className="footer-card footer-direct-contact">
             <h3>Direct Contact</h3>
-            <div className="footer-contact-list">
-              <div className="flex-align-center">
-                <span className="footer-icon"><FaPhone /></span>
-                <a href={websiteContent['footer_phone']?.value ? `tel:${websiteContent['footer_phone'].value}` : "#"}>
-                  {phone}
-                </a>
-              </div>
-              <div className="flex-align-center">
-                <span className="footer-icon"><FaEnvelope /></span>
-                <a href={websiteContent['footer_email']?.value ? `mailto:${websiteContent['footer_email'].value}` : "#"}>
-                  {email}
-                </a>
-              </div>
+            <div className="flex-align-center">
+              <FaPhoneAlt className="footer-icon" />
+              <a href={`tel:${websiteContent['header_phone_number']?.value || ''}`}>
+                {websiteContent['header_phone_number']?.value || 'Not Provided'}
+              </a>
+            </div>
+            <div className="flex-align-center">
+              <FaWhatsapp className="footer-icon" />
+              <a href={`https://wa.me/${websiteContent['whatsapp_number']?.value || ''}`} target="_blank" rel="noopener noreferrer">
+                {websiteContent['whatsapp_number']?.value || 'Not Provided'}
+              </a>
             </div>
           </div>
 
-          <div className="footer-card operating-hours">
+          {/* Operating Hours */}
+          <div className="footer-card footer-operating-hours">
             <h3>Operating Hours</h3>
             <div className="flex-align-center">
-              <span className="footer-icon"><FaClock /></span>
-              {weekdays}
-            </div>
-            <div className="flex-align-center">
-              <span className="footer-icon"><FaClock /></span>
-              {sunday}
+              <FaClock className="footer-icon" />
+              <span>{websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}</span>
             </div>
           </div>
         </div>
 
-        {/* Right column */}
+        {/* Right Column: 3 Cards */}
         <div className="footer-col footer-col-right">
-          <div className="footer-card locations">
+          {/* Our Locations */}
+          <div className="footer-card footer-locations">
             <h3>Our Locations</h3>
             <div className="flex-align-center">
-              <span className="footer-icon"><FaMapMarkerAlt /></span>
-              <span>{location1}</span>
-            </div>
-            <div className="flex-align-center">
-              <span className="footer-icon"><FaMapMarkerAlt /></span>
-              <span>{location2}</span>
+              <FaMapMarkerAlt className="footer-icon" />
+              <span>{websiteContent['location_address']?.value || 'Thripunithura, Ernakulam, Kerala'}</span>
             </div>
           </div>
 
-          <div className="footer-card usp-message special-message-card">
-            <p>{usp}</p>
+          {/* Special Message */}
+          <div className="special-message-card">
+            <p>{websiteContent['special_footer_message']?.value || 'Experience premium car care and detailing with Jose Car Care.'}</p>
           </div>
 
-          <div className="footer-card connect-with-us">
+          {/* Social Links */}
+          <div className="footer-card footer-connect">
             <h3>Connect With Us</h3>
             <div className="social-icons">
-              {anySocials
-                ? socials.filter(s => s.url).map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={s.label}
-                      className="social-icon"
-                    >
-                      {s.icon}
-                    </a>
-                  ))
-                : subtlePlaceholder("Links coming soon")}
+              <a href={websiteContent['facebook_link']?.value || '#'} className="social-icon" target="_blank" rel="noopener noreferrer">
+                <FaFacebookF />
+              </a>
+              <a href={websiteContent['instagram_link']?.value || '#'} className="social-icon" target="_blank" rel="noopener noreferrer">
+                <FaInstagram />
+              </a>
+              <a href={`https://wa.me/${websiteContent['whatsapp_number']?.value || ''}`} className="social-icon" target="_blank" rel="noopener noreferrer">
+                <FaWhatsapp />
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <div className="footer-bottom">{copyright}</div>
+
+      {/* Footer Bottom */}
+      <div className="footer-bottom">
+        &copy; {new Date().getFullYear()} Jose Car Care. All Rights Reserved.
+      </div>
     </footer>
   );
-};
+}
 
 export default Footer;

@@ -775,24 +775,20 @@ a:hover {
   box-sizing: border-box;
 }
 
-/* Equal height columns using flex */
 .footer-col {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Left column (2 cards) */
 .footer-col-left {
   justify-content: stretch;
 }
 
-/* Right column (3 cards) */
 .footer-col-right {
   justify-content: stretch;
 }
 
-/* All cards */
 .footer-card {
   background-color: #1c2230;
   border-radius: 22px;
@@ -810,7 +806,7 @@ a:hover {
   border: 1.5px solid #262e40;
 }
 
-/* Card headings */
+/* Card Headings (Same for all blocks) */
 .footer-card h3 {
   font-size: 2.0rem;
   color: #5f64fa;
@@ -820,7 +816,7 @@ a:hover {
   letter-spacing: -0.5px;
 }
 
-/* Card content */
+/* Generic Content (for fallback) */
 .footer-card p,
 .footer-card span,
 .footer-card a {
@@ -830,11 +826,30 @@ a:hover {
   margin-bottom: 0.5rem;
   line-height: 1.7;
 }
+
+/* Block-Specific Font Customizations */
+.footer-card.footer-direct-contact a {
+  font-size: 1.22rem;
+}
+
+.footer-card.footer-operating-hours span {
+  font-size: 1.18rem;
+}
+
+.footer-card.footer-locations span {
+  font-size: 1.14rem;
+}
+
+.footer-card.footer-connect a,
+.footer-card.footer-connect p {
+  font-size: 1.16rem;
+}
+
 .footer-card a {
   color: #fff;
   text-decoration: none;
   transition: color 0.2s;
-  word-break: break-all;
+  word-break: break-word;
 }
 .footer-card a:hover {
   color: #5f64fa;
@@ -883,18 +898,20 @@ a:hover {
   display: flex;
   gap: 1.3rem;
   margin-top: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .social-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px;
-  height: 48px;
-  font-size: 1.3rem;
+  width: 52px;
+  height: 52px;
+  font-size: 1.6rem;
   border-radius: 50%;
   background: #242a37;
-  box-shadow: 0 3px 10px rgba(95,100,250,0.08);
+  box-shadow: 0 3px 10px rgba(95, 100, 250, 0.08);
   transition: transform 0.18s, box-shadow 0.18s, background 0.2s;
   color: #fff;
   margin: 0 4px;
@@ -904,7 +921,7 @@ a:hover {
   background: linear-gradient(90deg, #5f64fa 10%, #10b981 80%);
   color: #fff;
   transform: translateY(-5px) scale(1.09);
-  box-shadow: 0 7px 18px rgba(95,100,250,0.24);
+  box-shadow: 0 7px 18px rgba(95, 100, 250, 0.24);
 }
 
 /* Footer bottom */
@@ -954,10 +971,23 @@ a:hover {
   .footer-card a {
     font-size: 1.01rem;
   }
-  .social-icon {
-    width: 38px;
-    height: 38px;
+  .footer-card.footer-direct-contact a {
     font-size: 1.1rem;
+  }
+  .footer-card.footer-operating-hours span {
+    font-size: 1.05rem;
+  }
+  .footer-card.footer-locations span {
+    font-size: 1.02rem;
+  }
+  .footer-card.footer-connect a,
+  .footer-card.footer-connect p {
+    font-size: 1.02rem;
+  }
+  .social-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
   }
 }
 
