@@ -817,6 +817,7 @@ a:hover {
   border: 1.5px solid #262e40;
   overflow: auto;
   transition: box-shadow 0.22s, transform 0.18s, border 0.18s;
+  overflow-y: auto;
 }
 
 /* Optional: Prevent horizontal scrollbars */
