@@ -9,7 +9,14 @@ import {
   FaWhatsapp
 } from 'react-icons/fa';
 
-function Footer({ websiteContent, navLinks }) {
+function Footer({ websiteContent }) {
+  // Brand colors for icons
+  const brandColors = {
+    facebook: "#1877f3",
+    instagram: "#E1306C",
+    whatsapp: "#25D366",
+  };
+
   return (
     <footer className="main-footer">
       <div className="footer-grid-container">
@@ -35,14 +42,35 @@ function Footer({ websiteContent, navLinks }) {
           {/* Social Links */}
           <div className="footer-card footer-connect">
             <h3>Connect With Us</h3>
-            <div className="social-icons">
-              <a href={websiteContent['facebook_link']?.value || '#'} className="social-icon" target="_blank" rel="noopener noreferrer">
+            <div className="social-icons social-icons-justified">
+              <a
+                href={websiteContent['facebook_link']?.value || '#'}
+                className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                style={{ color: brandColors.facebook }}
+              >
                 <FaFacebookF />
               </a>
-              <a href={websiteContent['instagram_link']?.value || '#'} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href={websiteContent['instagram_link']?.value || '#'}
+                className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                style={{ color: brandColors.instagram }}
+              >
                 <FaInstagram />
               </a>
-              <a href={`https://wa.me/${websiteContent['whatsapp_number']?.value || ''}`} className="social-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href={`https://wa.me/${websiteContent['whatsapp_number']?.value || ''}`}
+                className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                style={{ color: brandColors.whatsapp }}
+              >
                 <FaWhatsapp />
               </a>
             </div>
@@ -53,8 +81,16 @@ function Footer({ websiteContent, navLinks }) {
             <h3>Operating Hours</h3>
             <div className="flex-align-center">
               <FaClock className="footer-icon" />
-              <span>{websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}</span>
+              <span>
+                {websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}
+              </span>
             </div>
+            {websiteContent['footer_hours_sunday']?.value && (
+              <div className="flex-align-center">
+                <FaClock className="footer-icon" />
+                <span>{websiteContent['footer_hours_sunday'].value}</span>
+              </div>
+            )}
           </div>
         </div>
 
