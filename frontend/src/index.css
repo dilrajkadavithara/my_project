@@ -789,13 +789,23 @@ a:hover {
   margin-bottom: 0;
 }
 
-.footer-col-right > .footer-card,
-.footer-col-right > .special-message-card {
-  flex: 0 0 33.3333%;
+/* Right Column: 3 cards, 40% / 20% / 40% heights */
+.footer-col-right > .footer-card:nth-child(1) {
+  flex: 0 0 40%;
   margin-bottom: 1.2rem;
 }
-.footer-col-right > .footer-card:last-child,
-.footer-col-right > .special-message-card:last-child {
+.footer-col-right > .footer-card:nth-child(2),
+.footer-col-right > .special-message-card:nth-child(2) {
+  flex: 0 0 20%;
+  margin-bottom: 1.2rem;
+}
+.footer-col-right > .footer-card:nth-child(3) {
+  flex: 0 0 40%;
+  margin-bottom: 0;
+}
+/* Remove margin from the last card if you ever have more/less than three */
+.footer-col-right > .special-message-card:last-child,
+.footer-col-right > .footer-card:last-child {
   margin-bottom: 0;
 }
 
