@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 
 function Footer({ websiteContent }) {
-  // Brand colors for icons
+  // Inline brand colors for each icon
   const brandColors = {
     facebook: "#1877f3",
     instagram: "#E1306C",
@@ -42,7 +42,7 @@ function Footer({ websiteContent }) {
           {/* Social Links */}
           <div className="footer-card footer-connect">
             <h3>Connect With Us</h3>
-            <div className="social-icons social-icons-justified">
+            <div className="social-icons">
               <a
                 href={websiteContent['facebook_link']?.value || '#'}
                 className="social-icon"

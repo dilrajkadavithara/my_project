@@ -753,6 +753,9 @@ a:hover {
   .service-card p { font-size: 0.9em; padding: 0 15px; }
 }
 
+/* ========================================= */
+/* FOOTER SECTION: WORLD-CLASS, EQUAL COLUMNS, HUGE SOCIAL ICONS */
+/* ========================================= */
 .main-footer {
   background-color: #0d1117;
   color: #ffffff;
@@ -768,24 +771,23 @@ a:hover {
   gap: 2.5rem;
   max-width: 1600px;
   margin: 0 auto;
-  align-items: stretch;
+  align-items: stretch;         /* Ensures columns fill the height */
   box-sizing: border-box;
-  min-height: 410px;        /* Makes columns always equal height */
-  height: 100%;
+  min-height: 420px;            /* Guarantees both columns fill at least this much */
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  height: 100%;
+  justify-content: stretch;
+  height: 100%;                 /* Columns fill their grid cell */
 }
 
 .footer-card {
   background-color: #1c2230;
   border-radius: 22px;
   box-shadow: 0 6px 32px rgba(30, 34, 90, 0.22);
-  padding: 1.05rem 1.25rem 1rem 1.25rem;
+  padding: 1rem 1.2rem;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -793,15 +795,15 @@ a:hover {
   align-items: flex-start;
   box-sizing: border-box;
   border: 1.5px solid #262e40;
-  min-height: 84px;
+  min-height: 68px;
   transition: box-shadow 0.2s, background 0.3s, transform 0.22s;
 }
 
 .footer-card h3 {
-  font-size: 2.18rem;
+  font-size: 2.16rem;
   color: #5f64fa;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.7rem;
   font-weight: 700;
   letter-spacing: -0.5px;
   text-shadow: 0 3px 14px rgba(95, 100, 250, 0.10);
@@ -810,17 +812,16 @@ a:hover {
 .footer-card p,
 .footer-card span,
 .footer-card a {
-  font-size: 1.32rem;
+  font-size: 1.33rem;
   color: #fff;
   font-family: 'Segoe UI', 'Open Sans', sans-serif;
-  margin-bottom: 0.36rem;
-  line-height: 1.67;
+  margin-bottom: 0.22rem;
+  line-height: 1.65;
 }
 
 .footer-card.footer-direct-contact a {
-  font-size: 1.34rem;
+  font-size: 1.39rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
 }
 
 .footer-card.footer-operating-hours span {
@@ -834,7 +835,7 @@ a:hover {
 
 .footer-card.footer-connect a,
 .footer-card.footer-connect p {
-  font-size: 1.29rem;
+  font-size: 1.36rem;
 }
 
 .footer-card a {
@@ -851,21 +852,21 @@ a:hover {
 .flex-align-center {
   display: flex;
   align-items: center;
-  gap: 1.09rem;
-  margin-bottom: 0.13rem;
+  gap: 1.07rem;
+  margin-bottom: 0.07rem;
 }
 
 .footer-icon {
   margin-right: 0.07rem;
   color: #ffd000;
-  font-size: 1.65em;
+  font-size: 1.67em;
   display: flex;
   align-items: center;
 }
 
 /* For multiple location entries */
 .location-entry {
-  margin-bottom: 0.95rem;
+  margin-bottom: 0.81rem;
 }
 .location-entry:last-child {
   margin-bottom: 0;
@@ -876,7 +877,7 @@ a:hover {
   background: linear-gradient(90deg, #5f64fa 20%, #10b981 100%);
   color: #fff;
   font-weight: 700;
-  padding: 1.15rem 1.5rem;
+  padding: 1.1rem 1.25rem;
   border-radius: 19px;
   box-shadow: 0 6px 28px rgba(16, 185, 129, 0.10);
   text-align: center;
@@ -884,8 +885,8 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 84px;
-  font-size: 1.29rem;
+  min-height: 68px;
+  font-size: 1.23rem;
   max-width: 100%;
   box-sizing: border-box;
   margin: 0;
@@ -893,45 +894,56 @@ a:hover {
 
 .special-message-card p {
   margin: 0;
-  font-size: 1.22rem;
+  font-size: 1.19rem;
   line-height: 1.7;
   color: #fff;
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
-  letter-spacing: 0.01em;
   font-weight: 700;
 }
 
-/* Social Media Icons (plain icons, justified, large, brand colors) */
+/* SOCIAL ICONS: HUGE, BRAND COLOR, NO BG, JUSTIFIED */
 .social-icons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.9rem;
   width: 100%;
+  gap: 0.5rem;
 }
 
 .social-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.7rem;       /* Very large, pure icon */
-  transition: transform 0.18s, box-shadow 0.18s, color 0.18s;
-  margin: 0;
-  outline: none;
+  font-size: 3.4rem;            /* Make icon itself huge */
+  width: 3.4rem;
+  height: 3.4rem;
+  min-width: 3.4rem;
+  min-height: 3.4rem;
+  color: inherit;                /* Color comes from inline style in JSX */
+  background: none !important;
   border: none;
-  background: none !important; /* Remove background */
-  box-shadow: none !important; /* Remove shadow */
-  border-radius: 0 !important; /* Remove circle */
-  cursor: pointer;
+  box-shadow: none !important;
+  margin: 0;
   padding: 0;
-  min-width: 2.7rem;
-  min-height: 2.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.18s, transform 0.18s;
 }
 .social-icon:hover,
 .social-icon:focus {
   color: #ffd000 !important;
-  transform: scale(1.13);
+  transform: scale(1.15);
+}
+
+/* Footer bottom */
+.footer-bottom {
+  margin-top: 2.2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #9ca3af;
+  border-top: 1.5px solid #23293b;
+  padding-top: 1.1rem;
+  letter-spacing: 0.01em;
+  font-family: 'Segoe UI', 'Montserrat', sans-serif;
+  opacity: 0.97;
 }
 
 /* Responsive Layout for Footer */
@@ -940,7 +952,7 @@ a:hover {
     grid-template-columns: 1fr 1fr;
     gap: 1.1rem;
     padding: 0 1rem;
-    min-height: 290px;
+    min-height: 270px;
   }
 }
 @media (max-width: 900px) {
@@ -949,12 +961,10 @@ a:hover {
   }
   .footer-grid-container {
     grid-template-columns: 1fr;
-    gap: 1.1rem;
     min-height: unset;
-    height: unset;
+    gap: 1.15rem;
   }
   .footer-col {
-    gap: 0.7rem;
     min-height: unset;
     height: unset;
   }
@@ -962,8 +972,8 @@ a:hover {
   .special-message-card {
     padding: 0.7rem 0.5rem 0.7rem 0.5rem;
     border-radius: 8px;
-    min-height: 68px;
-    font-size: 1.01rem;
+    min-height: 56px;
+    font-size: 0.99rem;
   }
   .footer-card h3 {
     font-size: 1.07rem;
@@ -971,7 +981,7 @@ a:hover {
   .footer-card p,
   .footer-card span,
   .footer-card a {
-    font-size: 0.92rem;
+    font-size: 0.91rem;
   }
   .footer-card.footer-direct-contact a,
   .footer-card.footer-connect a {
@@ -982,20 +992,20 @@ a:hover {
     font-size: 0.93rem;
   }
   .special-message-card p {
-    font-size: 0.99rem;
+    font-size: 0.97rem;
   }
   .social-icons {
-    justify-content: space-around;
-    gap: 0;
-    width: 100%;
+    gap: 0.25rem;
   }
   .social-icon {
-    font-size: 1.65rem;
-    min-width: 1.65rem;
-    min-height: 1.65rem;
+    font-size: 2.1rem;
+    width: 2.1rem;
+    height: 2.1rem;
+    min-width: 2.1rem;
+    min-height: 2.1rem;
   }
   .footer-bottom {
-    font-size: 0.89rem;
+    font-size: 0.93rem;
   }
 }
 
