@@ -851,7 +851,7 @@ a:hover {
 }
 
 .footer-card.footer-direct-contact a {
-  font-size: 1.27rem;
+  font-size: 1.45rem;
   font-weight: 600;
 }
 
@@ -860,7 +860,7 @@ a:hover {
 }
 
 .footer-card.footer-locations span {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -913,10 +913,18 @@ a:hover {
   margin-bottom: 0;
 }
 
+.special-message-card {
+  display: flex;
+  align-items: center;       /* vertical centering */
+  justify-content: center;   /* horizontal centering */
+  /* ...other styles... */
+}
+
+
 /* Special message card (uses same style as card for height math) */
 .special-message-card p {
   margin: 0;
-  font-size: 1.13rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   color: #fff;
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
