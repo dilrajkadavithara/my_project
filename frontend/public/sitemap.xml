@@ -1,49 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <!-- Static React Pages -->
   <url>
-    <loc>https://josecarcare.com/</loc>
+    <loc>https://www.josecarcare.com/</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://josecarcare.com/about</loc>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://josecarcare.com/services</loc>
+    <loc>https://www.josecarcare.com/about</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://josecarcare.com/contact</loc>
+    <loc>https://www.josecarcare.com/services</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/contact</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://josecarcare.com/success</loc>
+    <loc>https://www.josecarcare.com/success</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>0.50</priority>
   </url>
 
-  <!-- Dynamic Detail Pages (example) -->
+  <!-- Dynamic Service Detail Pages -->
   <url>
-    <loc>https://josecarcare.com/services/ceramic-coating</loc>
+    <loc>https://www.josecarcare.com/services/ceramic-coating</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/paint-protection-film</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/car-painting</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/borophine-coating</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/car-wash</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/scratch-removal</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.josecarcare.com/services/underbody-coating</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://josecarcare.com/services/paint-protection-film</loc>
+    <loc>https://www.josecarcare.com/services/nano-diamond-coating</loc>
+    <lastmod>2025-07-12</lastmod>
     <priority>0.70</priority>
   </url>
   <url>
-    <loc>https://josecarcare.com/services/car-painting</loc>
-    <priority>0.70</priority>
+    <loc>https://www.josecarcare.com/services/car-accessorizing</loc>
+    <lastmod>2025-07-12</lastmod>
+    <priority>0.65</priority>
   </url>
-  <url>
-    <loc>https://josecarcare.com/services/borophine-coating</loc>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://josecarcare.com/services/car-wash</loc>
-    <priority>0.70</priority>
-  </url>
-
 </urlset>
-  
