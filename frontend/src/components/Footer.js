@@ -13,7 +13,7 @@ function Footer({ websiteContent, navLinks }) {
   return (
     <footer className="main-footer">
       <div className="footer-grid-container">
-        {/* Left Column: 2 Cards */}
+        {/* Left Column: 3 Cards */}
         <div className="footer-col footer-col-left">
           {/* Direct Contact */}
           <div className="footer-card footer-direct-contact">
@@ -32,32 +32,6 @@ function Footer({ websiteContent, navLinks }) {
             </div>
           </div>
 
-          {/* Operating Hours */}
-          <div className="footer-card footer-operating-hours">
-            <h3>Operating Hours</h3>
-            <div className="flex-align-center">
-              <FaClock className="footer-icon" />
-              <span>{websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column: 3 Cards */}
-        <div className="footer-col footer-col-right">
-          {/* Our Locations */}
-          <div className="footer-card footer-locations">
-            <h3>Our Locations</h3>
-            <div className="flex-align-center">
-              <FaMapMarkerAlt className="footer-icon" />
-              <span>{websiteContent['location_address']?.value || 'Thripunithura, Ernakulam, Kerala'}</span>
-            </div>
-          </div>
-
-          {/* Special Message */}
-          <div className="special-message-card">
-            <p>{websiteContent['special_footer_message']?.value || 'Experience premium car care and detailing with Jose Car Care.'}</p>
-          </div>
-
           {/* Social Links */}
           <div className="footer-card footer-connect">
             <h3>Connect With Us</h3>
@@ -72,6 +46,39 @@ function Footer({ websiteContent, navLinks }) {
                 <FaWhatsapp />
               </a>
             </div>
+          </div>
+
+          {/* Operating Hours */}
+          <div className="footer-card footer-operating-hours">
+            <h3>Operating Hours</h3>
+            <div className="flex-align-center">
+              <FaClock className="footer-icon" />
+              <span>{websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: 2 Cards */}
+        <div className="footer-col footer-col-right">
+          {/* Our Locations (with two separate addresses) */}
+          <div className="footer-card footer-locations">
+            <h3>Locations</h3>
+            {websiteContent['footer_location_1']?.value && (
+              <div className="flex-align-center location-entry">
+                <FaMapMarkerAlt className="footer-icon" />
+                <span>{websiteContent['footer_location_1'].value}</span>
+              </div>
+            )}
+            {websiteContent['footer_location_2']?.value && (
+              <div className="flex-align-center location-entry">
+                <FaMapMarkerAlt className="footer-icon" />
+                <span>{websiteContent['footer_location_2'].value}</span>
+              </div>
+            )}
+          </div>
+          {/* Special Message */}
+          <div className="special-message-card">
+            <p>{websiteContent['special_footer_message']?.value || 'Experience premium car care and detailing with Jose Car Care.'}</p>
           </div>
         </div>
       </div>

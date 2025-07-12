@@ -754,7 +754,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* 9. Footer Section (2+3 CARD GRID, EQUAL HEIGHT, MODERNIZED) */
+/* Footer Section: 2+3 CARD GRID, EQUAL HEIGHT, MODERNIZED */
 /* ========================================= */
 .main-footer {
   background-color: #0d1117;
@@ -767,82 +767,76 @@ a:hover {
 
 .footer-grid-container {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.1fr;
   gap: 2.5rem;
   max-width: 1600px;
   margin: 0 auto;
   align-items: stretch;
   box-sizing: border-box;
+  min-height: 380px; /* Ensures equal column height */
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-.footer-col-left {
-  justify-content: stretch;
-}
-
-.footer-col-right {
-  justify-content: stretch;
+  gap: 1.4rem;
+  height: 100%;
 }
 
 .footer-card {
   background-color: #1c2230;
   border-radius: 22px;
   box-shadow: 0 6px 32px rgba(30, 34, 90, 0.22);
-  padding: 2.2rem 2.5rem 2rem 2.5rem;
+  padding: 1.55rem 2rem 1.5rem 2rem;
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  min-height: 160px;
-  height: 100%;
   box-sizing: border-box;
-  transition: box-shadow 0.2s, background 0.3s;
   border: 1.5px solid #262e40;
+  min-height: 110px;
+  transition: box-shadow 0.2s, background 0.3s, transform 0.22s;
 }
 
-/* Card Headings (Same for all blocks) */
 .footer-card h3 {
-  font-size: 2.0rem;
+  font-size: 2.05rem;
   color: #5f64fa;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.95rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  text-shadow: 0 3px 14px rgba(95, 100, 250, 0.10);
 }
 
-/* Generic Content (for fallback) */
 .footer-card p,
 .footer-card span,
 .footer-card a {
-  font-size: 1.18rem;
+  font-size: 1.22rem;
   color: #fff;
   font-family: 'Segoe UI', 'Open Sans', sans-serif;
   margin-bottom: 0.5rem;
   line-height: 1.7;
 }
 
-/* Block-Specific Font Customizations */
 .footer-card.footer-direct-contact a {
-  font-size: 1.22rem;
+  font-size: 1.28rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .footer-card.footer-operating-hours span {
-  font-size: 1.18rem;
+  font-size: 1.20rem;
 }
 
 .footer-card.footer-locations span {
-  font-size: 1.14rem;
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 .footer-card.footer-connect a,
 .footer-card.footer-connect p {
-  font-size: 1.16rem;
+  font-size: 1.19rem;
 }
 
 .footer-card a {
@@ -852,52 +846,63 @@ a:hover {
   word-break: break-word;
 }
 .footer-card a:hover {
-  color: #5f64fa;
+  color: #ffd000;
   text-decoration: underline;
 }
 
 .flex-align-center {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 0.4rem;
+  gap: 1.05rem;
+  margin-bottom: 0.2rem;
 }
 
 .footer-icon {
-  margin-right: 0.1rem;
+  margin-right: 0.13rem;
   color: #ffd000;
-  font-size: 1.35em;
+  font-size: 1.53em;
   display: flex;
   align-items: center;
 }
 
+/* For multiple location entries */
+.location-entry {
+  margin-bottom: 1.1rem;
+}
+.location-entry:last-child {
+  margin-bottom: 0;
+}
+
 .special-message-card {
-  background: linear-gradient(90deg, #5f64fa 30%, #6366f1 100%);
+  background: linear-gradient(90deg, #5f64fa 20%, #10b981 100%);
   color: #fff;
-  font-weight: 600;
-  padding: 1.5rem 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(95, 100, 250, 0.16);
+  font-weight: 700;
+  padding: 1.55rem 2.2rem;
+  border-radius: 19px;
+  box-shadow: 0 6px 28px rgba(16, 185, 129, 0.10);
   text-align: center;
-  justify-content: center;
-  align-items: center;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  font-size: 1.21rem;
 }
 
 .special-message-card p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 1.7;
   color: #fff;
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   letter-spacing: 0.01em;
+  font-weight: 700;
 }
 
-/* Social Media Icons */
 .social-icons {
   display: flex;
-  gap: 1.3rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  margin-top: 1.2rem;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
@@ -906,88 +911,93 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 52px;
-  font-size: 1.6rem;
+  width: 58px;
+  height: 58px;
+  font-size: 2.05rem;
   border-radius: 50%;
   background: #242a37;
-  box-shadow: 0 3px 10px rgba(95, 100, 250, 0.08);
-  transition: transform 0.18s, box-shadow 0.18s, background 0.2s;
+  box-shadow: 0 3px 10px rgba(95, 100, 250, 0.11);
+  transition: transform 0.22s, box-shadow 0.18s, background 0.2s;
   color: #fff;
-  margin: 0 4px;
+  margin: 0 6px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.social-icon:hover, .social-icon:focus {
+  background: linear-gradient(90deg, #5f64fa 10%, #10b981 90%);
+  color: #fff;
+  transform: translateY(-5px) scale(1.11);
+  box-shadow: 0 9px 25px rgba(16, 185, 129, 0.22);
 }
 
-.social-icon:hover {
-  background: linear-gradient(90deg, #5f64fa 10%, #10b981 80%);
-  color: #fff;
-  transform: translateY(-5px) scale(1.09);
-  box-shadow: 0 7px 18px rgba(95, 100, 250, 0.24);
-}
-
-/* Footer bottom */
 .footer-bottom {
-  margin-top: 2.5rem;
+  margin-top: 2.7rem;
   text-align: center;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: #9ca3af;
   border-top: 1.5px solid #23293b;
-  padding-top: 1.1rem;
+  padding-top: 1.2rem;
   letter-spacing: 0.01em;
   font-family: 'Segoe UI', 'Montserrat', sans-serif;
+  opacity: 0.97;
 }
 
 /* Responsive Layout for Footer */
 @media (max-width: 1200px) {
   .footer-grid-container {
     grid-template-columns: 1fr 1fr;
-    gap: 1.3rem;
+    gap: 1.2rem;
     padding: 0 1rem;
+    min-height: 320px;
   }
 }
 @media (max-width: 900px) {
   .main-footer {
-    padding: 2rem 0.5rem 1.3rem 0.5rem;
+    padding: 1.7rem 0.3rem 1.2rem 0.3rem;
   }
   .footer-grid-container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.45rem;
+    min-height: unset;
   }
   .footer-col {
-    gap: 1.2rem;
+    gap: 1.0rem;
+    min-height: unset;
   }
-  .footer-card {
-    padding: 1.4rem 1.2rem 1.2rem 1.2rem;
-    border-radius: 14px;
-  }
+  .footer-card,
   .special-message-card {
-    padding: 1.2rem 1.1rem;
+    padding: 1.1rem 0.7rem 1.1rem 0.7rem;
     border-radius: 10px;
+    min-height: 92px;
+    font-size: 1.05rem;
   }
   .footer-card h3 {
-    font-size: 1.33rem;
+    font-size: 1.13rem;
   }
   .footer-card p,
   .footer-card span,
   .footer-card a {
+    font-size: 0.97rem;
+  }
+  .footer-card.footer-direct-contact a,
+  .footer-card.footer-connect a {
     font-size: 1.01rem;
   }
-  .footer-card.footer-direct-contact a {
-    font-size: 1.1rem;
+  .footer-card.footer-operating-hours span,
+  .footer-card.footer-locations span {
+    font-size: 0.97rem;
   }
-  .footer-card.footer-operating-hours span {
+  .special-message-card p {
     font-size: 1.05rem;
   }
-  .footer-card.footer-locations span {
-    font-size: 1.02rem;
-  }
-  .footer-card.footer-connect a,
-  .footer-card.footer-connect p {
-    font-size: 1.02rem;
-  }
   .social-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 1.3rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.23rem;
+  }
+  .footer-bottom {
+    font-size: 0.95rem;
   }
 }
 
