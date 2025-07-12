@@ -755,7 +755,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .about-us-content .cta-button {
-    width: 98vw;       /* Always fits viewport */
+    width: calc(100vw - 40px);       /* Always fits viewport */
     max-width: 100%;   /* Never wider than parent */
     box-sizing: border-box;
     margin-left: 0;
