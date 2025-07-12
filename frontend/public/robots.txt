@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://josecarcare.com/sitemap.xml
+Sitemap: https://joscarcare.com/sitemap.xml
