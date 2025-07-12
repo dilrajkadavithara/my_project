@@ -3,6 +3,22 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// Helper function to get a cookie value by name (for CSRF)
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 function LeadCaptureForm() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -67,9 +83,21 @@ function LeadCaptureForm() {
         throw new Error("REACT_APP_API_URL is not defined in .env");
       }
 
-      await axios.post(`${API_URL}leads/`, formData);
-      navigate('/success');
+      // CSRF token from cookie
+      const csrfToken = getCookie('csrftoken');
 
+      await axios.post(
+        `${API_URL}leads/`,
+        formData,
+        {
+          headers: {
+            'X-CSRFToken': csrfToken
+          },
+          withCredentials: true // Important for cookies/session!
+        }
+      );
+
+      navigate('/success');
     } catch (error) {
       console.error('Error submitting lead:', error);
       alert('Failed to submit. Please try again later.');
