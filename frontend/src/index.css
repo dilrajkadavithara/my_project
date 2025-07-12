@@ -753,6 +753,24 @@ a:hover {
   .service-card p { font-size: 0.9em; padding: 0 15px; }
 }
 
+@media (max-width: 768px) {
+  .about-us-content .cta-button {
+    width: 98vw;       /* Always fits viewport */
+    max-width: 100%;   /* Never wider than parent */
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    display: block;
+  }
+  .about-us-section {
+    overflow-x: hidden; /* Defensive, prevents all accidental horizontal scroll */
+  }
+}
+
+
+
 /* ========================================= */
 /* 9. Footer Section (GRID + FLEX, FRACTIONAL CARDS) */
 /* ========================================= */
