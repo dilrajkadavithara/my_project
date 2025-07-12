@@ -805,15 +805,30 @@ a:hover {
   background-color: #1c2230;
   border-radius: 22px;
   box-shadow: 0 6px 32px rgba(30, 34, 90, 0.22);
+  max-height: 100%;
+  overflow-y: auto;
   padding: 1rem 1.2rem;
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: c  enter;
   align-items: flex-start;
   box-sizing: border-box;
   border: 1.5px solid #262e40;
   overflow: auto;
+  transition: box-shadow 0.22s, transform 0.18s, border 0.18s;
+}
+
+/* Optional: Prevent horizontal scrollbars */
+.footer-card::-webkit-scrollbar,
+.special-message-card::-webkit-scrollbar {
+  width: 8px;
+  background: #222531;
+}
+.footer-card::-webkit-scrollbar-thumb,
+.special-message-card::-webkit-scrollbar-thumb {
+  background: #5f64fa;
+  border-radius: 6px;
 }
 
 .footer-card h3 {
@@ -880,6 +895,16 @@ a:hover {
   align-items: center;
 }
 
+.footer-card:hover,
+.footer-card:focus-within,
+.special-message-card:hover,
+.special-message-card:focus-within {
+  box-shadow: 0 10px 38px 0 rgba(95, 100, 250, 0.18), 0 2px 12px 0 #10b98144;
+  border-color: #5f64fa;
+  transform: translateY(-4px) scale(1.018);
+  z-index: 2;
+}
+
 /* Location entries */
 .location-entry {
   margin-bottom: 0.81rem;
@@ -922,12 +947,20 @@ a:hover {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  transition: color 0.18s, transform 0.18s;
+  transition: color 0.18s, transform 0.18s filter 0.18s;
 }
+
 .social-icon:hover,
 .social-icon:focus {
-  color: #ffd000 !important;
-  transform: scale(1.15);
+  filter: brightness(1.25) drop-shadow(0 2px 6px #5f64fa55);
+  transform: scale(1.16);
+  color: #ffd000 !important; /* or keep the brand color for even more consistency */
+}
+
+.footer-card:focus-within,
+.social-icon:focus {
+  outline: 2px solid #5f64fa;
+  outline-offset: 2px;
 }
 
 .footer-bottom {

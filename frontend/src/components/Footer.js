@@ -1,3 +1,4 @@
+// frontend/src/components/Footer.js
 import React from 'react';
 import {
   FaPhoneAlt,
@@ -45,7 +46,7 @@ function Footer({ websiteContent }) {
                 className="social-icon"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
+                aria-label="Facebook (opens in new tab)"
                 style={{ color: brandColors.facebook }}
               >
                 <FaFacebookF />
@@ -55,7 +56,7 @@ function Footer({ websiteContent }) {
                 className="social-icon"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram"
+                aria-label="Instagram (opens in new tab)"
                 style={{ color: brandColors.instagram }}
               >
                 <FaInstagram />
@@ -65,7 +66,7 @@ function Footer({ websiteContent }) {
                 className="social-icon"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp"
+                aria-label="WhatsApp (opens in new tab)"
                 style={{ color: brandColors.whatsapp }}
               >
                 <FaWhatsapp />
