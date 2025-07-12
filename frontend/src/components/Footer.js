@@ -1,4 +1,3 @@
-// frontend/src/components/Footer.js
 import React from 'react';
 import {
   FaPhoneAlt,
@@ -10,7 +9,6 @@ import {
 } from 'react-icons/fa';
 
 function Footer({ websiteContent }) {
-  // Inline brand colors for each icon
   const brandColors = {
     facebook: "#1877f3",
     instagram: "#E1306C",
@@ -20,7 +18,7 @@ function Footer({ websiteContent }) {
   return (
     <footer className="main-footer">
       <div className="footer-grid-container">
-        {/* Left Column: 3 Cards */}
+        {/* Left Column: 2 Cards */}
         <div className="footer-col footer-col-left">
           {/* Direct Contact */}
           <div className="footer-card footer-direct-contact">
@@ -38,7 +36,6 @@ function Footer({ websiteContent }) {
               </a>
             </div>
           </div>
-
           {/* Social Links */}
           <div className="footer-card footer-connect">
             <h3>Connect With Us</h3>
@@ -75,28 +72,11 @@ function Footer({ websiteContent }) {
               </a>
             </div>
           </div>
-
-          {/* Operating Hours */}
-          <div className="footer-card footer-operating-hours">
-            <h3>Operating Hours</h3>
-            <div className="flex-align-center">
-              <FaClock className="footer-icon" />
-              <span>
-                {websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}
-              </span>
-            </div>
-            {websiteContent['footer_hours_sunday']?.value && (
-              <div className="flex-align-center">
-                <FaClock className="footer-icon" />
-                <span>{websiteContent['footer_hours_sunday'].value}</span>
-              </div>
-            )}
-          </div>
         </div>
 
-        {/* Right Column: 2 Cards */}
+        {/* Right Column: 3 Cards */}
         <div className="footer-col footer-col-right">
-          {/* Our Locations (with two separate addresses) */}
+          {/* Our Locations */}
           <div className="footer-card footer-locations">
             <h3>Locations</h3>
             {websiteContent['footer_location_1']?.value && (
@@ -113,8 +93,24 @@ function Footer({ websiteContent }) {
             )}
           </div>
           {/* Special Message */}
-          <div className="special-message-card">
+          <div className="footer-card special-message-card">
             <p>{websiteContent['special_footer_message']?.value || 'Experience premium car care and detailing with Jose Car Care.'}</p>
+          </div>
+          {/* Operating Hours */}
+          <div className="footer-card footer-operating-hours">
+            <h3>Operating Hours</h3>
+            <div className="flex-align-center">
+              <FaClock className="footer-icon" />
+              <span>
+                {websiteContent['operating_hours']?.value || 'Mon - Sat: 9:00 AM - 6:00 PM'}
+              </span>
+            </div>
+            {websiteContent['footer_hours_sunday']?.value && (
+              <div className="flex-align-center">
+                <FaClock className="footer-icon" />
+                <span>{websiteContent['footer_hours_sunday'].value}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

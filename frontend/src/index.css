@@ -754,7 +754,7 @@ a:hover {
 }
 
 /* ========================================= */
-/* FOOTER SECTION: WORLD-CLASS, EQUAL COLUMNS, HUGE SOCIAL ICONS */
+/* 9. Footer Section (GRID + FLEX, FRACTIONAL CARDS) */
 /* ========================================= */
 .main-footer {
   background-color: #0d1117;
@@ -767,23 +767,41 @@ a:hover {
 
 .footer-grid-container {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   max-width: 1600px;
   margin: 0 auto;
-  align-items: stretch;         /* Ensures columns fill the height */
-  box-sizing: border-box;
-  min-height: 420px;            /* Guarantees both columns fill at least this much */
+  align-items: stretch;
+  min-height: 420px;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-  height: 100%;                 /* Columns fill their grid cell */
+  height: 100%;
 }
 
-.footer-card {
+.footer-col-left > .footer-card {
+  flex: 0 0 50%;
+  margin-bottom: 1.2rem;
+}
+.footer-col-left > .footer-card:last-child {
+  margin-bottom: 0;
+}
+
+.footer-col-right > .footer-card,
+.footer-col-right > .special-message-card {
+  flex: 0 0 33.3333%;
+  margin-bottom: 1.2rem;
+}
+.footer-col-right > .footer-card:last-child,
+.footer-col-right > .special-message-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer Cards Style */
+.footer-card,
+.special-message-card {
   background-color: #1c2230;
   border-radius: 22px;
   box-shadow: 0 6px 32px rgba(30, 34, 90, 0.22);
@@ -791,51 +809,49 @@ a:hover {
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
   border: 1.5px solid #262e40;
-  min-height: 68px;
-  transition: box-shadow 0.2s, background 0.3s, transform 0.22s;
+  overflow: auto;
 }
 
 .footer-card h3 {
-  font-size: 2.16rem;
+  font-size: 2.15rem;
   color: #5f64fa;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 0.7rem;
   font-weight: 700;
   letter-spacing: -0.5px;
-  text-shadow: 0 3px 14px rgba(95, 100, 250, 0.10);
 }
 
 .footer-card p,
 .footer-card span,
 .footer-card a {
-  font-size: 1.33rem;
+  font-size: 1.22rem;
   color: #fff;
   font-family: 'Segoe UI', 'Open Sans', sans-serif;
   margin-bottom: 0.22rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .footer-card.footer-direct-contact a {
-  font-size: 1.39rem;
+  font-size: 1.27rem;
   font-weight: 600;
 }
 
 .footer-card.footer-operating-hours span {
-  font-size: 1.28rem;
+  font-size: 1.18rem;
 }
 
 .footer-card.footer-locations span {
-  font-size: 1.21rem;
+  font-size: 1.15rem;
   font-weight: 500;
 }
 
 .footer-card.footer-connect a,
 .footer-card.footer-connect p {
-  font-size: 1.36rem;
+  font-size: 1.19rem;
 }
 
 .footer-card a {
@@ -853,18 +869,18 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 1.07rem;
-  margin-bottom: 0.07rem;
+  margin-bottom: 0.09rem;
 }
 
 .footer-icon {
   margin-right: 0.07rem;
   color: #ffd000;
-  font-size: 1.67em;
+  font-size: 1.65em;
   display: flex;
   align-items: center;
 }
 
-/* For multiple location entries */
+/* Location entries */
 .location-entry {
   margin-bottom: 0.81rem;
 }
@@ -872,36 +888,17 @@ a:hover {
   margin-bottom: 0;
 }
 
-/* Special message card always contained */
-.special-message-card {
-  background: linear-gradient(90deg, #5f64fa 20%, #10b981 100%);
-  color: #fff;
-  font-weight: 700;
-  padding: 1.1rem 1.25rem;
-  border-radius: 19px;
-  box-shadow: 0 6px 28px rgba(16, 185, 129, 0.10);
-  text-align: center;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 68px;
-  font-size: 1.23rem;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-}
-
+/* Special message card (uses same style as card for height math) */
 .special-message-card p {
   margin: 0;
-  font-size: 1.19rem;
+  font-size: 1.13rem;
   line-height: 1.7;
   color: #fff;
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   font-weight: 700;
 }
 
-/* SOCIAL ICONS: HUGE, BRAND COLOR, NO BG, JUSTIFIED */
+/* Social Icons */
 .social-icons {
   display: flex;
   justify-content: space-between;
@@ -911,20 +908,20 @@ a:hover {
 }
 
 .social-icon {
-  font-size: 3.4rem;            /* Make icon itself huge */
-  width: 3.4rem;
-  height: 3.4rem;
-  min-width: 3.4rem;
-  min-height: 3.4rem;
-  color: inherit;                /* Color comes from inline style in JSX */
+  font-size: 3.2rem !important;
+  width: 3.2rem !important;
+  height: 3.2rem !important;
+  min-width: 3.2rem !important;
+  min-height: 3.2rem !important;
+  color: inherit;
   background: none !important;
-  border: none;
+  border: none !important;
   box-shadow: none !important;
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   transition: color 0.18s, transform 0.18s;
 }
 .social-icon:hover,
@@ -933,7 +930,6 @@ a:hover {
   transform: scale(1.15);
 }
 
-/* Footer bottom */
 .footer-bottom {
   margin-top: 2.2rem;
   text-align: center;
@@ -946,63 +942,32 @@ a:hover {
   opacity: 0.97;
 }
 
-/* Responsive Layout for Footer */
-@media (max-width: 1200px) {
-  .footer-grid-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.1rem;
-    padding: 0 1rem;
-    min-height: 270px;
-  }
-}
+/* Responsive for Mobile */
 @media (max-width: 900px) {
-  .main-footer {
-    padding: 1.2rem 0.3rem 1.2rem 0.3rem;
-  }
   .footer-grid-container {
     grid-template-columns: 1fr;
     min-height: unset;
-    gap: 1.15rem;
+    gap: 1.1rem;
   }
   .footer-col {
-    min-height: unset;
     height: unset;
   }
-  .footer-card,
-  .special-message-card {
-    padding: 0.7rem 0.5rem 0.7rem 0.5rem;
-    border-radius: 8px;
-    min-height: 56px;
-    font-size: 0.99rem;
+  .footer-col > .footer-card,
+  .footer-col > .special-message-card {
+    flex: unset;
+    height: unset;
+    margin-bottom: 1rem;
   }
-  .footer-card h3 {
-    font-size: 1.07rem;
-  }
-  .footer-card p,
-  .footer-card span,
-  .footer-card a {
-    font-size: 0.91rem;
-  }
-  .footer-card.footer-direct-contact a,
-  .footer-card.footer-connect a {
-    font-size: 0.98rem;
-  }
-  .footer-card.footer-operating-hours span,
-  .footer-card.footer-locations span {
-    font-size: 0.93rem;
-  }
-  .special-message-card p {
-    font-size: 0.97rem;
-  }
-  .social-icons {
-    gap: 0.25rem;
+  .footer-col > .footer-card:last-child,
+  .footer-col > .special-message-card:last-child {
+    margin-bottom: 0;
   }
   .social-icon {
-    font-size: 2.1rem;
-    width: 2.1rem;
-    height: 2.1rem;
-    min-width: 2.1rem;
-    min-height: 2.1rem;
+    font-size: 2rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    min-width: 2rem !important;
+    min-height: 2rem !important;
   }
   .footer-bottom {
     font-size: 0.93rem;
@@ -1010,6 +975,7 @@ a:hover {
 }
 
 /* Remove bottom margin from last card in each col */
-.footer-col > .footer-card:last-child {
+.footer-col > .footer-card:last-child,
+.footer-col > .special-message-card:last-child {
   margin-bottom: 0;
 }
