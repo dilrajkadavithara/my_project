@@ -7,14 +7,15 @@ const SEOHelmet = () => {
     "@context": "https://schema.org",
     "@type": "AutoBodyShop",
     "name": "JOS CAR CARE",
-    "image": "https://www.joscarcare.com/og-image.jpg",
-    "@id": "https://www.joscarcare.com",
-    "url": "https://www.joscarcare.com",
+    "description": "Jos Car Care is a leading car detailing and paint protection center in Udayamperoor, Kerala. We specialize in car painting, ceramic coating, borophine coating, paint protection film, underbody coating, car washing, and more.",
+    "image": "https://joscarcare.com/JCC_og.webp",
+    "@id": "https://joscarcare.com",
+    "url": "https://joscarcare.com",
     "telephone": "+91-6238804932",
     "email": "info@joscarcare.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "1, Kandanad",
+      "streetAddress": "1, Kandanad, Valiyakulam",
       "addressLocality": "Udayamperoor",
       "addressRegion": "Kerala",
       "postalCode": "682307",
@@ -54,6 +55,16 @@ const SEOHelmet = () => {
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>
+      {/* Optional: Open Graph and Twitter Card meta tags for rich social sharing */}
+      <meta property="og:title" content="Jos Car Care – Car Detailing & Paint Protection, Udayamperoor" />
+      <meta property="og:description" content="Your one-stop shop for car detailing, paint protection, ceramic/borophine coating, car painting, and more. Book now!" />
+      <meta property="og:image" content="https://joscarcare.com/JCC_og.webp" />
+      <meta property="og:url" content="https://joscarcare.com" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Jos Car Care – Car Detailing & Paint Protection, Udayamperoor" />
+      <meta name="twitter:description" content="Expert car detailing, paint protection, ceramic & borophine coatings, and more. Visit Jos Car Care at Valiyakulam, Udayamperoor, Kerala." />
+      <meta name="twitter:image" content="https://joscarcare.com/JCC_og.webp" />
     </Helmet>
   );
 };
