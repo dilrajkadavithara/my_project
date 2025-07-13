@@ -1,0 +1,29 @@
+# dependencies
+/node_modules
+
+# production build
+/build
+
+# misc
+.DS_Store
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# testing
+/coverage
+
+# vscode/editor config
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+ehthumbs.db
+
+# optional: lock files (if you use only npm or only yarn, keep only one)
+# yarn.lock
+# package-lock.json
