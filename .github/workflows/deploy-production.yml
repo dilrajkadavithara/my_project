@@ -1,4 +1,4 @@
-name: 🚀 Deploy to Production
+name: 🚀 Deploy to Production (Debug Mode)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Frontend and Backend to Production
+    name: Deploy Frontend and Backend to Production (Debug)
     runs-on: ubuntu-latest
 
     steps:
@@ -19,16 +19,31 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
 
-      - name: Deploy and Build on Production Server (monorepo root)
+      - name: Deploy and Build on Production Server with Debug
         env:
           SSH_USER: dilrajkr
           SSH_HOST: joscarcare.com
+          PROJECT_ROOT: /opt/JCC
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<ENDSSH
             set -e
 
-            echo "=== GIT: Pull latest code at project root ==="
-            cd /opt/JCC
+            echo "=== DEBUG: Starting deployment ==="
+
+            echo "=== DEBUG: Current directory ==="
+            pwd
+
+            echo "=== DEBUG: List files at current directory ==="
+            ls -la
+
+            echo "=== DEBUG: Check .git directory ==="
+            ls -la .git
+
+            echo "=== DEBUG: Git status ==="
+            git status
+
+            echo "=== DEBUG: Now git fetch and reset ==="
+            cd $PROJECT_ROOT
             git fetch origin
             git reset --hard origin/main
 
