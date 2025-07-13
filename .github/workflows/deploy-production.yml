@@ -19,22 +19,22 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
 
-      - name: Deploy and Build on Production Server
+      - name: Deploy and Build on Production Server (monorepo root)
         env:
           SSH_USER: dilrajkr
           SSH_HOST: joscarcare.com
-          BACKEND_DIR: /opt/JCC/backend
-          FRONTEND_DIR: /opt/JCC/frontend
+          PROJECT_ROOT: /opt/JCC
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<'ENDSSH'
             set -e
 
-            echo "=== BACKEND: Pull latest code ==="
-            cd $BACKEND_DIR
+            echo "=== GIT: Pull latest code at project root ==="
+            cd $PROJECT_ROOT
             git fetch origin
             git reset --hard origin/main
 
             echo "=== BACKEND: Install dependencies ==="
+            cd backend
             source .venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
@@ -45,10 +45,8 @@ jobs:
             echo "=== BACKEND: Collect static files ==="
             python manage.py collectstatic --noinput
 
-            echo "=== FRONTEND: Pull latest code and build ==="
-            cd $FRONTEND_DIR
-            git fetch origin
-            git reset --hard origin/main
+            echo "=== FRONTEND: Install npm dependencies and build ==="
+            cd ../frontend
             npm install
             npm run build
 
