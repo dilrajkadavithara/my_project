@@ -1,0 +1,59 @@
+name: 🚀 Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Frontend and Backend to Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
+
+      - name: Deploy and Build on Production Server
+        env:
+          SSH_USER: dilrajkr
+          SSH_HOST: joscarcare.com
+          BACKEND_DIR: /opt/JCC/backend
+          FRONTEND_DIR: /opt/JCC/frontend
+        run: |
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<'ENDSSH'
+            set -e
+
+            echo "=== BACKEND: Pull latest code ==="
+            cd $BACKEND_DIR
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "=== BACKEND: Install dependencies ==="
+            source .venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+
+            echo "=== BACKEND: Run migrations ==="
+            python manage.py migrate --noinput
+
+            echo "=== BACKEND: Collect static files ==="
+            python manage.py collectstatic --noinput
+
+            echo "=== FRONTEND: Pull latest code and build ==="
+            cd $FRONTEND_DIR
+            git fetch origin
+            git reset --hard origin/main
+            npm install
+            npm run build
+
+            echo "=== RESTART GUNICORN ==="
+            sudo systemctl restart gunicorn
+
+            echo "=== Deployment completed successfully ==="
+          ENDSSH
