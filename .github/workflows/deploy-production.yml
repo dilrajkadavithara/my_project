@@ -23,13 +23,12 @@ jobs:
         env:
           SSH_USER: dilrajkr
           SSH_HOST: joscarcare.com
-          PROJECT_ROOT: /opt/JCC
         run: |
-          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<'ENDSSH'
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<ENDSSH
             set -e
 
             echo "=== GIT: Pull latest code at project root ==="
-            cd $PROJECT_ROOT
+            cd /opt/JCC
             git fetch origin
             git reset --hard origin/main
 
